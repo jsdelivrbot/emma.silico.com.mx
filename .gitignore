@@ -45,6 +45,38 @@
 ehthumbs.db
 Thumbs.db
 
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+#vim swap#
+*.sw*
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+/node_modules
+node_modules/
+
 # Laravel cache #
 ######################
 storage/framework/cache
@@ -57,6 +89,7 @@ storage/framework/views
 
 ### Laravel ###
 vendor/node_modules/npm-debug.log
+vendor/node_modules/
 
 # Laravel sessions #
 storage/framework/sessions
