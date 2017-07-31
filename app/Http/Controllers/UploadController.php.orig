@@ -1,0 +1,314 @@
+<?php
+
+namespace EMMA5\Http\Controllers;
+use EMMA5\User;
+use EMMA5\Center;
+use EMMA5\Board;
+use EMMA5\Exam;
+use EMMA5\Slot;
+use EMMA5\Subject;
+use EMMA5\Vignette;
+use EMMA5\Question;
+use EMMA5\Distractor;
+use EMMA5\Image as Img;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
+use Intervention\Image\Facades\Image;
+use File;
+use League\Csv\Reader;
+use Carbon;
+
+class UploadController extends Controller
+{
+  /**
+  * Create a new controller instance.
+  *
+  * @return void
+  */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+<<<<<<< HEAD
+
+=======
+  /*Methods for exams*/
+>>>>>>> feature/usernames
+  public function exam_prepare(){
+    $boards = Board::pluck('name', 'id');
+    return view('management.exams.csv_exam_form', compact('boards'));
+  }
+
+  /**
+  NOT WORKING
+  **/
+  public function exam_regex_clean($pathToFile, $linesNumber)
+  {
+    // try
+    // {
+    //     $contents = File::get($pathToFile);
+    // }
+    // catch (Illuminate\Filesystem\FileNotFoundException $exception)
+    // {
+    //     die("The file doesn't exist");
+    // }
+    // while (($line = fgets($contents)) !== false) {
+    //     echo $line;
+    // }
+    // return $contents;
+    $handle = fopen($pathToFile, "a+");
+
+    if ($handle) {
+      $linesInFile = count(file($pathToFile));
+      $text = fread($handle,filesize($pathToFile));
+      $text = preg_replace('/^ */','', $text);
+      #Encuentra los espacios al pricipio de la línea y los remueve
+      $text = preg_replace('/^ */','', $text);
+      #Encuentra los espacios al final de la línea y los remueve;
+      $text = preg_replace('/ *$/','', $text);
+      #$text = preg_replace('/\W*$/,''');
+      #$text = preg_replace('/^\W*/,' '');
+      #Encuentra los espacios y tabuladores redundantes;
+      $text = preg_replace('/ {2,}/',' ', $text);
+      $text = preg_replace('/\t{2,}/',' ', $text);
+      $text = preg_replace('/\r\n/',"\n", $text);
+      $text = preg_replace('/\r/',"\n", $text);
+      #Encuentra los saltos de línea redundantes; (\r|\n|\r\n)
+      $text = preg_replace('/\n{2,}/',"\n", $text);
+      #Encuentra ocurrencias de compuestos consubíndices químicos i.e. O2 y los;
+      #convierte a la forma O<sub>2</sub> ((?<foo1>([A-Z])) encuentra la letra;
+      #mayúscula de la fórmula química y la asigna a foo1 #((?<foo2>(\d)))) encuentra la parte entera y; la asigna a foo2
+      //$text = preg_replace('/((?<foo1>([A-Z]))((?<foo2>(\d))))/','\k<foo1><sub>\k<foo2></sub>', $text );
+      #Encuentra ocurrencias de mm en volúmenes de líquido y añade al subíndice;
+      #$text = preg_replace('/(?<foo1>(mm))(?<foo2>(\d))/,''\k<foo1><sup>\k<foo2></sup>');
+      #Encuentra la falta de salto de línea entre la última respuesta (correcta) y #el tema de la; siguiente
+      $text = preg_replace('/(?<foo1>(^[A-E]))(?<foo2>([A-Z]))(?<foo3>([a-z])){1,1}/',"\\k<foo1>\n\\k<foo2>\\k<foo3>", $text);
+      #Covertir a csv para "capturaexamentemasubtema.php";
+      $text = preg_replace('/$/',"|", $text);
+      /*if ($linesInFile < $linesNumber) {
+      return "Menos lineas de las esperadas";
+    }
+    elseif ($linesInFile > $linesNumber) {
+    return "Más lineas de las esperadas";
+  }
+  return "Cantidad exacta";*/
+
+  file_put_contents($pathToFile, $text);
+  // return $handle;
+  while (($line = fgets($handle)) !== false) {
+    // echo $line."<br>";
+
+  }
+
+  fclose($handle);
+} else {
+  // error opening the file.
+  dd($handle);
+}
+}
+public function exam_csv(Request $request) {
+  $this->validate($request, [
+    'exam_csv' => 'required|mimes:csv,dat,txt|max:2048',
+    'board_id' => 'required',
+    'applicated_at' => 'required',
+  ]);
+
+  $examCsvName = $request->applicated_at.'_'.$request->board_id.'.'.$request->exam_csv->getClientOriginalExtension();
+  $path = public_path('tmp/'.$request->board_id);
+  $request->exam_csv->move($path, $examCsvName);
+  $slotsNumber = $request->slots_number;
+  $questionsNumber = $request->questions_number;
+  $distractorsNumber = $request->distractors_number;
+  $applicatedAt = Carbon::parse($request->applicated_at);
+  $duration = $request->duration;
+  $vignetteHas = 1; //TODO must come from th Form
+  $subjectHas = 1; //TODO must come from the Form
+  $subtopicHas = 1; //TODO must come from the Form
+  $correctHas = 1; //TODO must come from the Form
+
+  $offset =  $subjectHas + $subtopicHas + $vignetteHas + $questionsNumber + ($questionsNumber * ($distractorsNumber+$correctHas)) ;
+
+
+  //Create exam
+  $exam = Exam::firstOrNew(['board_id' => $request->board_id, 'applicated_at' => $applicatedAt, 'duration' => $duration]);
+  $exam->active = 1;
+  $exam->annotation = "";
+
+  // Create vignette
+  $vignetteOrder = 1;
+  $vignetteInstructions = "Responda las siguientes preguntas";
+
+  //Create reader
+  $reader = Reader::createFromPath($path.'/'.$examCsvName);
+  $reader->setDelimiter('|');
+
+  /*$subject = */$subtopic = $vignette= $question = $distractor = collect();
+
+  for ($i=0; $i < $slotsNumber; $i++) {
+    //Create topics
+    $subjectText = $reader->setOffset($i*$offset)->setLimit(1)->fetchAll();
+    // dd($subjectText);
+    // print_r($subjectText);
+    $subject = Subject::firstOrCreate(["text" => $subjectText[0][0]]);
+    $slot = Slot::firstOrCreate(['order' => $i, 'instructions' => '', 'subject_id' => $subject->id, 'exam_id' => $exam->id]);
+    $exam->slots()->save($slot);
+    $vignetteText = $reader->setOffset(($i*$offset)+2)->setLimit(1)->fetchAll();
+    $vignette = Vignette::firstOrNew(["text" => $vignetteText[0][0], "order" => $vignetteOrder, "instructions" => $vignetteInstructions]);
+    $slot->vignettes()->save($vignette);
+    for ($j=0; $j < ($questionsNumber); $j++) {
+      $questionText = $reader->setOffset(($i*$offset)+($subjectHas+$subtopicHas+1)+(($j*($distractorsNumber+$correctHas+1))))->setLimit(1)->fetchAll();
+      $question = Question::firstOrNew(["text" => $questionText[0][0], "slot_id" => $slot->id, "order" => $j ]);
+      $slot->questions()->save($question);
+
+      $correct = $reader->setOffset(($i*$offset)+3+($j*($questionsNumber+$correctHas+1))+1+$distractorsNumber)->setLimit(1)->fetchAll();
+
+      // print_r($correct);
+      $correct = ord(strtoupper($correct[0][0])) - ord('A') + 1;
+      $distractors = $reader->setOffset(($i*$offset)+3+($j*($questionsNumber+$correctHas+1))+1)->setLimit($distractorsNumber)->fetchAll();
+
+      $optionPosition = 0;
+      $alphabet = range('A', 'Z');
+      // echo $alphabet[3]; // returns D
+      // echo array_search('D', $alphabet); // returns 3
+
+      foreach ($distractors as $item ) {
+        $option = $alphabet[$optionPosition];
+        if(isset($item[0])){
+          $alphabet[$correct-1];
+          $correctOption = 0;
+          if ($correct-1 == $optionPosition) {
+            $correctOption = 1;
+          }
+          $distractor = Distractor::firstOrNew([
+            'option'      => $option,
+            'distractor'  => $item[0],
+            'correct'     => $correctOption,
+            'question_id' => $question->id
+          ]);
+          $question->distractors()->save($distractor);
+        }
+        $optionPosition++;
+      }
+
+    }
+
+  }
+
+  // $exam->push(['slots' => $slot]);
+  $exam->save();
+  // dd($exam);
+  // return $exam->slots->all();
+  return redirect('/exams/'.$exam->id);
+  // return view('management.exams.doc_preview_partial', compact('exam'));
+
+}
+
+/**
+* Uploads users CSV file
+*
+* Uploads a CSV file with the users name and generates Users with automatic and unique username
+*
+* @param \Illuminate\Request
+* @return \Illuminate\View
+*/
+public function users_csv(Request $request)
+{
+  $this->validate($request, [
+    'users_csv' => 'required|mimes:txt,csv',
+    'exam_id'   => 'required',
+  ]);
+  $file = $request->file('users_csv');
+  $usersCsvName = $request->exam_id.'_'.$request->board_id.'.'.$request->users_csv->getClientOriginalExtension();
+  $path = public_path('tmp/users/'.$request->board_id);
+  $request->users_csv->move($path, $usersCsvName);
+
+  //Create reader
+  $reader = Reader::createFromPath($path.'/'.$usersCsvName);
+  $reader->setDelimiter('|');
+  $reader->setEnclosure('"');
+  $reader->setOffset(1);//Because we have header
+  $exam = Exam::find($request->exam_id);
+  $faker = Faker::create();
+  $centerCollection = collect();
+  $usersRows = $reader->each(function ($row) use ($exam, $request ,$faker, $centerCollection)  {
+    $boardId = $exam->board_id;
+    $name = $row[2];
+    $last_name = $row[0]." ".$row[1];
+    $center = Center::where('name', 'like', '%'.trim($row[3]).'%')->get()->first();
+    $completion_year = intval($row[4]);
+    $centerCollection->push($completion_year);
+
+    $user = User::firstOrNew([
+      'name' => $name,
+      'last_name' => $last_name,
+      // 'board_id' => $boardId,
+      // 'completion_year' => $completion_year,
+    ]);
+    $user->board_id = $boardId;
+    $user->completion_year = $completion_year;
+    /*Username generator*/
+    $userName = createAcronym($user->name." ".$user->last_name);
+    if($user->username == NULL){
+      $user->username = $faker->bothify($userName.$boardId.'####?');
+      if($user->password == NULL){
+        $user->password = $user->username;
+      }
+      $user->email = $user->username.'@'.$boardId.'.local';
+    }
+    $user->center_id = $center->id;
+    $user->save();
+    $exam->users()->sync([$user->id], false);
+
+    /**/
+    return true;
+  });
+  // return $centerCollection;
+  return Exam::find($request->exam_id)->load('users');
+
+}
+
+<<<<<<< HEAD
+  public function image(Request $request)
+  {
+=======
+public function image(Request $request)
+{
+
+  return "hit";
+  $path = public_path('images/exams');
+  $files = $request->file('file');
+  foreach($files as $file){
+>>>>>>> feature/usernames
+
+    // if ($file->getClientOriginalExtension() == '.jpg'||'.gif'||'.png') {
+    //   return response()->json(['error' => 'Error: Utilice un formato .jpg .gif .png'], 422);
+    // }
+    $fileName = $file->getClientOriginalName();
+    $img = Image::make($file);
+    $img->resize(1000, null, function ($constraint) {
+      $constraint->aspectRatio();
+    });
+    $file->move($path, $fileName);
+    $img->save($path.'/'.$fileName);
+
+    $image = new Img ;
+    $image->imageable_type = 'EMMA5\\'.$request->type;
+    $image->imageable_id = $request->imageable_id;
+    $image->source = $fileName;
+    $image->save();
+
+  }
+
+  return response()->json(['success' => 'Imagen almacenada'], 200);
+
+<<<<<<< HEAD
+  }
+=======
+}
+/*Methods for usersList*/
+
+>>>>>>> feature/usernames
+
+}
