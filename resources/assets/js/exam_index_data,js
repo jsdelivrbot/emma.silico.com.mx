@@ -1,0 +1,17 @@
+/**
+ * Created by marcosantana on 06/12/16
+ */
+ $( document ).ready(function() {
+ 	console.log( "ready!" );
+ 	$( ".button-users" ).click(function() {
+ 		var exam_id = $(this).attr('id');
+ 		var form = $(this).closest("form");
+ 		var data = form.serialize();
+ 		$('#users_list li:not(:first)').remove();
+ 		$.post( "/exams/users", data,  function(result) {
+ 			$.each(result, function(key, value){
+ 				$("#users_list").append('<li class="list-group-item">'+value.last_name+' '+value.name+'</li>');
+ 			});
+ 		});
+ 	});
+ });

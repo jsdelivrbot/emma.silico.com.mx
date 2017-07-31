@@ -1,0 +1,449 @@
+Oncogénetica
+retinoblastoma
+Niño de 8 meses con retinoblastoma en ojo derecho y madre con retinoblastoma bilateral.
+1. En esta familia las características esperadas del retinoblastoma serían:
+Unilateral, unifocal y tardío
+Congénito, unilateral y unifocal
+Multifocal, bilateral y temprano
+Unilateral, multifocal y temprano
+Simultáneo en ambos ojos y tardío
+C
+2. El patrón de herencia en este caso es:
+Multifactorial
+Recesivo ligado al X
+Autosómico recesivo
+Dominante ligado al X
+Autosómico dominante
+E
+3. Asumiendo una penetrancia de 90% en esta entidad, el riesgo para la descendencia del niño afectado de desarrollar esta neoplasia es:
+15%
+25%
+45%
+50%
+100%
+C
+4. De acuerdo con la hipótesis de Knudson, en este paciente el mecanismo que generó el retinoblastoma fue:
+Dos mutaciones en una célula germinal
+Dos mutaciones en una célula de la retina
+Dos mutaciones de novo en una célula germinal
+Haber heredado un alelo mutado de cada progenitor
+Una primera mutación germinal y una segunda somática
+E
+5. El gen que debe estudiar es:
+RB1
+MYC
+TP53
+PTEN
+RBBP6
+A
+6. Este gen se clasifica como:
+Oncogen
+Gen mutador
+Gen homeótico
+Gen antiapoptótico
+Gen supresor de tumor
+D
+7. El mecanismo por el cual el gen anterior genera este cáncer es:
+Dominancia negativa
+Recesivo por pérdida de función
+Dominante por haploinsuficiencia
+Dominante por ganancia de función
+Codominante por activación constitutiva
+B
+8. Una de las funciones del producto proteico del gen anterior es:
+Actuar como factor de transcripción
+Activarse por fosforilación cuando hay daño al DNA
+Ser uno de los blancos principales del complejo ciclina B y CDK1
+Detener en su forma hiperfosforilada el avance del ciclo celular de G2 a M
+Interactuar en su forma hipofosforilada con E2F1 impidiendo la transcripción
+E
+9. Se encontró una mutación puntual por transición, considerando exones e intrones la notación que corresponde es:
+c. 1206C>G
+c. 1206C>T
+c. 1206C>U
+g. 59683C>T
+g. 59683C>A
+D
+10. El mecanismo más probable que generó la mutación anterior es:
+Desaminación de citosina
+Desaminación de 5 metil citosina
+Alquilación de residuos de guanina
+Formación de dímeros de pirimidina
+Recombinación homóloga no alélica
+B
+11. La mutación anterior a nivel de proteína cambia un codón de arginina (CGA) por un codón de terminación. La nomenclatura para referirse a la proteína mutada es:
+p.R251*
+p.C251T
+c.R251A
+p.G251X
+p.A251stop
+A
+12. Se realizó análisis con 4 marcadores microsatélites, 2 intragénicos (B y C) y 2 que lo flanquean, en sangre periférica del paciente, sus padres y en una muestra del tumor del niño, encontrándose los resultados mostrados en el cuadro 1. El haplotipo con el que está segregando la mutación es:
+28,15,16,32
+28,15,24,36
+28,15,28,41
+32,22,28,41
+34,22,16,32
+E
+13. En este tumor, la pérdida de heterocigosidad se pudo producir por:
+Microdeleción cromosómica
+Metilación de la isla CpG en el promotor del gen
+Mutación puntual por transición en el alelo materno
+Pérdida del cromosoma paterno y duplicación del materno
+Pérdida del cromosoma materno y duplicación del paterno
+B
+14. Para comprobar lo anterior utilizaría:
+MLPA
+Hibridación tipo Northern
+Secuenciación de todos los exones del gen
+Análisis de metilación por PCR y bisulfito de sodio
+FISH con la sonda del gen en los cortes histológicos del tumor
+D
+15. El fundamento de la técnica empleada es:
+Ligación de regiones pequeñas  amplificadas a lo largo de todo el gen
+Cambio a T de citosinas no metiladas oxidadas y uso de 2 pares de cebadores
+Uso de los 4 dideoxinucleótidos marcados cada uno con un fluorocromo diferente
+Hibridación de sonda de DNA del gen con DNA en los núcleos de células del tumor
+Separación electroforética de moléculas de mRNA e hibridación con sonda de DNA
+B
+Oncogénetica
+leucemia mieloide crónica
+Hombre de 58 años quien presenta fatiga, anorexia y pérdida de peso. En el ultrasonido se observa hepatoesplenomegalia. Biometría hemática con trombocitosis, leucocitosis y 1-3% de blastos; en el aspirado de médula ósea se observa hipercelularidad con escasos blastos con predominio de estirpes mieloides. En el estudio citogenético se observó t(9:22)(q34;q11.2).
+16. El diagnóstico es:
+Mieloma múltiple
+Leucemia linfoide aguda
+Leucemia linfoide crónica
+Leucemia mieloide aguda
+Leucemia mieloide crónica
+E
+17. El porcentaje de  detección de esta alteración por citogenética convencional es de:
+5
+25
+55
+75
+95
+E
+18. Los genes implicados en la translocación son:
+BCR-ABL1
+AML1-ETO
+PML-RARA
+ETV6-AML1
+CBFβ-MYH11
+A
+19. La proteína quimérica característica de esta patología es:
+p140
+p185
+p190
+p210
+p230
+D
+20. La actividad que posee la proteína de fusión es:
+Cinasa de tirosina
+Factor de crecimiento
+Factor de transcripción
+Inhibidor de ciclina-cinasa
+Receptor de factor de crecimiento
+A
+Herencia no clásica
+síndrome de Prader Willi
+Niña de 7 años con diagnóstico clínico de síndrome de Prader Willi.
+21. En la mayoría de los casos la forma de herencia es:
+Esporádica
+Multifactorial
+Autosómico recesivo
+Dominante ligado al X
+Autosómico dominante
+A
+22. Este síndrome se produce por:
+Alteraciones en la impronta
+Mutación dominante ligada al cromosoma X
+Mutación en el alelo materno del gen CDKN1C
+Mutación dominante en el alelo materno del gen UBE3A
+Amplificación  de repetido CGG y metilación de la isla CpG
+A
+23. El abordaje de elección para confirmar el diagnóstico es:
+FISH
+MLPA
+Hibridación tipo Southern
+Secuenciación del gen completo
+Análisis de los patrones de metilación de la región implicada
+E
+24. En este caso el mecanismo de producción más probable es:
+Disomía uniparental materna
+Microdeleción 15q11 en el cromosoma paterno
+Mutaciones  puntuales de novo en la meiosis paterna
+Hipometilación del  segundo centro regulador de la impronta
+Amplificación del trinucléotido y metilación del mismo en la meiosis materna
+B
+25. Para corroborar el mecanismo anterior realizaría:
+FISH
+Análisis de microsatélites
+Hibridación tipo Southern
+Secuenciación del gen completo
+Análisis de los patrones de metilación de la región implicada
+A
+enfermedad de Huntington
+Hombre de 32 años (II.2) enviado para diagnóstico molecular presintomático de enfermedad de Huntington. Las edades mostradas corresponden a la edad de inicio del padecimiento.
+26. El tipo de mutación en está enfermedad es:
+Amplificación de microsatélites del ORF
+Mutaciones puntuales de sentido equivocado
+Metilación de isla CpG en el promotor del gen
+Amplificación de microsatélites en UTR 3’ del gen
+Cambios en las variantes de número de copias (CNV)
+A
+27. Esta enfermedad se explica por:
+Inactivación de la proteína
+Proteína con ganancia de función
+Metilación del repetido que impide su transcripción
+Efecto dominante por ganancia de función del mRNA
+Alteración en el reconocimiento de la unión intrón-exón
+B
+28. El diagnóstico molecular se hace por:
+Microarreglos de SNP y CNV
+Secuenciación de todos los exones del gen
+Hibridación tipo Southern con enzimas sensibles a metilación
+Amplificación por PCR y corrimiento de los productos en agarosa
+Amplificación por PCR y corrimiento de los productos en acrilamida
+E
+29. De acuerdo a los resultados observados en la figura, el sujeto II.2:
+Normal de su padre
+Mutado y presentará anticipación
+Mutado y presentará la enfermedad
+Normal de cada uno de sus progenitores
+Paterno con un número mayor de repetidos
+C
+30. La anticipación y las formas infantiles se producen por:
+Reducción en el número de repetidos a menos de 34 en meiosis paterna
+Amplificación en meiosis materna y número de repetidos mayor a 1,000
+Amplificación mayor de 200 repetidos y metilación del alelo materno amplificado
+Amplificación del repetido en meiosis paterna y número de repetidos mayor de 100
+Amplificación del repetido en meiosis paterna y mutaciones en genes modificadores
+D
+Biología molecular
+paternidad biológica
+Se muestran lo genotipos obtenidos dentro del perfil de DNA obtenido en 13 marcadores CODIS en tres personas en las cuales se desea determinar la paternidad biológica entre dos individuos masculinos relacionados (hermanos, indicados como SP1, SP2) y una menor (SH). No se dispone de la muestra biológica de la madre.
+31. Internacionalmente en relación a marcadores CODIS para establecer paternidad:
+Son marcadores que carecen de microvariantes alélicas
+Tienen en común una tasa nula de mutación germinal y somática
+Son marcadores de tipo (CA)n repetidos y son de localización intrónica
+Su ubicación está restringida a los sexocromosomas y a la región D-loop del mtDNA
+El número en los genotipos corresponde al número de repeticiones en tándem en cada alelo
+E
+32. En los genotipos obtenidos en el marcador D21S11 se observa:
+Incongruencia de genotipos para hermanos
+Exclusión de la paternidad biológica de SP1 y SP2
+Mutación a nivel germinal heredada de SP1 en el alelo 31 en SH
+Son informativos para determinar la paternidad biológica de SP1 y SH
+Microvariante atribuíble a un repetido imperfecto compartido entre SP1 y SP2
+E
+33. Para determinar con precisión los genotipos de los marcadores CODIS utiliza:
+Secuenciación automatizada tipo Sanger
+Hibridación tipo Northern con sondas tipo VNTR
+Análisis de fragmentos mediante electroforesis capilar
+Electroforesis vertical en geles de agarosa de alta resolución
+Electroforesis horizontal en geles de agarosa de alta resolución
+C
+34. En este caso para obtener la probabilidad en la asignación de la paternidad biológica se requiere:
+El perfil de DNA obtenido de la madre biológica
+Las frecuencias alélicas de marcadores del cromosoma Y
+Las frecuencias alélicas de los marcadores CODIS de otras poblaciones
+Determinar el tipo y frecuencia en la población del haplogrupo del mtDNA
+Las frecuencias alélicas y genotípicas de la población a la que pertenecen
+E
+35. La conclusión de la prueba es:
+SP2 queda asignado como el padre biológico de SH
+Se requiere analizar un mayor número de marcadores
+SP1 no puede ser excluído como el padre biológico de SH
+SP2 no puede ser excluído como el padre biológico de SH
+Al ser hermanos el perfil de DNA no permite determinar la paternidad biológica
+C
+Biología molecular
+galactosemia
+Se esquematiza el estudio molecular por PCR, ensayo de restricción y análisis electroforético para la identificación de la mutación c.404+1G>T en una familia con galactosemia clásica. El amplicón generado por la PCR es de 400 pb. Se señalan los genotipos debajo de la genealogía.
+36. El estudio molecular muestra que el caso índice es:
+Genotípicamente normal
+Heterocigoto compuesto
+Homocigoto por disomía uniparental
+Homocigoto para la mutación c.404+1G>T
+Heterocigoto para la mutación c.404+1G>T
+D
+37. De acuerdo al patrón de restricción, la mutación c.404+1G>T:
+Pierde el sitio de restricción en el producto de PCR
+Genera un sitio de restricción en el producto de PCR
+Genera un segundo sitio de restricción en el producto de PCR
+Induce un corte endonucleotídico en las moléculas heterodúplex
+Induce un corte endonucleotídico en las homodúplex del alelo normal
+B
+38. De acuerdo con la nomenclatura internacional, se asume que la mutación c.404+1G>T:
+Se ubica en un exón
+Es de sentido erróneo
+Se ubica en la región 5’ no traducible
+Elimina el sitio aceptor para la remoción del intrón
+Elimina el sitio donador para la remoción del intrón
+E
+39. La probabilidad de que un hijo de II-3 tenga galactosemia clásica si éste se casa con una prima hermana por rama paterna es:
+1/2
+1/4
+1/16
+1/22
+1/32
+E
+40. De acuerdo al estudio molecular de II-1 y II-4, Usted concluye que:
+Ambos presentan un genotipo homocigoto normal
+Ambos presentan un estado homocigoto para la mutación
+Un genotipo heterocigoto en II-1 y homocigoto normal en II-4
+Ambos presentan un genotipo heterocigoto para la mutación
+Un genotipo heterocigoto en II-4 y homocigoto normal en II-1
+A
+Herencia mendeliana
+hemofilia A
+Se muestra una genealogía con un afectado de hemofilia A severa, cuyo estudio molecular, con la finalidad de ofrecer diagnóstico prenatal se llevó al cabo con un marcador ubicado a 1 cM de distancia al gen responsable de la enfermedad. I-2 tiene antecedentes familiares de la enfermedad por rama materna. Los genotipos se señalan debajo de cada integrante.
+41. De acuerdo a los genotipos observados, II-4 se puede considerar:
+1% de posibilidad de que sea heterocigoto afectado
+1% de posibilidad de que sea homocigoto no afectado
+99% de posibilidades de que sea hemicigoto afectado
+99% de posibilidades de que sea homocigoto afectado
+99% de posibilidades de que sea hemicigoto no afectado
+C
+42. De acuerdo a los genotipos observados, indique los riesgos calculados para la descendencia de II-1, si se asume que su pareja es feno y genotípicamente normal:
+Igual al de la población en general
+25% de varones afectados y 100% de mujeres sanas
+50% de varones afectados y 50% de mujeres portadoras
+100% de varones afectados y 50% de mujeres portadoras
+100% de varones afectados y 100% de mujeres portadoras
+C
+43. De acuerdo al patrón electroforético observado, se asume que el marcador analizado corresponde a un:
+VNTR
+RFLP bialélico
+SNP sinónimo
+SNP no sinónimo
+Microsatélite di ó tetranucleótido
+E
+44. De acuerdo a los genotipos observados el individuo II-2 es:
+Hemicigoto sano
+Homocigoto sano
+Hemicigoto afectado
+Hemicigoto portador
+Homocigoto portador
+A
+45. De acuerdo a los genotipos observados, el individuo II.3, el riesgo de recurrencia para su descendencia si procrea con un individuo geno y fenotípicamente sano es:
+100% de varones sanos
+100% de mujeres afectadas
+50% de varones afectados
+50% de mujeres sanas
+25% independientemente del sexo
+A
+Terapia génica
+terapia génica
+Niño de 2 años con síndrome de inmunodeficiencia severa combinada, autosómica recesiva.
+46. El gen mutado en este padecimiento codifica para:
+Interleucina 2
+Cinasa de timidina
+Desaminasa de adenosina
+Receptor de interleucina 9
+Transferasa de fosfo-ribosil hipoxantina guanina
+C
+47. Una opción de terapia para este padecimiento es:
+Trasplante hepático
+Restricción dietética
+Restricción de sustrato
+Reemplazo enzimático
+Megadosis de vitaminas
+D
+48. En los protocolos de terapia génica aplicados a esta enfermedad el vector más utilizado es:
+Retrovirus
+Liposomas
+Adenovirus
+Virus de herpes
+Virus adeno-asociados
+A
+49. Una ventaja del uso de ese vector es que:
+Se mantiene como episoma
+Se integra al genoma del hospedero
+Puede contener insertos de hasta 40 kb
+Puede contener insertos de más de 40 kb
+Se puede introducir a células quiescentes
+B
+50. Una posible complicación del uso de este vector es desarrollo de:
+Sepsis
+Ictericia
+Leucemia
+Hemorragia
+Reacciones de hipersensibilidad grave
+C
+Biología molecular
+secuenciación
+Se muestra la porción de un electroferograma obtenido con el oligonucléotido en dirección sentido (forward).
+51. La secuencia y orientación correcta de la hebra sentido es:
+3’-GGC AGC CTT GCT GGA A[N]G [N] CCT GCT CCT AGG GGC CCC GAG AG-5’
+3’-CTC TCG GGG CCC CTA GGA GCA GG[A/G] C[A/G]T TCC AGC AAG GCT GCC-5’
+3’-GGC AGC CTT GCT GGA A[T/A]G [T/A] CCT GCT CCT AGG GGC CCC GAG AG-5’
+5’-GGC AGC CTT GCT GGA A[T/A]G [T/A] CCT GCT CCT AGG GGC CCC GAG AG-3’
+5’-CTC TCG GGG CCC CTA GGA GCA GG[A/G] C[A/G]T TCC AGC AAG GCT GCC-3’
+E
+52. De acuerdo a la secuencia, usted concluye que:
+Existe un genotipo doble heterocigoto [T/A] en las posiciones 218 y 220
+Los alelos “G” de las posiciones 218 y 220 se encuentran conformando un haplotipo
+Existen dos genotipos heterocigotos para cambios puntuales en las posiciones 218 y 220
+Se confirma una deleción de exón completo por los hallazgos en las posiciones 218 y 220
+Existe un genotipo heterocigoto compuesto de cambios puntuales en las posiciones 218 y 220
+C
+53. Con relación a los cambios observados:
+Pueden corresponder a polimorfismos de un solo nucleótido
+Las transiciones A>G suelen explicarse por deaminación oxidativa espontánea
+La mayoría de los cambios en las posiciones 218 y 220 suelen ser patogénicos
+Las posiciones 218 y 220, ocurren con mayor frecuencia en regiones codificantes
+Los cambios en las posiciones 218 y 220 por lo general corren el marco de lectura
+A
+54. Si la adenina de la posición 218 del electroferograma correspondiera al nucleótido c.302+12, el efecto esperado más probable sería:
+Ninguno, ya que el cambio reside en un intrón
+Salto del exón previo en el 50% de los transcritos
+Cambio del sentido de un codón en estado heterocigoto
+Inclusión de un fragmento de intrón en el mRNA maduro
+Corrimiento del marco de lectura en el 50% de los transcritos
+A
+55. Si la adenina de la posición 218 del electroferograma correspondiera al nucleótido c.302-1, el efecto esperado sería:
+Un cambio silente
+Insertar dos pares de bases
+Cambiar un aminoácido por un codón de paro
+Alterar la eliminación de intrones y empalme de exones
+Cambiar del sentido de un codón en estado heterocigoto
+D
+Biología molecular
+biología molecular
+Masculino con diagnóstico clínico de síndrome de Marfán en quien se identificó el cambio génico c.4791-2A>C en estado heterocigoto en el gen FBN1.
+56. La metodología molecular que probablemente fue utilizada para caracterizar el cambio génico es:
+Secuenciación automatizada
+FISH con sonda de locus sencillo
+Amplificación múltiple de sondas ligadas (MLPA)
+Hibridación genómica comparativa en microarreglos (a-CGH)
+Extensión 3´ de primers con dideoxinucleótidos trifosfato (SNAP-shot)
+A
+57. El sitio donde se localiza el cambio génico es:
+Promotor
+Secuencia codificante
+Región 3’ no traducible
+Sitio aceptor de corte y empalme de exones
+Sitio donador de corte y empalme de exones
+D
+58. El efecto esperado de c.4791-2A>C, es:
+Un cambio silente
+Insertar dos pares de bases
+Cambiar un aminoácido por un codón de paro
+Generar una proteína con ganancia de función
+Alterar la eliminación de intrones y empalme de exones
+E
+59. En caso de identificar el mismo genotipo molecular en el padre quien se refiere clínicamente sano, Usted concluye que:
+No es el padre biológico
+No hay riesgo de recurrencia en hermanos del caso índice
+Es un polimorfismo sin efecto funcional heredado del padre al hijo
+El padre debe estudiarse clínicamente ya que puede tener expresión mínima
+Debe buscar la mutación responsable en el caso índice por otra metodología
+D
+60. En caso de NO identificar el mismo genotipo molecular en el análisis de los padres quienes se refieren clínicamente sanos, Usted concluye que:
+Es una mutación patológica de novo
+El fenotipo de los padres se explica por no penetrancia
+Es un polimorfismo sin efecto funcional mutación de novo
+Tienen un riesgo de recurrencia de 50% en futura gestación
+Debe buscar la mutación responsable en el caso índice por otra metodología
+A

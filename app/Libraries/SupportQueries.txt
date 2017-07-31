@@ -1,0 +1,14 @@
+SELECT answers.option ,sum(e.correct) corr,a.name,a.last_name, a.id,d.id
+FROM users a 
+inner join exam_user b on a.`id` = b.user_id
+inner join exams d on b.exam_id = d.id
+inner join ((
+    SELECT y.* FROM answers y INNER JOIN 
+   ( select max(`id`)id,user_id,`question_id` from answers where answers.exam_id = 179 group by user_id, question_id ) z
+    on z.id = y.id
+)) c on a.id = c.user_id
+inner join distractors e on e.question_id = c.question_id and c.answer = e.option 
+where  d.id = 179
+GROUP by  a.name,a.last_name, a.id,d.id
+order by  corr desc
+limit 0,500;
