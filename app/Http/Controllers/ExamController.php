@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Debugbar;
+use Excel;
 
 class ExamController extends Controller
 {
@@ -275,5 +276,20 @@ class ExamController extends Controller
     {
         $grades = new Grade;
         return $studentGrade = $grades->gradeStudent($exam, $user);
+    }
+
+
+    /**
+     * Returns a spreadsheet with only the students that were present
+     *
+     * @return PHPOffice
+     */
+    public function gradesSpreadshet(Exam $exam)
+    {
+        return Excel::create('Filename', function ($excel) {
+                //Create sheet to be able to return something to keep on testing
+        })->export('xls');
+        return Excel::create('Filename');
+        return null;
     }
 }
