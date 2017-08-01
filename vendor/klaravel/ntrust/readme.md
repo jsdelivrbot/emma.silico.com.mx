@@ -1,6 +1,6 @@
-## NTRUST Multi-User Roles & Permissions (Laravel 5.3)
+## NTRUST Multi-User Roles & Permissions (Laravel 5.4)
 
-Ntrust is a succinct and flexible way to add Role-based Permissions to **Laravel 5.3**.
+Ntrust is a succinct and flexible way to add Role-based Permissions to **Laravel 5.4**.
 
 **Original Package:** https://github.com/Zizaco/entrust
 
@@ -31,7 +31,7 @@ Ntrust is a succinct and flexible way to add Role-based Permissions to **Laravel
 
 In order to install Laravel 5 Ntrust, just add
 
-    "klaravel/ntrust": "1.0.*"
+    "klaravel/ntrust": "1.1.*"
 
 to your composer.json. Then run `composer install` or `composer update`.
 

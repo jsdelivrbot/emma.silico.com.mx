@@ -43,6 +43,8 @@ return [
     'in_array'             => 'Ang :larangan ng attribute ay wala sa :iba.',
     'integer'              => 'Ang :attribute ay dapat isang integer.',
     'ip'                   => 'Ang :attribute ay dapat isang balidong IP address.',
+    'ipv4'                 => 'The :attribute must be a valid IPv4 address.',
+    'ipv6'                 => 'The :attribute must be a valid IPv6 address.',
     'json'                 => 'Ang :attribute ay dapat isang balidong JSON string.',
     'max'                  => [
         'numeric' => 'Ang :attribute ay hindi maaaring higit sa  :max.',
@@ -109,12 +111,12 @@ return [
     */
 
     'attributes' => [
-        'test_name' => 'Subok na pangalan',
-        'test_description' => 'Subok na paglalarawan',
-        'test_locale' => 'Wika',
-        'image' => 'Imahe',
+        'test_name'               => 'Subok na pangalan',
+        'test_description'        => 'Subok na paglalarawan',
+        'test_locale'             => 'Wika',
+        'image'                   => 'Imahe',
         'result_text_under_image' => 'Resultang teksto sa ilalim ng imahe',
-        'short_text' => 'Maikling teksto',
+        'short_text'              => 'Maikling teksto',
     ],
 
 ];

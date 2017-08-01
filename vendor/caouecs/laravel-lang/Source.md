@@ -11,6 +11,7 @@ Arabic (ar)
 * [bo3bdo](https://github.com/bo3bdo)
 * [Ibrahim AshShohail](https://github.com/laheab)
 * [Ihab Shoully](https://github.com/shoully)
+* [Mohamed Sabil](https://github.com/mohamedsabil83)
 * [Youghourta Benali](https://github.com/djug)
 
 Bosnian (bs)
@@ -135,6 +136,7 @@ Hungarian (hu)
 * [lintaba](https://github.com/lintaba)
 * [Tamás Erdélyi](https://github.com/terdelyi)
 * [Zsombor Franczia](https://github.com/frzsombor)
+* [balping](https://github.com/balping)
 
 Icelandic (is)
 

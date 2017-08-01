@@ -43,6 +43,8 @@ return [
     'in_array'             => ':attribute فیلڈ :other میں موجود نہیں ہے۔',
     'integer'              => ':attribute لازماً کوئی عدد ہو۔',
     'ip'                   => ':attribute لازماً قابلِ قبول آئی پی پتہ ہو۔',
+    'ipv4'                 => 'The :attribute must be a valid IPv4 address.',
+    'ipv6'                 => 'The :attribute must be a valid IPv6 address.',
     'json'                 => ':attribute لازماً قابلِ قبول JSON سٹرِنگ ہو۔',
     'max'                  => [
         'numeric' => ':attribute کو :max سے بڑا نہیں ہونا چاہیے۔',
@@ -109,12 +111,12 @@ return [
     */
 
     'attributes' => [
-        'test_name' => 'ٹیسٹ کا نام',
-        'test_description' => 'ٹیسٹ کی تفصیلات',
-        'test_locale' => 'زبان',
-        'image' => 'تصویر',
+        'test_name'               => 'ٹیسٹ کا نام',
+        'test_description'        => 'ٹیسٹ کی تفصیلات',
+        'test_locale'             => 'زبان',
+        'image'                   => 'تصویر',
         'result_text_under_image' => 'تصویر کے تحت نتیجے کا متن',
-        'short_text' => 'مختصر متن',
+        'short_text'              => 'مختصر متن',
     ],
 
 ];
