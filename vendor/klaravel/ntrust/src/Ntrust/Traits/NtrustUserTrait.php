@@ -13,32 +13,11 @@ trait NtrustUserTrait
         $userPrimaryKey = $this->primaryKey;
         $cacheKey = 'ntrust_roles_for_' . self::$roleProfile . '_'.$this->$userPrimaryKey;
         if(Cache::getStore() instanceof TaggableStore) {
-            return Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.role_user_table'))->remember($cacheKey, Config::get('cache.ttl'), function () {
+            return Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.role_user_table'))->remember($cacheKey, Config::get('cache.ttl', 1440), function () {
                 return $this->roles()->get();
             });
         }
         else return $this->roles()->get();
-    }
-    public function save(array $options = [])
-    {   //both inserts and updates
-        parent::save($options);
-        if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.role_user_table'))->flush();
-        }
-    }
-    public function delete(array $options = [])
-    {   //soft or hard
-        parent::delete($options);
-        if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.role_user_table'))->flush();
-        }
-    }
-    public function restore()
-    {   //soft delete undo's
-        parent::restore();
-        if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.role_user_table'))->flush();
-        }
     }
 
     /**
@@ -56,23 +35,41 @@ trait NtrustUserTrait
     }
 
     /**
-     * Boot the user model
-     * Attach event listener to remove the many-to-many records when trying to delete
-     * Will NOT delete any records if the user model uses soft deletes.
-     *
-     * @return void|bool
+     * Trait boot method
+     * 
+     * @return void
      */
-    public static function boot()
+    protected static function bootNtrustUserTrait()
     {
-        parent::boot();
+        static::saved(function()
+        {
+            if(Cache::getStore() instanceof TaggableStore) {
+                Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.role_user_table'))
+                    ->flush();
+            }
+        });
 
-        static::deleting(function($user) {
-            if (!method_exists(Config::get('ntrust.profiles.' . self::$roleProfile . '.model'), 'bootSoftDeletes')) {
+        static::deleted(function($user)
+        {
+            if(Cache::getStore() instanceof TaggableStore) {
+                Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.role_user_table'))
+                    ->flush();
+
                 $user->roles()->sync([]);
             }
-
-            return true;
         });
+
+        if(method_exists(self::class, 'restored')) {
+            static::restored(function($user)
+            {
+                if(Cache::getStore() instanceof TaggableStore) {
+                    Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.role_user_table'))
+                        ->flush();
+
+                    $user->roles()->sync([]);
+                }
+            });
+        }
     }
 
     /**

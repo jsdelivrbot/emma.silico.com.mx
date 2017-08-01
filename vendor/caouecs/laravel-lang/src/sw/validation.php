@@ -43,6 +43,8 @@ return [
     'in_array'             => 'Sehemu ya kipengele haipo katika :nyingine.',
     'integer'              => 'Kipengele lazima kiwe nambari kamili.',
     'ip'                   => 'Kipengele lazima kiwe anuani halali ya Itifaki ya Intaneti.',
+    'ipv4'                 => 'The :attribute must be a valid IPv4 address.',
+    'ipv6'                 => 'The :attribute must be a valid IPv6 address.',
     'json'                 => 'Kipengele lazima kiwe kidwe halali cha Nukuu ya Java.',
     'max'                  => [
         'numeric' => 'Kipengele huenda si kikubwa kuliko :kiwango cha juu.',
@@ -109,12 +111,12 @@ return [
     */
 
     'attributes' => [
-        'test_name' => 'Jina la jaribio',
-        'test_description' => 'Maelezo ya jaribio',
-        'test_locale' => 'Lugha',
-        'image' => 'Picha',
+        'test_name'               => 'Jina la jaribio',
+        'test_description'        => 'Maelezo ya jaribio',
+        'test_locale'             => 'Lugha',
+        'image'                   => 'Picha',
         'result_text_under_image' => 'Maandishi ya matokeo chini ya picha',
-        'short_text' => 'Maandishi mafupi',
+        'short_text'              => 'Maandishi mafupi',
     ],
 
 ];

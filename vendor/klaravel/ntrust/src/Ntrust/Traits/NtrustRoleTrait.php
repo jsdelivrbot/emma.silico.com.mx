@@ -12,41 +12,11 @@ trait NtrustRoleTrait
         $rolePrimaryKey = $this->primaryKey;
         $cacheKey = 'ntrust_permissions_for_role_'.$this->$rolePrimaryKey;
         if(Cache::getStore() instanceof TaggableStore) {
-            return Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.permission_role_table'))->remember($cacheKey, Config::get('cache.ttl'), function () {
+            return Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.permission_role_table'))->remember($cacheKey, Config::get('cache.ttl', 1440), function () {
                 return $this->perms()->get();
             });
         }
         else return $this->perms()->get();
-    }
-    public function save(array $options = [])
-    {   //both inserts and updates
-        if(!parent::save($options)){
-            return false;
-        }
-        if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.permission_role_table'))->flush();
-        }
-        return true;
-    }
-    public function delete(array $options = [])
-    {   //soft or hard
-        if(!parent::delete($options)){
-            return false;
-        }
-        if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.permission_role_table'))->flush();
-        }
-        return true;
-    }
-    public function restore()
-    {   //soft delete undo's
-        if(!parent::restore()){
-            return false;
-        }
-        if(Cache::getStore() instanceof TaggableStore) {
-            Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.permission_role_table'))->flush();
-        }
-        return true;
     }
 
     /**
@@ -61,7 +31,6 @@ trait NtrustRoleTrait
             Config::get('ntrust.profiles.' . self::$roleProfile . '.role_user_table'),
             Config::get('ntrust.profiles.' . self::$roleProfile . '.role_foreign_key'),
             Config::get('ntrust.profiles.' . self::$roleProfile . '.user_foreign_key'));
-       // return $this->belongsToMany(Config::get('auth.model'), Config::get('ntrust.role_user_table'));
     }
 
     /**
@@ -80,24 +49,43 @@ trait NtrustRoleTrait
     }
 
     /**
-     * Boot the role model
-     * Attach event listener to remove the many-to-many records when trying to delete
-     * Will NOT delete any records if the role model uses soft deletes.
-     *
-     * @return void|bool
+     * Trait boot method
+     * 
+     * @return void
      */
-    public static function boot()
+    protected static function bootNtrustRoleTrait()
     {
-        parent::boot();
+        static::saved(function()
+        {
+            if(Cache::getStore() instanceof TaggableStore) {
+                Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.permission_role_table'))
+                    ->flush();
+            }
+        });
 
-        static::deleting(function($role) {
-            if (!method_exists(Config::get('ntrust.profiles.' . self::$roleProfile . '.role'), 'bootSoftDeletes')) {
+        static::deleted(function($role)
+        {
+            if(Cache::getStore() instanceof TaggableStore) {
+                Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.permission_role_table'))
+                    ->flush();
+
                 $role->users()->sync([]);
                 $role->perms()->sync([]);
             }
-
-            return true;
         });
+
+        if(method_exists(self::class, 'restored')) {
+            static::restored(function($role)
+            {
+                if(Cache::getStore() instanceof TaggableStore) {
+                    Cache::tags(Config::get('ntrust.profiles.' . self::$roleProfile . '.permission_role_table'))
+                        ->flush();
+
+                    $role->users()->sync([]);
+                    $role->perms()->sync([]);
+                }
+            });
+        }
     }
     
     /**

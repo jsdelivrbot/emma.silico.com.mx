@@ -43,6 +43,8 @@ return [
     'in_array'             => ':attribute फील्ड, :other में मौजूद नहीं है।',
     'integer'              => ':attribute एक पूर्णांक होना चाहिए।',
     'ip'                   => ':attribute एक मान्य IP पता होना चाहिए।',
+    'ipv4'                 => 'The :attribute must be a valid IPv4 address.',
+    'ipv6'                 => 'The :attribute must be a valid IPv6 address.',
     'json'                 => ':attribute एक मान्य JSON स्ट्रिंग होना चाहिए।',
     'max'                  => [
         'numeric' => ':attribute, :max से बड़ा नहीं हो सकता है।',
@@ -109,12 +111,12 @@ return [
     */
 
     'attributes' => [
-        'test_name' => 'टेस्ट का नाम',
-        'test_description' => 'टेस्ट का विवरण',
-        'test_locale' => 'भाषा',
-        'image' => 'छवि',
+        'test_name'               => 'टेस्ट का नाम',
+        'test_description'        => 'टेस्ट का विवरण',
+        'test_locale'             => 'भाषा',
+        'image'                   => 'छवि',
         'result_text_under_image' => 'छवि के नीचे परिणाम पाठ',
-        'short_text' => 'लघु पाठ',
+        'short_text'              => 'लघु पाठ',
     ],
 
 ];

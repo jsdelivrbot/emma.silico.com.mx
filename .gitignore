@@ -99,5 +99,6 @@ storage/framework/sessions/*1
 # Generated exams by EMMA #
 ##########################
 storage/app/public
-
+#public/tmp
+#public/tmp/*
 #
