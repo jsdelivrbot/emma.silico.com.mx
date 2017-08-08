@@ -92,6 +92,29 @@ class Grade extends Model
             ->get();
     }
 
+    function allStudentsWithData(Exam $exam)
+    {
+        return DB::table('users')
+            ->select(
+                'users.id as Identificador',
+                'users.identifier as Folio',
+                'users.name as Nombre',
+                'users.last_name as Apellidos',
+                'centers.name as Sede'
+                )
+            ->selectRaw('count(distractors.id) as Puntos')
+            ->join('exam_user', 'exam_user.user_id', '=', 'users.id')
+            ->join('answers', 'users.id', '=', 'answers.user_id')
+            ->join('centers', 'users.center_id', '=', 'centers.id')
+            ->join('distractors', 'answers.question_id', 'distractors.question_id')
+            ->whereRaw('distractors.option = answers.answer')
+            ->whereRaw('exam_user.exam_id = ' . $exam->id)
+            ->whereRaw('distractors.correct = '. 1)
+            ->whereNotNull('exam_user.started_at')
+            ->groupBy('answers.user_id')
+            ->get();
+    }
+
     public function avgSubject(Exam $exam)
     {
         //return $this->allStudentsBySubject($exam)->groupBy('text');
