@@ -82,7 +82,9 @@ Route::get('/exams/bottom_students/{exam}/{bottom}', 'ExamController@bottom_stud
 Route::resource('distractors', 'DistractorsController');
 
 Route::resource('slots', 'SlotsController');
+/* Grading */
 
+Route::get('spreadsheet/{exam}', 'ExamController@gradesSpreadshet')->name('gradesSpreadsheet');
 
 Route::resource('locations', 'LocationsController');
 Route::resource('users', 'UsersController');

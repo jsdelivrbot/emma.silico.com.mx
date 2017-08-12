@@ -332,10 +332,12 @@ class UploadController extends Controller
     public function users_csv(Request $request)
     {
             ini_set('max_execution_time', '180');
-            $this->validate($request, [
+            $this->validate(
+                $request, [
                     'users_csv' => 'required|mimes:txt,csv',
                     'exam_id'   => 'required',
-            ]);
+                ]
+            );
 
             $file = $request->file('users_csv');
             $usersCsvName = $request->exam_id.'_'.$request->board_id.'.'.$request->users_csv->getClientOriginalExtension();
@@ -356,7 +358,8 @@ class UploadController extends Controller
             $seatCounter = 0;
             //Use a conditional to see if the file contains a column with the avatar filename
             //in order to create the image/avatar for the given user
-            $usersRows = $reader->each(function ($row) use ($exam, $request ,$faker, $usersCollection, $centerCollection, $seatCounter) {
+            $usersRows = $reader->each(
+                function ($row) use ($exam, $request ,$faker, $usersCollection, $centerCollection, $seatCounter) {
                     $boardId = $exam->board_id;
                     $identifier = $row[0];
                     $last_name = $row[1] . " " . $row[2];
@@ -364,13 +367,15 @@ class UploadController extends Controller
                     $center = Center::where('name', 'like', '%' . trim($row[4]) . '%')->get()->first();
                     $completion_year = intval($row[5]);
                     $centerCollection->push($completion_year);
-                    $user = User::firstOrNew([
+                    $user = User::firstOrNew(
+                        [
                             //'identifier' => $identifier,
                             'name' => $name,
                             'last_name' => $last_name,
                             'board_id' => $boardId,
                             'completion_year' => $completion_year,
-                    ]);
+                        ]
+                    );
                     $user->identifier = $identifier;
                     $user->board_id = $boardId;
                     $user->completion_year = $completion_year;
@@ -401,6 +406,29 @@ class UploadController extends Controller
             $exam = Exam::find($request->exam_id);
             return redirect()->action('AdministrationController@createUsersPdf', ['exam' => $exam]);
     }
+
+    /**
+     * Accepts request from user with file upload and vlidates it as a excel
+     * file that icludes the name and other user data
+     *
+     * @return Redirect
+     */
+    public function usersExcel(Request $request)
+    {
+        //Validate input must include
+        //
+        //Create a ExcelReader
+        //
+        //validate the header names (this will be converted to attribute
+        //names by excelLaravel)
+        //
+        //Create the users as objects to be saved
+        //¿How manage the photos?
+        //Create the Image object and attach it but the after how do I
+        //garantee that the user uploads the photo files
+        return null;
+    }
+
 
 
     public function image(Request $request)
@@ -456,7 +484,7 @@ class UploadController extends Controller
                                     ->where('order', $imageData['questionOrder'])
                                     ->get()
                                     ->first();
-                            $imageableId = $question->id; 
+                            $imageableId = $question->id;
                     }
 
 
@@ -474,7 +502,7 @@ class UploadController extends Controller
     }
 
     /**
-     * Filters a Request with zipped pictures and 
+     ''''* Filters a Request with zipped pictures and
      * returns the containing directory
      *
      * @return Response $request
