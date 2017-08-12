@@ -28,11 +28,13 @@ use File;
 use EMMA5\Response;
 use Illuminate\Http\Request as Request;
 use Illuminate\Support\Facades\Input as Input;
+use Illuminate\Support\Collection as Collect;
 use Exception;
 use Image;
 use Intervention\Image\ImageManager;
 use Comodojo\Zip\Zip as Zip;
 use Comodojo\Exception\ZipException as ZipException;
+use Stringy\Stringy as S;
 
 /**
  *Helper class to do simple tasks easier in EMMA
@@ -50,8 +52,10 @@ class Helper
      * Creates an acronym for usernames and the like
      */
 
-    public static function createAcronym($string, $onlyCapitals = false)
+    public static function createAcronym($string, $onlyCapitals = true)
     {
+        $string = preg_replace('#A.C.#', '', $string);//Beacuse mexican boards are civil asociations its name always includes A.C.
+        $string = S::create($string)->toAscii();
         $output = null;
         $token  = strtok($string, ' ');
         while ($token !== false) {
@@ -355,5 +359,16 @@ class Helper
      */
     public static function uploadUserAvatar()
     {
+    }
+
+    public static function collectionToArray(Array $collect = null)
+    {
+        return array_map(function ($array) use($collect)
+        {
+            foreach ($array as $key => $value) {
+                $resultArray[$key] = $value;
+            }
+            return $resultArray;
+        }, $collect);
     }
 } // END     class

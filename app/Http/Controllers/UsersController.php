@@ -19,7 +19,7 @@ class UsersController extends Controller
     public function index()
     {
         //
-        $users = User::with('board')->orderBy('last_name')->get();
+        $users = User::with('board')->with('avatar')->with('board')->with('center')->orderBy('last_name')->get();
         return view('management.crud.users.index', compact('users'));
     }
 
