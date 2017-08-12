@@ -297,32 +297,36 @@ class ExamController extends Controller
         //Must know if using a title/header to be used or ignored
         $data = Helper::collectionToArray($grade->allStudentsWithData($exam)->toArray());
         return Excel::create(
-                        "CalificacionFinal".$board->shortName().$exam->applicated_at->toDateString(),
-                    function ($excel) use ($data, $exam, $grade) {
+            "CalificacionFinal".$board->shortName().$exam->applicated_at->toDateString(),
+            function ($excel) use ($data, $exam, $grade) {
                         $excel->sheet(
                             'Primera hoja',
                             function ($sheet) use ($data, $exam, $grade) {
                                 $sheet->fromArray($data);
                                 $sheet->row(
-                                        1, function($row) {
-                                                // call cell manipulation methods
-                                                $row->setBackground('#074DFE');
-                                        }
+                                    1, function ($row) {
+                                            // call cell manipulation methods
+                                            $row->setBackground('#EAE3CB');
+                                    }
                                 );
-                                $highestColumn = $sheet->getHighestColumn();
-                                $highestRow = $sheet->getHighestRow();
-
 
                                 // Append row as very last
-                                $sheet->appendRow(array($highestColumn, $highestRow ));
+                                //$sheet->appendRow(array());
 
-                                $sheet->cell($highestColumn.$highestRow, function($cell) use($highestColumn, $highestRow) {
+                                $highestColumn = $sheet->getHighestColumn();
+                                $newRow = $sheet->appendRow(array())->getHighestRow();
 
-                                    // manipulate the cell
-                                    $cell->setValue('=AVERAGE('.$highestColumn."2:".$highestColumn.($highestRow-1).")");
 
-                                });
+                                //$sheet->appendRow(array($highestColumn, $highestRow ));
 
+                                $sheet->cell(
+                                    $highestColumn.($newRow+1), function ($cell) use ($highestColumn, $newRow) {
+                                        // manipulate the cell
+                                        $cell->setValue(
+                                            '=ROUND(AVERAGE('.$highestColumn."2:".$highestColumn.($newRow-1)."),2)"
+                                        );
+                                    }
+                                );
                                 // Set auto size for sheet
                                 $sheet->setAutoSize(true);
                             }

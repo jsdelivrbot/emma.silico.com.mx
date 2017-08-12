@@ -34,6 +34,7 @@ use Image;
 use Intervention\Image\ImageManager;
 use Comodojo\Zip\Zip as Zip;
 use Comodojo\Exception\ZipException as ZipException;
+use Stringy\Stringy as S;
 
 /**
  *Helper class to do simple tasks easier in EMMA
@@ -54,6 +55,7 @@ class Helper
     public static function createAcronym($string, $onlyCapitals = true)
     {
         $string = preg_replace('#A.C.#', '', $string);//Beacuse mexican boards are civil asociations its name always includes A.C.
+        $string = S::create($string)->toAscii();
         $output = null;
         $token  = strtok($string, ' ');
         while ($token !== false) {
