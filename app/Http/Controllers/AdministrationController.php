@@ -100,12 +100,13 @@ class AdministrationController extends Controller
     public function monitor(Exam $exam)
     {
         $grades = new Grade;
-        $stats = new Grade;
+        $stats = new Grade;//Not necesary two instances of the dsame thing 
         $grades = $grades->allStudents($exam);
-        $exam = $exam->load('users.answers');
+        $exam = $exam->load('users.answers', 'users.board', 'users.center');
+        //$users = $exam->users;
         $questions_count = $exam->questions_count();
-        $stringy = new S;
-        return view('management.monitor.exam', compact('exam', 'grades', 'stats', 'questions_count', 'stringy'));
+        $stringy = new S;//Maybe it can be called from the view
+        return view('management.monitor.exam', compact('exam', 'users', 'grades', 'stats', 'questions_count', 'stringy'));
     }
 
     public function monitorStudent(Exam $exam, User $user)

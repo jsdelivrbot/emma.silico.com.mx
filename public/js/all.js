@@ -436,6 +436,8 @@ $(document).ready(function() {
                 //$('.alert-div').append("respuestas");
                 $('#alert-div #alert_content').html("Respuesta guardada: "+result.answer);
                 $('#alert-div').fadeOut('slow');
+                $('input:not(:checked)').parentsUntil('.list-group-item').removeClass("list-group-item-info").css('border-radius', '10px');
+                $('input:checked').parentsUntil('.list-group-item').addClass("list-group-item-info").css('border-radius', '10px');
             }
             else{
               $('#alert-div').fadeIn(3000);
@@ -445,8 +447,7 @@ $(document).ready(function() {
             }
         } );
 
-        $('input:not(:checked)').parentsUntil('.list-group-item').removeClass("list-group-item-info").css('border-radius', '10px');
-        $('input:checked').parentsUntil('.list-group-item').addClass("list-group-item-info").css('border-radius', '10px');
+
     });
 });
 
@@ -558,6 +559,7 @@ function flash(level, text, fadeout) {
 
 /**
  * Created by marcosantana on 15/02/16
+ * Creates a twitter/bootstrap modal for editing standar CRUD model
  */
 $( document ).ready(function() {
     $( ".edit_button" ).click(function() {
@@ -579,48 +581,21 @@ $( document ).ready(function() {
     });
 });
 
-$(document).ready(function()
-    {
-        $('th').click(function(){
-            var table = $(this).parents('table').eq(0)
-            var rows = table.find("tr:not(:has('th'))").toArray().sort(comparer($(this).index()))
-            this.asc = !this.asc
-            if (!this.asc){rows = rows.reverse()}
-            for (var i = 0; i < rows.length; i++){table.append(rows[i])}
-        })
-        function comparer(index) {
-            return function(a, b) {
-                var valA = getCellValue(a, index), valB = getCellValue(b, index)
-                return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
-            }
-        }
-        function getCellValue(row, index){ return $(row).children('td').eq(index).html() }
 
-// additional code to apply a filter
-        $('table').each(function(){
-            var table = $(this)
-            var headers = table.find('th').length
-            var filterrow = $('<tr>').insertAfter($(this).find('th:last()').parent())
-            for (var i = 0; i < headers; i++){
-                filterrow.append($('<th>').append($('<input class="form-control form-horizontal">').attr('type','text').keyup(function(){
-                    table.find('tr').show()
-                    filterrow.find('input[type=text]').each(function(){
-                        var index = $(this).parent().index() + 1
-                        var filter = $(this).val() != ''
-                        $(this).toggleClass('filtered', filter)
-                        if (filter){
-                            var el = 'td:nth-child('+index+')'
-                            var criteria = ":contains('"+$(this).val()+"')"
-                            table.find(el+':not('+criteria+')').parent().hide()
-                        }
-                    })
-                })))
-            }
-            filterrow.append($('<th>').append($('<input>').attr('type','button').val('Limpiar filtro').click(function(){
-                $(this).parent().parent().find('input[type=text]').val('').toggleClass('filtered', false)
-                table.find('tr').show()
-            })))
-        })
-    }
-);
+$(document).ready(function(){
+            $('#myTable').DataTable(
+                {
+                    language: {
+                        url: '//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json'
+                    },
+                    fixedHeader: true   
+                }
+            );
+
+});
+
+
+
+
+
 //# sourceMappingURL=all.js.map
