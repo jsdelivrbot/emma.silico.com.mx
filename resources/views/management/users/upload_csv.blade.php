@@ -25,6 +25,16 @@
                         </span>
                         <span>{{ Carbon::now()->hour }}:{{ Carbon::now()->minute }}</span>
                     </div>
+                    <hr>
+                    <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Cargar archivo de Excel (inlcuye columna de nombre de imagen)
+                    </div>
+                    <div class="panel-body">
+                        {{ Form::open(['action' => 'UploadController@usersExcel', 'files' => true]) }}
+                        {{ Form::file('users_excel', ['class' => 'form-control']) }}
+                    </div>
+                    </div>
 
                     <div class="panel-body">
                         {{  Form::open(['action' => 'UploadController@users_csv','files'=>true]) }}

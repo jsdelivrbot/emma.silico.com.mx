@@ -17,7 +17,7 @@ class Grade extends Model
     //Función para calificar un sustentantes devuelve conteo de respuestas correctas (int)
     public function gradeStudent(Exam $exam, User $user)
     {
-        return $result = DB::table('answers')
+         $result = DB::table('answers')
             /*->max('answers.updated_at')*/
             ->leftJoin('distractors', 'answers.question_id', '=', 'distractors.question_id')
             ->where('answers.user_id', $user->id)
@@ -25,7 +25,9 @@ class Grade extends Model
             ->where('answers.exam_id', $exam->id)
             ->whereRaw('distractors.option = answers.answer')
             ->where('distractors.correct', 1)
+            ->latest()
             ->count();
+        return $result;
     }
 
     public function answersCount(Exam $exam, User $user)
@@ -92,7 +94,7 @@ class Grade extends Model
             ->get();
     }
 
-    function allStudentsWithData(Exam $exam)
+    public function allStudentsWithData(Exam $exam)
     {
         return DB::table('users')
             ->select(
@@ -100,8 +102,11 @@ class Grade extends Model
                 'users.identifier as Folio',
                 'users.name as Nombre',
                 'users.last_name as Apellidos',
-                'centers.name as Sede'
+                'centers.name as Sede',
+                'exam_user.started_at as Inicio',
+                'exam_user.ended_at as Fin'
                 )
+            ->selectRaw('TIMESTAMPDIFF(MINUTE, exam_user.started_at, exam_user.ended_at) as Tiempo')
             ->selectRaw('count(distractors.id) as Puntos')
             ->join('exam_user', 'exam_user.user_id', '=', 'users.id')
             ->join('answers', 'users.id', '=', 'answers.user_id')
@@ -110,8 +115,38 @@ class Grade extends Model
             ->whereRaw('distractors.option = answers.answer')
             ->whereRaw('exam_user.exam_id = ' . $exam->id)
             ->whereRaw('distractors.correct = '. 1)
-            ->whereNotNull('exam_user.started_at')
+            // ->whereNotNull('exam_user.started_at')
             ->groupBy('answers.user_id')
+            ->get();
+    }
+
+    public function answersDump(Exam $exam)
+    {
+        // select t1.exam_id, t2.question_id, d.option, (d.option=a.answer) as correct, t1.user_id, a.answer
+        //                     from
+        //                         (
+        //                          (select distinct exam_id, user_id from answers ) as t1
+        //                          inner join
+        //                          (select distinct exam_id, question_id from answers where exam_id = 195 order by question_id asc) t2  on t1.exam_id=t2.exam_id
+        //                          inner join questions q on t2.question_id=q.id
+        //                          inner join distractors d on q.id=d.question_id and d.correct=1
+        //                         )
+        //                     left join answers a on t1.exam_id=a.exam_id and t1.user_id=a.user_id and q.id=a.question_id
+        //                     ;
+        return DB::table('answers')
+            ->select(
+                'exams.id',
+                'questions.id',
+                'distractors.option',
+                'answers.answer',
+                'users.id'
+            )
+            ->join('users', 'answers.user_id', '=', 'users.id')
+            ->join('exams', 'answers.exam_id', '=', 'exams.id')
+            ->join('questions', 'exams.id', '=', 'questions.exam_id')
+            ->join('distractors', 'distractors.question_id', '=', 'questions.id')
+            ->where('answers.exam_id', $exam->id)
+            ->limit(30)
             ->get();
     }
 
@@ -335,6 +370,7 @@ class Grade extends Model
     public function alpha(Exam $exam)
     {
         $grades = $this->groupByQuestion($exam)->pluck('points');
+        // TODO Must exclude users that did not take the exam
         $studentsNumber = $exam->users()->count();
         $pQ = $grades->map(function ($points) use ($studentsNumber) {
             return ($points/$studentsNumber)*(1-($points/$studentsNumber));

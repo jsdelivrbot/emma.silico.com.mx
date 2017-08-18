@@ -416,6 +416,12 @@ class UploadController extends Controller
     public function usersExcel(Request $request)
     {
         //Validate input must include
+        $this->validate($request, [
+                'file' => 'required|mimeTypes:'.
+                'application/vnd.ms-office,'.
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,'.
+                'application/vnd.ms-excel',
+        ]);
         //
         //Create a ExcelReader
         //

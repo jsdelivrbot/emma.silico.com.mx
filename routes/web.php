@@ -100,3 +100,4 @@ Auth::routes();
 Route::post('/uploadUsers', 'UploadController@users_csv')->name('uploadCsvUsers');
 Route::post('/uploadUsersPics', 'UploadController@pictures')->name('userPictures');
 Route::post('/uploadUserAvatar', 'UploadController@userAvatar')->name('userAvatar');
+Route::post('uploadUsersExcel', 'UploadController@usersExcel')->name('uploadUsersExcel');
