@@ -17,6 +17,14 @@
 //     el: 'body'
 // });
 
+//Dinamically adjusts the navbar height 
+$(document).ready(function () {
+    var navbar_height = $('.description_panel').height();
+    console.log(navbar_height);
+    $('#items-list').css("padding-top", +navbar_height+"px");
+})
+
+
 function flash(level, text, fadeout) {
     $('#flash').removeClass('hidden').fadeIn(1600).text(text).addClass('alert-'+level);
     if (fadeout){

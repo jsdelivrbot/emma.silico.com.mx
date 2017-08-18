@@ -5,7 +5,7 @@
       Avance de usuarios
     </div>
     <div class="row panel-body">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <table id="myTable" class="table table-responsive table-bordered">
         <thead>
           <tr>
@@ -87,6 +87,7 @@
         </tbody>
       </table>
     </div>
+
       {{--  <div class="col-sm-4">
         <div class="container-fluid">
           <div class="row">

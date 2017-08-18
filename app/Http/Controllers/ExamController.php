@@ -262,8 +262,11 @@ class ExamController extends Controller
             $ids[] = $user->id;
             $points[] = $user->points;
             $pointsAverage = array_sum($points) / count($points);
+            if ($exam->passing_grade !== null) {
+                $passingGrade = $exam->passingGrade;
+            }
         }
-        return view('management.exams.grades_chart_partial', compact('ids', 'points', 'pointsAverage'));
+        return view('management.exams.grades_chart_partial', compact('ids', 'points', 'pointsAverage', 'passingGrade'));
     }
 
     /**
