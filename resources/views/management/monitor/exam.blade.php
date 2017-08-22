@@ -6,6 +6,7 @@
     </div>
     <div class="panel">
             <a href="{{ route('gradesSpreadsheet', ['exam' => $exam->id]) }}" class="btn btn-sm btn-primary">
+                    Descargar archivo de calificaciones.
                     <i class="fa fa-table" aria-hidden="true"></i>
             </a>
     </div>
@@ -43,6 +44,7 @@
                         <img src="/images/avatars/users/{{$user->board_id."/".$filename}}.jpg" style="width: 50px; " >
                 <a href="/monitor/student/{{ $exam->id }}/{{$user->id}}">
                   <img src="{{ Avatar::create($user->name." ".$user->last_name)->toBase64() }}" width="24px" class=""/>
+                  <img src="{{Helper::imageBase64($user->photo())}}" width="50px" />
                 </a>
               </div>
               </td>

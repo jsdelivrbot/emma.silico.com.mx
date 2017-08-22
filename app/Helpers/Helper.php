@@ -339,13 +339,13 @@ class Helper
     {
         preg_match("/([0-9]{1,})([a-z]*)([_| ]?)([p|d]?)([0-9]*)/", $file, $output_array);
         if (isset($output_array[2])) {
-                $imageData['imageOrder'] = $output_array[2];
+            $imageData['imageOrder'] = $output_array[2];
         }
         $imageData['slotOrder'] = $output_array[1];
         $imageData['imageableType'] = "slot";
         if ($output_array[4] == "p" | $output_array[4] == "P") {
-                $imageData['imageableType'] = "question";
-                isset($output_array[5]) ? $imageData['questionOrder'] = $output_array[5] : $imageData['questionOrder'] = null;
+            $imageData['imageableType'] = "question";
+            isset($output_array[5]) ? $imageData['questionOrder'] = $output_array[5] : $imageData['questionOrder'] = null;
         }
         //$imageData['order'] = $output_array[5];
         return $imageData;
@@ -361,14 +361,30 @@ class Helper
     {
     }
 
-    public static function collectionToArray(Array $collect = null)
+    public static function collectionToArray(array $collect = null)
     {
-        return array_map(function ($array) use($collect)
-        {
+        return array_map(function ($array) use ($collect) {
             foreach ($array as $key => $value) {
                 $resultArray[$key] = $value;
             }
             return $resultArray;
         }, $collect);
+    }
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    public static function imageBase64($filePath)
+    {
+        if (File::exists($filePath)) {
+            $source = $filePath;
+            $type = pathinfo($source, PATHINFO_EXTENSION);
+            $data = file_get_contents($source);
+            return 'data:image/'.$type.';base64,'.base64_encode($data);
+        } else {
+                return null;
+        }
     }
 } // END     class
