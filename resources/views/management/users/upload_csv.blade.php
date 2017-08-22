@@ -33,6 +33,10 @@
                     <div class="panel-body">
                         {{ Form::open(['action' => 'UploadController@usersExcel', 'files' => true]) }}
                         {{ Form::file('users_excel', ['class' => 'form-control']) }}
+                        <button class="btn btn-info">
+                            <i class="fa fa-ifile-excel-o">
+                            Cargar archivo excel
+                        </button>
                     </div>
                     </div>
 
