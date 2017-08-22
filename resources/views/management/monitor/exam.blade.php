@@ -4,6 +4,11 @@
     <div class="panel-heading panel-primary">
       Avance de usuarios
     </div>
+    <div class="panel">
+            <a href="{{ route('gradesSpreadsheet', ['exam' => $exam->id]) }}" class="btn btn-sm btn-primary">
+                    <i class="fa fa-table" aria-hidden="true"></i>
+            </a>
+    </div>
     <div class="row panel-body">
       <div class="col-sm-6">
         <table id="myTable" class="table table-responsive table-bordered">
