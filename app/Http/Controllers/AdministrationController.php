@@ -69,12 +69,12 @@ class AdministrationController extends Controller
     {
         if (Auth::user()->hasRole('admin')) {
             $exam = $exam->load('users');
-            $users = $exam->users->load('avatar');
+            $users = $exam->users->load('avatar')->load('center');
             $board = $exam->board->load('logo');
 
             $pdf = PDF::loadView('management.users.passwords', compact('exam', 'users', 'board'));
-            //return $pdf->download('users'.$exam->id.'.pdf');
-            return view('management.users.passwords', compact('exam', 'users', 'board'));
+            return $pdf->download('users'.$exam->id.'.pdf');
+           // return view('management.users.passwords', compact('exam', 'users', 'board'));
         } else {
             return redirect()->action('ExamController@user_dashboard');
         }
