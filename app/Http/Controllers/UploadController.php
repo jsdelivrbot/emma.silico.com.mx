@@ -21,6 +21,7 @@ use Intervention\Image\Facades\Image;
 use File;
 use League\Flysystem\ZipArchive\ZipArchiveAdapter as Adapter;
 use League\Csv\Reader;
+use Excel;
 use Carbon;
 use Faker\Factory as Faker;
 use Comodojo\Zip\Zip as Zip;
@@ -415,9 +416,10 @@ class UploadController extends Controller
      */
     public function usersExcel(Request $request)
     {
+        //dd($request);
         //Validate input must include
         $this->validate($request, [
-                'file' => 'required|mimeTypes:'.
+                'users_excel' => 'required|mimeTypes:'.
                 'application/vnd.ms-office,'.
                 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,'.
                 'application/vnd.ms-excel',
@@ -425,6 +427,30 @@ class UploadController extends Controller
         //
         //Create a ExcelReader
         //
+        $filePath = $request->file('users_excel');
+        //dd($filePath);
+
+        $data = Excel::load(
+            $filePath, function ($reader) {
+                //reader methods
+                $results = $reader->get();
+                //Table heading as attributes
+                //first row of the excel file will be used as attributes.
+            }
+        )->get();
+        $users = collect();
+        $users->push($data->map(function ($item)  {
+                $item = $item->toArray();
+                $user = new User;
+                foreach ($item as $key => $val) {
+                        if (\Schema::hasColumn($user->getTable(), $key)) {
+                                $user->$key = $val;
+
+                        }
+                }
+                return $user;
+        }));
+        return $users;
         //validate the header names (this will be converted to attribute
         //names by excelLaravel)
         //
