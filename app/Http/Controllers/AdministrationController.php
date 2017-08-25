@@ -54,7 +54,9 @@ class AdministrationController extends Controller
     public function users_upload(Board $board)
     {
         // $board =  $board->load('exams');
-        $exams = Exam::where('board_id', '=', $board->id)->pluck('applicated_at', 'id');
+        //$exams = Exam::where('board_id', '=', $board->id);
+        //$exams = Exam::where('board_id', '=', $board->id)->pluck('applicated_at', 'id');
+        $exams = $board->exams;
         return view('management.users.upload_csv', compact('exams', 'board'));
     }
 
