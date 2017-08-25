@@ -77,7 +77,7 @@
       <div class="row">
         <div class="col-xs-4">{{-- Foto placeholder --}}
           <div class="panel">
-                  <img src="{{$user->photo()}}" width="250px" />
+                  <img src="{{$user->photo()}}" height="250px" />
           </div>
         </div>{{--Foto placeholder end --}}
         <div class="col-xs-8 pull-right">
