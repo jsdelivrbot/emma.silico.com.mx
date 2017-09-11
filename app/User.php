@@ -35,7 +35,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'username', 'email', 'password', 'center_id', 'board_id',
+        'name', 'last_name', 'username', 'email', 'password', 'center_id', 'board_id', 'completion_year',
     ];
 
     /**
@@ -179,4 +179,5 @@ class User extends Authenticatable
             return Avatar::create($this->name." ".$this->last_name)->toBase64();
         }
     }
+
 }

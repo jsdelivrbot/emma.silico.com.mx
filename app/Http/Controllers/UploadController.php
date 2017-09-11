@@ -71,9 +71,9 @@ class UploadController extends Controller
         $outputText = "";
         foreach ($results as $row) {
             $row[0] = preg_replace('/^ */', '', $row[0]);
-            #Encuentra los espacios al pricipio de la línea y los remueve
+            /*Encuentra los espacios al pricipio de la línea y los remueve*/
             $row[0] = preg_replace('/^ */', '', $row[0]);
-            #Encuentra los espacios al final de la línea y los remueve;
+            /*Encuentra los espacios al final de la línea y los remueve;*/
             $row[0] = preg_replace('/ *$/', '', $row[0]);
             #$row[0] = preg_replace('/\W*$/,''');
             #$row[0] = preg_replace('/^\W*/,' '');
@@ -87,7 +87,7 @@ class UploadController extends Controller
             #Encuentra ocurrencias de compuestos consubíndices químicos i.e. O2 y los;
             #convierte a la forma O<sub>2</sub> ((?<foo1>([A-Z])) encuentra la letra;
             #mayúscula de la fórmula química y la asigna a foo1 #((?<foo2>(\d)))) encuentra la parte entera y; la asigna a foo2
-            //$row[0] = preg_replace('/((?<foo1>([A-Z]))((?<foo2>(\d))))/','\k<foo1><sub>\k<foo2></sub>', $row[0] );
+            $row[0] = preg_replace('/((?<foo1>([A-Z]))((?<foo2>(\d))))/','\k<foo1><sub>\k<foo2></sub>', $row[0] );
             #Encuentra ocurrencias de mm en volúmenes de líquido y añade al subíndice;
             $row[0] = preg_replace('/(?<foo1>(mm))(?<foo2>(\d))/,', '\k<foo1><sup>\k<foo2></sup>', $row[0]);
             #Encuentra la falta de salto de línea entre la última respuesta (correcta) y #el tema de la; siguiente
@@ -432,13 +432,15 @@ class UploadController extends Controller
         if ($request->zipFile) {
             $dir = Helper::unzipUpload($request);
             $imagesDir = Helper::filterImages($dir);
-            //dd($output_array);
-            //dd($imagesDir);
             if (!File::exists(public_path("images/avatars/users/$request->board_id/"))) {
                     $avatarsPath = File::makeDirectory(public_path("images/avatars/users/$request->board_id/"));
             } else {
                     $avatarsPath = public_path("images/avatars/users/$request->board_id/");
             }
+        } else {
+                $imagesDir = "";
+                $avatarsPath = "";
+                $dir = "";
         }
         //Recursively get al files
         //Compare the filename with the identifier
@@ -460,6 +462,7 @@ class UploadController extends Controller
         $users->push($data->map(function ($item) use($request, $imagesDir, $avatarsPath, $dir, $exam){
                 $item = $item->toArray();
                 $user = new User;
+                /* somewhere I read that there is no need for this array conversion */
                 foreach ($item as $key => $val) {
                         if (\Schema::hasColumn($user->getTable(), $key)) {
                                 $userArray[$key] = $val;
@@ -493,7 +496,7 @@ class UploadController extends Controller
                         $user->identifier = $userArray['identifier'];
                         $user->save($userArray);
                         $user->exams()->save($exam);
-                        if (isset($imagesDir)) {
+                        if (isset($imagesDir) && $imagesDir != "") {
                                 $expectedFilename = ''.S::create($item['identifier'])->collapseWhitespace()->regexReplace('\W','');
                                 $image = preg_grep("/\/($expectedFilename)\.\w*$/", $imagesDir);
                                 if ($image != null) {

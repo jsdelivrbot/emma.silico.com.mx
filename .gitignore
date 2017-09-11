@@ -102,5 +102,5 @@ storage/app/public
 storage/tmp
 public/tmp
 public/images/*
-
+public/*.jpg
 #

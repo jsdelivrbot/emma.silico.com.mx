@@ -135,17 +135,10 @@ class ExamController extends Controller
                 // return $request;
         $user = Auth::user();
         $exam = Exam::find($request->exam_id);
-        $slots = $exam->slots->load('questions');
-
-        $questionsCount = 0;
-        foreach ($slots as $slot) {
-            $questionsCount += $slot->questions->count();
-        }
-
         $grade = new Grade;
         $answersCount = $grade->answersCount($exam, $user);
         $userGrade = $grade->gradeStudent($exam, $user);
-
+        $questionsCount = $exam->questions->count();
         $examUser = $user->exams->find($request->exam_id)->pivot;
 
         if (!isset($examUser->ended_at)) {

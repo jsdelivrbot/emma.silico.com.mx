@@ -40,11 +40,8 @@
                   @endif
                 </div>
                 <div class="pull-left">
-                        @php $filename = $stringy->create($user->name." ".$user->last_name)->toAscii()->toLowerCase()->replace(' ', '_') @endphp
-                        <img src="/images/avatars/users/{{$user->board_id."/".$filename}}.jpg" style="width: 50px; " >
                 <a href="/monitor/student/{{ $exam->id }}/{{$user->id}}">
-                  <img src="{{ Avatar::create($user->name." ".$user->last_name)->toBase64() }}" width="24px" class=""/>
-                  <img src="{{Helper::imageBase64($user->photo())}}" width="50px" />
+                  <img src="{{$user->photo()}}" height="125px" />
                 </a>
               </div>
               </td>

@@ -40,6 +40,11 @@
                       {{ config('app.name', 'EMMA') }}
                   </a>
                 @endrole
+                @role('examinee')
+                    <a class="navbar-brand" href="{{ url('/')}}">
+                        {{ Auth::user()->name." ". Auth::user()->last_name }}
+                    </a>
+                @endrole
             </div>
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
@@ -69,6 +74,10 @@
                                     </a>
                                   </li>
                                 @endrole
+                                    <li>
+                                    {{ Auth::user()->name." ".Auth::user()->last_name}}
+                                    <img src="{{ Auth::user()->photo() }}" style="width: 150px;">
+                                    </li>
                                 <li>
                                     <a href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();

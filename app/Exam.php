@@ -138,6 +138,16 @@ class Exam extends Model
         return false;
     }
 
+    /**
+     *Scope a query to only return extemporaneous users
+     *
+     *@return \Illuminate\Database\Eloquent\Builder
+     */
+     public function scopeExtemporaneous()
+     {
+         
+     }
+
     public function key()
     {
             return DB::table('questions')

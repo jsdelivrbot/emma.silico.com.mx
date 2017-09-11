@@ -25,7 +25,7 @@ class Grade extends Model
             ->where('answers.exam_id', $exam->id)
             ->whereRaw('distractors.option = answers.answer')
             ->where('distractors.correct', 1)
-            ->latest()
+            //->latest()
             ->count();
         return $result;
     }
@@ -103,6 +103,7 @@ class Grade extends Model
                 'users.name as Nombre',
                 'users.last_name as Apellidos',
                 'centers.name as Sede',
+                'users.completion_year',
                 'exam_user.started_at as Inicio',
                 'exam_user.ended_at as Fin'
                 )

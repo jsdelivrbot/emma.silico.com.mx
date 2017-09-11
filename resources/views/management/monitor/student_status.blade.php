@@ -10,7 +10,7 @@
           <div class="pull-left">
             <a id="users_{{$user->id}}" href="#!" class="btn btn-block btn-sm btn-info edit_button">Editar</a>
             <a href="/monitor/student/{{ $exam->id }}/{{$user->id}}">
-              <img src="{{ Avatar::create($user->name." ".$user->last_name)->toBase64() }}" width="100px" class=""/>
+              <img src="{{ $user->photo() }}" width="100px" class=""/>
             </a>
           </div>
         </div>
