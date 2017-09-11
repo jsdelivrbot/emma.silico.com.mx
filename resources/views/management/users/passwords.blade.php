@@ -115,8 +115,8 @@
                       <p>No ingrese al exam hasta que nuestro personal se lo indique</p>
                       <p>En caso de que su nombre esté mal escrito por favor haga la corrección en este documento y terminando su examen lo corregiremos.</p>
                       <p>Al terminar su examen debe entregar este documento firmado en la parte inferiror</p>
-                      <p>En el campo de -Usuario- debe capturar el texto marcado como Usuario impreso en este documento, tal y como está escrito. Este texto está compuesto de letras mayúsculas, 6 números y una letra minúscula</p>
-                      <p>En el campo de -Contraseña- debe capturar el texto marcado como Contraseña impreso en este documento tal y como está escrito. Este texto está compuesto de letras mayúsculas, 6 números y una letra minúscula</p>
+                      <p>En el campo de -Usuario- debe capturar el texto marcado como Usuario impreso en este documento, tal y como está escrito. Este texto está compuesto por 4 letras mayúsculas,y 3 letras minúsculas</p>
+                      <p>En el campo de -Contraseña- debe capturar el texto marcado como Contraseña impreso en este documento tal y como está escrito. Este texto está compuesto de 4 letras mayúsculas, y 3 letras minúsculas</p>
                       <p>Al capturar sus datos en el sistema debe ser cuidadoso de que estén escritos tal y como los están en este documento ya que de no ser así no podrá ingresar</p>
                       <p>Su examen tendrá una duración de {{ $exam->duration }} minutos y consiste de {{ $exam->questions_count() }} preguntas.</p>
                       <h5>Consejos</h5>

@@ -23,6 +23,7 @@ class CheckExam
         $now = Carbon::now();
         $exam = Exam::find($examId);
         $endExamTime = $exam->applicated_at->addMinutes(Exam::find($examId)->duration);
+        //$endExamTime = $exam->applicated_at->addMinutes(Exam::find($examId)->duration);
         session(['checkExam' => $status]);
         if ($status->active != 1) {
             return redirect('home');
