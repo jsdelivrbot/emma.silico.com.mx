@@ -8031,4 +8031,9 @@ div.container {
   max-height: 28px !important;
 }
 
+.emma-navbar {
+  height: 28px;
+  max-height: 30px;
+}
+
 /*# sourceMappingURL=app.css.map */
