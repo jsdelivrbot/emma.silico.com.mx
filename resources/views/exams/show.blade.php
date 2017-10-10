@@ -28,10 +28,11 @@
                 {{-- </div> --}}
                 {{--/Carousel--}}
 
+            </div>
         </div>
             <div class="col-xs-6 col-lg-6">
                 <div class="row" style="height: 100%; overflow: scroll; position:fixed;">
-                    <div class="col-md-12">
+                    <div class="col-xs-6 pull-right">
                         {{--Flash ajax <div>--}}
                         <div id="alert-div"  class="alert alert-div nav-fixed-top">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;

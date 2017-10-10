@@ -85,7 +85,7 @@
             </div>
         </div>
     </nav>
-    <div class="" style="margin-top: 90px;">
+    <div class="" style="margin-top: 50px;">
       @if(count($errors))
       <div class="alert alert-danger" role="alert">
           <ul class="list-group">
