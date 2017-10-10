@@ -4,8 +4,7 @@
         <div class="btn-group btn-group-justified">
             <a id="save_back" href="{{ route('exams.slot', ['slot' => $prev]) }}" class="btn btn-lg btn-success {{ (!$prev) ? 'disabled':null}}" style="background-color: #669A66;">
                                     <span class="fa-lg">
-                                        <i class="fa fa-chevron-circle-left fa-fw"></i>
-                                        <i class="fa fa-floppy-o fa-2x"></i>
+                                        <i class="fa fa-chevron-circle-left fa-fw fa-2x"></i>
                                     </span>
             </a>
             <a href="{{ route('generalIndex') }}#slot_{{ $slot_id }}" class="btn btn-lg btn-primary" style="background-color: #92CEEA;">
@@ -15,14 +14,10 @@
             </a>
             <a href="{{ route('exams.slot', ['slot' => $next]) }}" class="btn btn-lg btn-success {{ (!$next) ? 'disabled':null}}" style="background-color: #669A66;">
                                     <span class="fa-lg">
-                                        <i class="fa fa-floppy-o fa-2x"></i>
-                                        <i class="fa fa-chevron-circle-right fa-fw "></i>
+                                        <i class="fa fa-chevron-circle-right fa-fw fa-2x "></i>
                                     </span>
             </a>
         </div>
-
-    </li>
-    <li>
 
     </li>
 </ul>
