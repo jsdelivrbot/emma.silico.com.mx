@@ -1,4 +1,4 @@
-  <div class="col-md-12" id="slider-thumbs" style="height:160px; position: fixed;
+  <div class="" id="slider-thumbs" style="height:160px; position: fixed;
    width: 50%; background: rgba(217, 237, 247, 0.5);
     left: 25%;
     top: 45%;
