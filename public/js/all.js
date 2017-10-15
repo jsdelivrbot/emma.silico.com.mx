@@ -414,7 +414,8 @@ function save_ajax() {
 $(document).ready(function() {
     //alert('Done');
 
-    $('input:checked').parentsUntil('.list-group-item').addClass("list-group-item-info").css('border-radius', '10px');
+    $('input:checked').parentsUntil('.list-group-item').addClass("list-group-item-info").addClass("disabled").css('border-radius', '10px');
+    $('.list-group input').addClass('disabled');
 
     $('input').click(function () {
         var form = $(this).closest("form");
@@ -545,11 +546,19 @@ function filter(element) {
  * the application, or feel free to tweak this setup for your needs.
  */
 
-// Vue.component('example', require('./components/Example.vue'));
+ Vue.component('example', require('./components/Example.vue'));
 
-// const app = new Vue({
-//     el: 'body'
-// });
+ const app = new Vue({
+     el: 'body'
+ });
+var Vue = require('vue');
+var validator = require('vue-validator');
+var resource = require('vue-resource');
+window.Vue = Vue;
+
+Vue.use(validator);
+Vue.use(resource);
+
 
 function flash(level, text, fadeout) {
     $('#flash').removeClass('hidden').fadeIn(1600).text(text).addClass('alert-'+level);
