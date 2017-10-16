@@ -8024,11 +8024,11 @@ div.container {
 .chart_display .navbar-nav > li > a, .chart_display .navbar-brand {
   padding-top: 4px !important;
   padding-bottom: 0 !important;
-  height: 28px;
 }
 
-.chart_display .navbar {
-  max-height: 28px !important;
+.emma-navbar {
+  height: 30px;
+  max-height: 30px;
 }
 
 /*# sourceMappingURL=app.css.map */
