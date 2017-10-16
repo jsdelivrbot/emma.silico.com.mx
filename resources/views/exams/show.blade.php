@@ -4,7 +4,6 @@
 
 @stop
 @section('content')
-        <example></example>
     <div class="container-fluid ">
             <div class="col-xs-6 col-lg-6" style="height: 50vh; width:50%">
                 {{--Vigenttes--}}
@@ -58,5 +57,4 @@
 @stop
 
 @section('footer')
-        <script src="https://cdn.jsdelivr.net/npm/vue">
 @stop
