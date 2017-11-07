@@ -52,6 +52,7 @@ class CentersController extends Controller
         try {
             $center = new Center($request->all());
             $center->save();
+            flash()->overlay('Sede académica creada', 'Crear sede académica');
         } catch (\Exception $e) {
             flash()->overlay('Error al crear la sede académica', 'Crear sede académica');
         }
@@ -105,8 +106,10 @@ class CentersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        Center::destroy($request->id);
+        return back(302);
     }
 }
