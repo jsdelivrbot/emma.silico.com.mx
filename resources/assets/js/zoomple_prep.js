@@ -1,11 +1,11 @@
 $(document).ready(function() {
     $('.zoomple').zoomple({
-        blankURL : 'images/blank.gif',
-        bgColor : 'white',
-        offset : {x:-150,y:-150},
-        zoomWidth : 300,
+        bgColor : '#2F4C6E',
+        zoomWidth : 400,
         zoomHeight : 300,
-        roundedCorners : true,
-        attachWindowToMouse: true,
+        roundedCorners : false,
+        attachWindowToMouse: false,
+        loaderURL: 'http://emma.silico.com.mx/images/loader.gif',
+        showCursor : true,
     });
 });

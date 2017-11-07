@@ -6,7 +6,7 @@
 *.exe
 *.o
 *.so
-
+*.map
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -101,6 +101,9 @@ storage/framework/sessions/*1
 storage/app/public
 storage/tmp
 public/tmp
+<<<<<<< HEAD
 public/images/*
 public/*.jpg
+public/tmp/*
+public/images/exams
 #

@@ -47,9 +47,15 @@ class AnswersController extends Controller
 
         $user = Auth::user();
         if ($request->isMethod('post')) {
-            $answer = Answer::updateOrCreate(['question_id' => $request->question_id, 'user_id'=>$user->id, 'exam_id'=>$request->exam_id]);
-            $answer->answer = $request->answer;
-            if ($answer->save()) {
+                $answer = Answer::updateOrCreate(
+                [
+                                'question_id' => $request->question_id,
+                                'user_id'=>$user->id,
+                                'exam_id'=>$request->exam_id
+                ]
+                );
+        $answer->answer = $request->answer;
+        if ($answer->save()) {
                 return response($answer, 200);
             } else {
                 return response('Error', 500);
