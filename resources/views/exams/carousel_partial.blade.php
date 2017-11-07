@@ -1,8 +1,4 @@
-  <div class="col-md-12" id="slider-thumbs" style="height:160px; position: fixed;
-   width: 50%; background: rgba(217, 237, 247, 0.5);
-    left: 25%;
-    top: 45%;
-    transform: translate(-50%, -50%);">
+<div class="panel" id="slider-thumbs">
       <!-- thumb navigation items -->
       <ul class="list-inline list-group" style="overflow-scrolling: ">
         @php
@@ -20,7 +16,7 @@
           @endforeach
       </ul>
   </div>
-  <div id="image-container-{{ $slot->id }}" class="" style="margin-top:160px;">
+  <div id="image-container-{{ $slot->id }}" class="panel"> 
 
     @php
       $display = ""

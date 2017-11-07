@@ -345,12 +345,21 @@ div.container {
   .navbar-nav > li > a, .navbar-brand {
     padding-top:4px !important;
     padding-bottom:0 !important;
-    height: 28px;
+   // height: 28px;
   }
-  .navbar {max-height:28px !important;}
+  //.navbar {max-height:28px !important;}
+
+  
+}
+.emma-navbar {
+  height: 30px;
+  max-height: 30px;
 }
 
+<<<<<<< HEAD
 .emma-navbar{
         height: 28px;
         max-height: 30px;
 }
+=======
+>>>>>>> 5.answersBug

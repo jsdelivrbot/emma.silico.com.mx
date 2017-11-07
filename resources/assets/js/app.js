@@ -11,11 +11,19 @@
  * the application, or feel free to tweak this setup for your needs.
  */
 
-// Vue.component('example', require('./components/Example.vue'));
+ Vue.component('example', require('./components/Example.vue'));
 
-// const app = new Vue({
-//     el: 'body'
-// });
+ const app = new Vue({
+     el: 'body'
+ });
+var Vue = require('vue');
+var validator = require('vue-validator');
+var resource = require('vue-resource');
+window.Vue = Vue;
+
+Vue.use(validator);
+Vue.use(resource);
+
 
 //Dinamically adjusts the navbar height 
 $(document).ready(function () {
