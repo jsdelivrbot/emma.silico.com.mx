@@ -5,7 +5,8 @@
 @stop
 @section('content')
     <div class="container-fluid ">
-            <div class="col-xs-6 col-lg-6" style="height: 50vh; width:50%">
+            <div class="row">
+            <div class="col-xs-6 col-lg-6" style="height: 100%; width:50%">
                 {{--Vigenttes--}}
                 @each('exams.videos_partial', $slot->videos, 'video')
                 
@@ -20,7 +21,7 @@
 
                 {{--Carousel--}}
                 {{-- <div class="row"> --}}
-                    <div class="col-md-12" style="height: 100%; overflow:scroll;">
+                    <div class="" style="height: 100%; overflow:scroll;">
                         @include('exams.carousel_partial', ['images' => $slot->images])
                     </div>
 
@@ -28,6 +29,7 @@
                 {{--/Carousel--}}
 
             </div>
+            </div><!--end of first row -->
             <div class="col-xs-6">
                 <div class="" style="height: 100%; overflow: scroll; position:fixed;">
                     <div class="pull-right">
