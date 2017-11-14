@@ -8036,13 +8036,24 @@ div.container {
 
 /* CSS used here will be applied after bootstrap.css */
 .left-column {
+  padding: 1em;
+  overflow: hidden;
+}
+
+.right-column {
   height: 100vh;
   padding: 0;
 }
 
+.right-column > .panel {
+  border-radius: 0;
+}
+
 .image-container {
-  height: 100%;
+  height: 70vh;
   width: 100%;
+  overflow: scroll;
+  padding: 0;
 }
 
 .vignette-container {

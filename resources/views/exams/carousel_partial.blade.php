@@ -1,4 +1,4 @@
-<div class="panel" id="slider-thumbs">
+<div class="panel" id="slider-thumbs" style="position:absolute;">
       <!-- thumb navigation items -->
       <ul class="list-inline list-group" style="overflow-scrolling: ">
         @php
@@ -16,7 +16,7 @@
           @endforeach
       </ul>
   </div>
-  <div id="image-container-{{ $slot->id }}" class="panel"> 
+  <div id="image-container-{{ $slot->id }}" class="panel" style:"margin-top:66px;"> 
 
     @php
       $display = ""

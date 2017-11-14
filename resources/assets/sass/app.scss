@@ -83,7 +83,7 @@ body {
   //  background-color: #aa9539;
   //}
   li {
-    background-color: whitesmoke
+    background-color: whitesmoke;
   }
   li:hover {
     background-color: ghostwhite
@@ -374,13 +374,24 @@ div.container {
 /* CSS used here will be applied after bootstrap.css */
 
 .left-column {
-  height: 100vh;
-  padding: 0;
+  padding: 1em;
+  overflow: hidden;
+}
+
+.right-column {
+    height: 100vh;
+    padding: 0;
+}
+
+.right-column > .panel {
+    border-radius: 0;
 }
 
 .image-container {
-  height: 100%;
+  height: 70vh;
   width: 100%;
+  overflow: scroll;
+  padding: 0;
 }
 
 .vignette-container {
