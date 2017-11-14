@@ -90,7 +90,7 @@ storage/framework/views
 ### Laravel ###
 vendor/node_modules/npm-debug.log
 vendor/node_modules/
-
+vendor/*
 # Laravel sessions #
 storage/framework/sessions
 storage/framework/sessions/
@@ -101,7 +101,6 @@ storage/framework/sessions/*1
 storage/app/public
 storage/tmp
 public/tmp
-<<<<<<< HEAD
 public/images/*
 public/*.jpg
 public/tmp/*
