@@ -112,11 +112,11 @@
               <div class="col-xs-12 text-left">
                       <h5>Instrucciones</h5>
                       <p>Espere a que nuestro personal le atienda y asigne una computadora</p>
-                      <p>No ingrese al exam hasta que nuestro personal se lo indique</p>
+                      <p>No ingrese al examen hasta que nuestro personal se lo indique</p>
                       <p>En caso de que su nombre esté mal escrito por favor haga la corrección en este documento y terminando su examen lo corregiremos.</p>
                       <p>Al terminar su examen debe entregar este documento firmado en la parte inferiror</p>
-                      <p>En el campo de -Usuario- debe capturar el texto marcado como Usuario impreso en este documento, tal y como está escrito. Este texto está compuesto por 4 letras mayúsculas,y 3 letras minúsculas</p>
-                      <p>En el campo de -Contraseña- debe capturar el texto marcado como Contraseña impreso en este documento tal y como está escrito. Este texto está compuesto de 4 letras mayúsculas, y 3 letras minúsculas</p>
+                      <p>En el campo de -Usuario- debe capturar el texto marcado como Usuario impreso en este documento, tal y como está escrito. Este texto está compuestpor letras mayúsculas y letras minúsculas</p>
+                      <p>En el campo de -Contraseña- debe capturar el texto marcado como Contraseña impreso en este documento tal y como está escrito. Este texto está compuesto de letras mayúsculas,  letras minúsculas</p>
                       <p>Al capturar sus datos en el sistema debe ser cuidadoso de que estén escritos tal y como los están en este documento ya que de no ser así no podrá ingresar</p>
                       <p>Su examen tendrá una duración de {{ $exam->duration }} minutos y consiste de {{ $exam->questions_count() }} preguntas.</p>
                       <h5>Consejos</h5>
@@ -130,8 +130,8 @@
                       <ol>
                               Limitantes
                               <li>Queda prohibido extraer cualquier información que competa a este examen</li>
-                              <li>Queda prohibido copiar y otros comportamientos que no se adecuén al perfil ético del {{ $board->short_name }} y de las buenas prácticas académicas.</li>
-                              <li>Usar el equipo de cómputo y sus sistemas de software para un objetivo distinto al de responder el examen</li>
+                              <li>Queda prohibido copiar y otros comportamientos que no se adecúen al perfil ético del {{ $board->name }} y de las buenas prácticas académicas.</li>
+                              <li>Queda prohibido usar el equipo de cómputo y sus sistemas de software para un objetivo distinto al de responder el examen</li>
                       </ol>
                       <p>Nuestro personal así como los miembros del {{ $board->name }} arbitrariamente pueden solicitar el cambio de asiento o equipo al sustentante.</p>
               </div>
