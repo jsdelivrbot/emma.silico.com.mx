@@ -13,8 +13,8 @@ function save_ajax() {
 $(document).ready(function() {
     //alert('Done');
 
-    $('input:checked').parentsUntil('.list-group-item').addClass("list-group-item-info").addClass("disabled").css('border-radius', '10px');
-    $('.list-group input').addClass('disabled');
+    $('input:checked').parentsUntil('.list-group-item').addClass("list-group-item-info").css('border-radius', '10px');
+    //$('.list-group input').addClass('disabled');
 
     $('input').click(function () {
         var form = $(this).closest("form");

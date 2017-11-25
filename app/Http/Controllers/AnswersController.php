@@ -52,7 +52,8 @@ class AnswersController extends Controller
                                 'question_id' => $request->question_id,
                                 'user_id'=>$user->id,
                                 'exam_id'=>$request->exam_id
-                ]
+                ],
+		['answer'=>$request->answer]
                 );
         $answer->answer = $request->answer;
         if ($answer->save()) {
