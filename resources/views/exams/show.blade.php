@@ -5,9 +5,9 @@
 @stop
 @section('content')
             <div class="row">
-                <div class="col-md-6 left-column">
+                <div class="col-md-6 left-column" style="height: 75%; overflow:hidden;  ">
                         <div class="row ">
-                                <div class="col-md-12 vignette-container">
+                                <div class="col-md-12 vignette-container" >
                                         @php($vignettes = $slot->vignettes /*Quiero poner esto en el controlador*/)
                                         @if(isset($vignettes))
                                             @each('exams.vignette_partial', $vignettes, 'vignette')
