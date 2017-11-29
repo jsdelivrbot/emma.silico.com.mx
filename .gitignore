@@ -76,16 +76,15 @@ Temporary Items
 node_modules
 /node_modules
 node_modules/
+package-lock.json
+yarn.lock
 
 # Laravel cache #
 ######################
-storage/framework/cache
-storage/framework/cache/
 storage/framework/cache/*
 
 # Laravel views #
 storage/framework/views/
-storage/framework/views
 
 ### Laravel ###
 vendor/node_modules/npm-debug.log
@@ -93,16 +92,12 @@ vendor/node_modules/
 vendor/*
 # Laravel sessions #
 storage/framework/sessions
-storage/framework/sessions/
-storage/framework/sessions/*1
 
 # Generated exams by EMMA #
 ##########################
-storage/app/public
-storage/tmp
-public/tmp
+storage/app/public/*
+storage/tmp/*
 public/images/*
 public/*.jpg
-public/tmp/*
 public/images/exams
 #
