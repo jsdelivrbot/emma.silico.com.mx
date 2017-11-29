@@ -34,8 +34,8 @@
                       @endif
                       @php
                               $grade = new EMMA5\Grade;
-$user = Auth::user();
-              @endphp
+                              $user = Auth::user();
+                      @endphp
               @if ($grade->passed($exam,$user) && $exam->passing_grade != 0)
                       <h2 class="text-success">Examen acreditado</h2>
               @elseif ($grade->passed($exam,$user) && $exam->passing_grade != 0)
@@ -64,6 +64,16 @@ $user = Auth::user();
                       <h2>
                               Usó {{ Carbon::parse($examUser->ended_at)->diffInMinutes(Carbon::parse($examUser->started_at)) }} minutos de los {{ $exam->duration }} para terminar su examen.
                       </h2>
+                      <a href="{{ url('/logout') }}"
+                          onclick="event.preventDefault();
+                                   document.getElementById('logout-form').submit();">
+                          Salir del sistema
+                      </a>
+
+                      <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                          {{ csrf_field() }}
+                      </form>
+
               </div>
       </div>
     </div>
