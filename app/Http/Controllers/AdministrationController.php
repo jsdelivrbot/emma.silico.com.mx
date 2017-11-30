@@ -54,7 +54,9 @@ class AdministrationController extends Controller
     public function users_upload(Board $board)
     {
         // $board =  $board->load('exams');
-        $exams = Exam::where('board_id', '=', $board->id)->pluck('applicated_at', 'id');
+        //$exams = Exam::where('board_id', '=', $board->id);
+        //$exams = Exam::where('board_id', '=', $board->id)->pluck('applicated_at', 'id');
+        $exams = $board->exams;
         return view('management.users.upload_csv', compact('exams', 'board'));
     }
 
@@ -69,12 +71,12 @@ class AdministrationController extends Controller
     {
         if (Auth::user()->hasRole('admin')) {
             $exam = $exam->load('users');
-            $users = $exam->users->load('avatar');
+            $users = $exam->users->load('avatar')->load('center');
             $board = $exam->board->load('logo');
 
             $pdf = PDF::loadView('management.users.passwords', compact('exam', 'users', 'board'));
-            //return $pdf->download('users'.$exam->id.'.pdf');
-            return view('management.users.passwords', compact('exam', 'users', 'board'));
+            return $pdf->download('users'.$exam->id.'.pdf');
+           // return view('management.users.passwords', compact('exam', 'users', 'board'));
         } else {
             return redirect()->action('ExamController@user_dashboard');
         }
@@ -100,12 +102,13 @@ class AdministrationController extends Controller
     public function monitor(Exam $exam)
     {
         $grades = new Grade;
-        $stats = new Grade;
+        $stats = new Grade;//Not necesary two instances of the dsame thing 
         $grades = $grades->allStudents($exam);
-        $exam = $exam->load('users.answers');
+        $exam = $exam->load('users.answers', 'users.board', 'users.center');
+        //$users = $exam->users;
         $questions_count = $exam->questions_count();
-        $stringy = new S;
-        return view('management.monitor.exam', compact('exam', 'grades', 'stats', 'questions_count', 'stringy'));
+        $stringy = new S;//Maybe it can be called from the view
+        return view('management.monitor.exam', compact('exam', 'users', 'grades', 'stats', 'questions_count', 'stringy'));
     }
 
     public function monitorStudent(Exam $exam, User $user)

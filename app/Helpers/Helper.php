@@ -28,11 +28,13 @@ use File;
 use EMMA5\Response;
 use Illuminate\Http\Request as Request;
 use Illuminate\Support\Facades\Input as Input;
+use Illuminate\Support\Collection as Collect;
 use Exception;
 use Image;
 use Intervention\Image\ImageManager;
 use Comodojo\Zip\Zip as Zip;
 use Comodojo\Exception\ZipException as ZipException;
+use Stringy\Stringy as S;
 
 /**
  *Helper class to do simple tasks easier in EMMA
@@ -43,135 +45,157 @@ use Comodojo\Exception\ZipException as ZipException;
  */
 class Helper
 {
-    /**
-     * @param $string
-     * @param bool $onlyCapitals
-     * @return null|string
-     * Creates an acronym for usernames and the like
-     */
+        /**
+         * @param $string
+         * @param bool $onlyCapitals
+         * @return null|string
+         * Creates an acronym for usernames and the like
+         */
 
-    public static function createAcronym($string, $onlyCapitals = false)
-    {
-        $output = null;
-        $token  = strtok($string, ' ');
-        while ($token !== false) {
-            $character = mb_substr($token, 0, 1);
-            if ($onlyCapitals and mb_strtoupper($character) !== $character) {
-                $token = strtok(' ');
-                continue;
-            }
-            $output .= $character;
-            $token = strtok(' ');
+        public static function createAcronym($string, $onlyCapitals = true)
+        {
+                $string = preg_replace('#A.C.#', '', $string);//Beacuse mexican boards are civil asociations its name always includes A.C.
+                $string = S::create($string)->toAscii();
+                $output = null;
+                $token  = strtok($string, ' ');
+                while ($token !== false) {
+                        $character = mb_substr($token, 0, 1);
+                        if ($onlyCapitals and mb_strtoupper($character) !== $character) {
+                                $token = strtok(' ');
+                                continue;
+                        }
+                        $output .= $character;
+                        $token = strtok(' ');
+                }
+                return $output;
         }
-        return $output;
-    }
 
-    /**
-     * Takes a Board object and searchs for its smnall version of
-     * its logo for the header in the template generator
-     *
-     * @param Class $board
-     *
-     * @return string
-     */
-    public static function templateHeaderLogo(Board $board)
-    {
-        $dir = public_path('images/');
-        $file = Image::make($dir.$board->logo->first()->source);
-        //So I must create a directory to save the new asset
-        //I must create a proper name for the final image file
-        //Must create a function to create the dir if it doesn't exists?
-        $file->greyscale();
-        $file->resize(
+        /**
+         * Converts numbers to Alphabet noattion
+         *
+         * @return string
+         * @author ircmaxell@stackoverflow
+         */
+        public static function getNameFromNumber($num)
+        {
+                $numeric = ($num - 1) % 26;
+                $letter = chr(65 + $numeric);
+                $num2 = intval(($num - 1) / 26);
+                if ($num2 > 0) {
+                        return Helper::getNameFromNumber($num2) . $letter;
+
+                } else {
+                        return $letter;
+
+                }
+        }
+
+        /**
+         * Takes a Board object and searchs for its smnall version of
+         * its logo for the header in the template generator
+         *
+         * @param Class $board
+         *
+         * @return string
+         */
+        public static function templateHeaderLogo(Board $board)
+        {
+                $dir = public_path('images/');
+                $file = Image::make($dir.$board->logo->first()->source);
+                //So I must create a directory to save the new asset
+                //I must create a proper name for the final image file
+                //Must create a function to create the dir if it doesn't exists?
+                $file->greyscale();
+                $file->resize(
                         80,
                         null,
                         function ($constraint) {
-                            $constraint->aspectRatio();
+                                $constraint->aspectRatio();
                         }
                 );
-        $file->save(
+                $file->save(
                         storage_path('app/wordTemplates/'.$board->id.'/').$file->filename.'_small'.'.'.$file->extension
                 );
-        dd($file);
-    }
+                dd($file);
+        }
 
 
-    /*
-     * undocumented function
-     *
-     * @return void
-     * @author yourname
-     */
-    public static function createBoardTemplate(Board $board)
-    {
-        //Getting the board logo
-        $objPHPWord = new \PhpOffice\PhpWord\PhpWord();
-        $logo = $board->logo->first()->source;
-        //Preparing th generarl orintation of the main section
-        //For this kind of reports it is always portrait
-        $sectionStyle = [
+        /*
+         * undocumented function
+         *
+         * @return void
+         * @author yourname
+         */
+        public static function createBoardTemplate(Board $board)
+        {
+                //Getting the board logo
+                $objPHPWord = new \PhpOffice\PhpWord\PhpWord();
+                $logo = $board->logo->first()->source;
+                //Preparing th generarl orintation of the main section
+                //For this kind of reports it is always portrait
+                $sectionStyle = [
                         'orientation' =>  'portrait',
                         'marginTop' => 600,
                         'colsNum' => 1,
                 ];
-        //Preparing the "small" image to be
-        //used in the header of all the document
-        $imageStyle = [
+                //Preparing the "small" image to be
+                //used in the header of all the document
+                $imageStyle = [
                         'height' => 80,
                         'wrappingStyle' => 'square',
                         'posHorizontalRel' => 'margin',
                         'posVerticalRel' => 'line',
                 ];
-        //Create the section
-        //
-        $section = $objPHPWord->addSection($sectionStyle);
-        //Create snake_casean empty header
-        $header = $section->addHeader();
-        //Preparing a table to insert in the heading
-        //to accomodate the image on the left and
-        //the name of the board on the right
-        $tableStyle = [
+                //Create the section
+                //
+                $section = $objPHPWord->addSection($sectionStyle);
+                //Create snake_casean empty header
+                $header = $section->addHeader();
+                //Preparing a table to insert in the heading
+                //to accomodate the image on the left and
+                //the name of the board on the right
+                $tableStyle = [
                         'borderColor' => '006699',
                         'borderSize' => 6,
                         'cellMargin' => 50
                 ];
-        $firstRowStyle = array('bgColor' => '66BBFF');
-        $objPHPWord->addTableStyle('headerTable', $tableStyle, $firstRowStyle);
+                $firstRowStyle = array('bgColor' => '66BBFF');
+                $objPHPWord->addTableStyle('headerTable', $tableStyle, $firstRowStyle);
 
-        $headerTable = $header->addTable('headerTable');
-        $headerTable->addRow();
-        $cell = $headerTable->addCell();
+                $headerTable = $header->addTable('headerTable');
+                $headerTable->addRow();
+                $cell = $headerTable->addCell();
 
-        $source = "images/".$logo;
-        //echo asset($source);
-        //dd($source);
-        echo $logo;
-        $cell->addImage(public_path('images')."/".$logo, $imageStyle);
-        $cell = $headerTable->addCell();
-        $cell->addText($board->name, array('name' => 'Arial', 'size' => 11));
-        $cell = $headerTable->addCell();
-        $cell->addText(
+                $source = "images/".$logo;
+                //echo asset($source);
+                //dd($source);
+                echo $logo;
+                $cell->addImage(public_path('images')."/".$logo, $imageStyle);
+                $cell = $headerTable->addCell();
+                $cell->addText($board->name, array('name' => 'Arial', 'size' => 11));
+                $cell = $headerTable->addCell();
+                $cell->addText(
                         'Examen de Certificación ${aplicated_at}',
                         array('name' => 'Arial', 'size' => 11)
                 );
-        $testTextSection = $objPHPWord->addSection();
-        $testTextSection->addText(
+                $testTextSection = $objPHPWord->addSection();
+                $testTextSection->addText(
                         '',
                         ['name' => 'Tahoma', 'size' => 32]
                 );
-        //Save and return
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($objPHPWord, 'Word2007');
-        $fileName = 'template_'.Helper::createAcronym($board->name).".docx";
-        $savePath = storage_path().'/wordTemplates/'.$board->id;
-        //dd(storage_path('wordTemplates/'.$board->id));
-        echo $fileName;
-        echo File::exists($savePath);
+                //Save and return
+                $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($objPHPWord, 'Word2007');
+                $fileName = 'template_'.Helper::createAcronym($board->name).".docx";
+                $savePath = storage_path().'/wordTemplates/'.$board->id;
+                //dd(storage_path('wordTemplates/'.$board->id));
+                echo $fileName;
+                echo File::exists($savePath);
         /*if (!File::exists($savePath)) {
             File::makeDirectory(storage_path().'/wordTemplates/'.$board->id, 0777, true);
         }*/
-        return $objWriter->save($savePath.'/'.$fileName);
+                return $objWriter->save($savePath.'/'.$fileName);
 
-        //$objWriter->save(storage_path().'/wordTemplates/'.$board->id.'test.docx');
+                //$objWriter->save(storage_path().'/wordTemplates/'.$board->id.'test.docx');
                 //File::put($fileName, $objWriter->save($fileName));
                 //return public_path($fileName);
                 //return $objWriter->save("test.docx");
@@ -179,181 +203,208 @@ class Helper
                 //$writer = PHPWord_IOFactory::createWriter($objPHPWord, 'Word2007');;
                 //$writer->save("testword.docx");
                 //return Response::download(storage_path(), $fileName);
-    }
-
-    /**
-     * Takes a number and rounds it to 2 significant digits
-     * and or zeropads it to 2 significant digits
-     *
-     * @return string
-     */
-    public static function statsRound($value)
-    {
-        $value = number_format($value, 2, '.', ',');
-        return $value;
-    }
-
-    /**
-     * Takes the group as original and part as the request of percentage
-     *
-     * @return string
-     */
-    public static function percentage($original, $part)
-    {
-        try {
-            $percent = ($part/$original)*100;
-            return Helper::statsRound($percent);
-        } catch (Exception $e) {
-            return 0;
         }
-    }
 
-    /**
-     * Takes a Request object, test if the uploaded file is a valid zip
-     * puts it on a temp file and uncompress it.
-     *
-     *@return string Route to the uncompressed folder
-     */
-    public static function unzipUpload(Request $request)
-    {
-        try {
-            Zip::check(Input::file('zipFile'));
-        } catch (ZipException $e) {
-            return $e;
-            flash('Archivo no válido', 'danger')->important();
+        /**
+         * Takes a number and rounds it to 2 significant digits
+         * and or zeropads it to 2 significant digits
+         *
+         * @return string
+         */
+        public static function statsRound($value)
+        {
+                $value = number_format($value, 2, '.', ',');
+                return $value;
         }
-        try {
-            $inputZip = Input::file('zipFile')
+
+        /**
+         * Takes the group as original and part as the request of percentage
+         *
+         * @return string
+         */
+        public static function percentage($original, $part)
+        {
+                try {
+                        $percent = ($part/$original)*100;
+                        return Helper::statsRound($percent);
+                } catch (Exception $e) {
+                        return 0;
+                }
+        }
+
+        /**
+         * Takes a Request object, test if the uploaded file is a valid zip
+         * puts it on a temp file and uncompress it.
+         *
+         *@return string Route to the uncompressed folder
+         */
+        public static function unzipUpload(Request $request)
+        {
+                try {
+                        Zip::check(Input::file('zipFile'));
+                } catch (ZipException $e) {
+                        return $e;
+                        flash('Archivo no válido', 'danger')->important();
+                }
+                try {
+                        $inputZip = Input::file('zipFile')
                                 ->move(
                                         storage_path('/tmp/'.Input::file('zipFile')->getBasename())
                                 );
-            $zip = Zip::open($inputZip);
-            $zip->extract(storage_path('tmp/').$inputZip->getBasename());
-            File::delete($inputZip);
-        } catch (ZipException $e) {
-            flash(
+                        $zip = Zip::open($inputZip);
+                        $zip->extract(storage_path('tmp/').$inputZip->getBasename());
+                        File::delete($inputZip);
+                } catch (ZipException $e) {
+                        flash(
                                 'Error al descomrpimir el archivo inténtelo de nuevo y si el problema persiste contacte al administrador'
                         );
-        }//End try/catch
-        return storage_path('tmp/').$inputZip->getBasename();
-    }//End unzipUpload
+                }//End try/catch
+                return storage_path('tmp/').$inputZip->getBasename();
+        }//End unzipUpload
 
-    /**
-     * Recibes a string of a directory and returns an array with the image contents of the file
-     *
-     * @return array
-     * @author msantana
-     */
-    public static function filterImages(string $directory)
-    {
-        //$files = File::allFiles($directory);
-        $aviableImageFormats = [
+        /**
+         * Recibes a string of a directory and returns an array with the image contents of the file
+         *
+         * @return array
+         * @author msantana
+         */
+        public static function filterImages(string $directory)
+        {
+                //$files = File::allFiles($directory);
+                $aviableImageFormats = [
                         "png",
                         "jpg",
                         "jpeg",
                         "gif"
                 ];
-        $imageExtensions = "{";
-        foreach ($aviableImageFormats as $extension) {
-            //Final product glob("*.{[jJ][pP][gG],[pP][nN][gG],[gG][iI][fF]}"
-            $extensionChars = str_split($extension);
-            $rgxPartial = null;
-            foreach ($extensionChars as $char) {
-                $rgxPartial .= "[".strtoupper($char).strtolower($char)."]";
-            }
-            $rgxPartial .= ",";
-            $imageExtensions .= $rgxPartial;
-        }
-        $imageExtensions .= "}";
-        if (File::exists($directory)) {
-            $imagesList = glob($directory."/*.".$imageExtensions, GLOB_BRACE);
-            return $imagesList;
-        } else {
-            return null;
-        }
-    }//End filterImages
+                $imageExtensions = "{";
+                foreach ($aviableImageFormats as $extension) {
+                        //Final product glob("*.{[jJ][pP][gG],[pP][nN][gG],[gG][iI][fF]}"
+                        $extensionChars = str_split($extension);
+                        $rgxPartial = null;
+                        foreach ($extensionChars as $char) {
+                                $rgxPartial .= "[".strtoupper($char).strtolower($char)."]";
+                        }
+                        $rgxPartial .= ",";
+                        $imageExtensions .= $rgxPartial;
+                }
+                $imageExtensions .= "}";
+                if (File::exists($directory)) {
+                        $imagesList = glob($directory."/*.".$imageExtensions, GLOB_BRACE);
+                        return $imagesList;
+                } else {
+                        return null;
+                }
+        }//End filterImages
 
-    /**
-     * Processes the given image to be properly used in the exams
-     *
-     * @return Array
-     * @author msantana
-     */
-    public static function userPictureProcess($directory, Board $board)
-    {
-        try {
-            //$files = File::get($directory);
-            $files = File::allFiles($directory);
-        } catch (Exception $e) {
-            return $e;
-        }
-        try {
-            $manager = new ImageManager(array('driver' => 'imagick'));
-        } catch (Exception $e) {
-            echo "Error creando manager de image ".PHP_EOL.$e;
-        }
-        if ($board) {
-            $logo = $board->logo->first();
-            $watermark = $manager->make("http://www.cmmu.org.mx/images/logo_intro.png?crc=4127967993");
-            ///$watermark = $manager->make(public_path('images/'.$logo->source));
-            //$watermark->gamma(2.5);
-            //$watermark->greyscale();
-            //$watermark= $manager->make($directory."/watermarkLogo.jpg");
+        /**
+         * Processes the given image to be properly used in the exams
+         *
+         * @return Array
+         * @author msantana
+         */
+        public static function userPictureProcess($directory, Board $board)
+        {
+                try {
+                        //$files = File::get($directory);
+                        $files = File::allFiles($directory);
+                } catch (Exception $e) {
+                        return $e;
+                }
+                try {
+                        $manager = new ImageManager(array('driver' => 'imagick'));
+                } catch (Exception $e) {
+                        echo "Error creando manager de image ".PHP_EOL.$e;
+                }
+                if ($board) {
+                        $logo = $board->logo->first();
+                        $watermark = $manager->make("http://www.cmmu.org.mx/images/logo_intro.png?crc=4127967993");
+                        ///$watermark = $manager->make(public_path('images/'.$logo->source));
+                        //$watermark->gamma(2.5);
+                        //$watermark->greyscale();
+                        //$watermark= $manager->make($directory."/watermarkLogo.jpg");
             /*$watermark->resize(null, 64, function ($constraint) {
                         $constraint->aspectRatio();
             });*/
-            $watermark->save($directory."/watermarkLogo.jpg");
-        }
-        foreach ($files as $picture) {
-            try {
-                $newImage = $manager->make($picture);
-            } catch (Exception $e) {
-                echo $e;
-            }
-            $height = round($newImage->height() * 0.6);
-            $width = round($newImage->width() * 0.5);
-            $newImage->crop($width, $height);
-            $newImage->save($picture);
-            //$newImage->resizeCanvas($height, $width);
-            $newImage->trim('bottom-right', array('bottom'), 0, null);
-            $newImage->save($picture);
-            $newImage->mask($watermark, true);
-            $newImage->save($picture);
-            echo $picture.PHP_EOL;
-        }
-        return true;
-    }/* End userPictureProcess */
+                        $watermark->save($directory."/watermarkLogo.jpg");
+                }
+                foreach ($files as $picture) {
+                        try {
+                                $newImage = $manager->make($picture);
+                        } catch (Exception $e) {
+                                echo $e;
+                        }
+                        $height = round($newImage->height() * 0.6);
+                        $width = round($newImage->width() * 0.5);
+                        $newImage->crop($width, $height);
+                        $newImage->save($picture);
+                        //$newImage->resizeCanvas($height, $width);
+                        $newImage->trim('bottom-right', array('bottom'), 0, null);
+                        $newImage->save($picture);
+                        $newImage->mask($watermark, true);
+                        $newImage->save($picture);
+                        echo $picture.PHP_EOL;
+                }
+                return true;
+        }/* End userPictureProcess */
 
-    /**
-     * Extracts information from the file such as the imageable type it belongs and order within that object
-     *
-     * @param $file String
-     * @return $imageData  Array
-     * @author msantana
-     */
-    public static function imageType($file)
-    {
-        preg_match("/([0-9]{1,})([a-z]*)([_| ]?)([p|d]?)([0-9]*)/", $file, $output_array);
-        if (isset($output_array[2])) {
-                $imageData['imageOrder'] = $output_array[2];
+        /**
+         * Extracts information from the file such as the imageable type it belongs and order within that object
+         *
+         * @param $file String
+         * @return $imageData  Array
+         * @author msantana
+         */
+        public static function imageType($file)
+        {
+                preg_match("/([0-9]{1,})([a-z]*)([_| ]?)([p|d]?)([0-9]*)/", $file, $output_array);
+                if (isset($output_array[2])) {
+                        $imageData['imageOrder'] = $output_array[2];
+                }
+                $imageData['slotOrder'] = $output_array[1];
+                $imageData['imageableType'] = "slot";
+                if ($output_array[4] == "p" | $output_array[4] == "P") {
+                        $imageData['imageableType'] = "question";
+                        isset($output_array[5]) ? $imageData['questionOrder'] = $output_array[5] : $imageData['questionOrder'] = null;
+                }
+                //$imageData['order'] = $output_array[5];
+                return $imageData;
         }
-        $imageData['slotOrder'] = $output_array[1];
-        $imageData['imageableType'] = "slot";
-        if ($output_array[4] == "p" | $output_array[4] == "P") {
-                $imageData['imageableType'] = "question";
-                isset($output_array[5]) ? $imageData['questionOrder'] = $output_array[5] : $imageData['questionOrder'] = null;
-        }
-        //$imageData['order'] = $output_array[5];
-        return $imageData;
-    }
 
-    /**
-     * undocumented function
-     *
-     * @return void
-     * @author yourname
-     */
-    public static function uploadUserAvatar()
-    {
-    }
+        /**
+         * undocumented function
+         *
+         * @return void
+         * @author yourname
+         */
+        public static function uploadUserAvatar()
+        {
+        }
+
+        public static function collectionToArray(array $collect = null)
+        {
+                return array_map(function ($array) use ($collect) {
+                        foreach ($array as $key => $value) {
+                                $resultArray[$key] = $value;
+                        }
+                        return $resultArray;
+                }, $collect);
+        }
+
+        /**
+         * undocumented function
+         *
+         * @return void
+         */
+        public static function imageBase64($filePath)
+        {
+                if (File::exists($filePath)) {
+                        $source = $filePath;
+                        $type = pathinfo($source, PATHINFO_EXTENSION);
+                        $data = file_get_contents($source);
+                        return 'data:image/'.$type.';base64,'.base64_encode($data);
+                } else {
+                        return null;
+                }
+        }
 } // END     class

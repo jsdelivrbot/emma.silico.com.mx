@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
+use Helper;
 use Illuminate\Support\Facades\DB;
 use Debugbar;
+use Excel;
+use PHPExcel;
 
 class ExamController extends Controller
 {
@@ -29,10 +32,10 @@ class ExamController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         //TODO eager loading for users and preparation for statistics
@@ -96,13 +99,13 @@ class ExamController extends Controller
         // find($request->exam_id)->
         $exam = Exam::with(
                         [ 'slots.vignettes',
-                          'slots.questions',
-                         'slots.questions.answers' => function ($query) {
-                             $query->where('answers.user_id', '=', Auth::user()->id);
-                         }, ]
-      )
-                    ->where('id', '=', session('exam_id'))
-                    ->get();
+                        'slots.questions',
+                        'slots.questions.answers' => function ($query) {
+                            $query->where('answers.user_id', '=', Auth::user()->id);
+                        }, ]
+                )
+                ->where('id', '=', session('exam_id'))
+                ->get();
 
         // $exam = Exam::with('slots.questions')->where('id', '=', session('exam_id'))->get();
         //$slot = $exam->slots->first();
@@ -116,33 +119,26 @@ class ExamController extends Controller
         $nextSlot = Slot::where('exam_id', '=', $slot->exam_id)->where('id', '>', $slot->id)->min('id');
 
         $slot->load([
-        'vignettes',
-        'questions.distractors',
-        'questions.answers' => function ($query) {
-            $query->where('answers.user_id', '=', Auth::user()->id);
-        }]);
+                        'vignettes',
+                        'questions.distractors',
+                        'questions.answers' => function ($query) {
+                            $query->where('answers.user_id', '=', Auth::user()->id);
+                        }]);
 
-        
+
         return view('exams.show', compact('slot', 'answers', 'previousSlot', 'nextSlot'));
     }
 
     public function finish(Request $request)
     {
 
-      // return $request;
+                // return $request;
         $user = Auth::user();
         $exam = Exam::find($request->exam_id);
-        $slots = $exam->slots->load('questions');
-
-        $questionsCount = 0;
-        foreach ($slots as $slot) {
-            $questionsCount += $slot->questions->count();
-        }
-
         $grade = new Grade;
         $answersCount = $grade->answersCount($exam, $user);
         $userGrade = $grade->gradeStudent($exam, $user);
-
+        $questionsCount = $exam->questions->count();
         $examUser = $user->exams->find($request->exam_id)->pivot;
 
         if (!isset($examUser->ended_at)) {
@@ -158,11 +154,11 @@ class ExamController extends Controller
     /*These are for management*/
 
     /**
-    *Return the asociated users with given exam
-    *for use with ajax
-    *
-    *@return \Illuminate\Http\Response
-    */
+     *Return the asociated users with given exam
+     *for use with ajax
+     *
+     *@return \Illuminate\Http\Response
+     */
     public function users_exam(Request $request)
     {
         if ($request->isMethod('post')) {
@@ -259,8 +255,11 @@ class ExamController extends Controller
             $ids[] = $user->id;
             $points[] = $user->points;
             $pointsAverage = array_sum($points) / count($points);
+            if ($exam->passing_grade !== null) {
+                $passingGrade = $exam->passingGrade;
+            }
         }
-        return view('management.exams.grades_chart_partial', compact('ids', 'points', 'pointsAverage'));
+        return view('management.exams.grades_chart_partial', compact('ids', 'points', 'pointsAverage', 'passingGrade'));
     }
 
     /**
@@ -275,5 +274,66 @@ class ExamController extends Controller
     {
         $grades = new Grade;
         return $studentGrade = $grades->gradeStudent($exam, $user);
+    }
+
+
+    /**
+     * Returns a spreadsheet with only the students that were present
+     *
+     * @return PHPOffice
+     */
+    public function gradesSpreadshet(Exam $exam)
+    {
+        $grade = new Grade;
+        $board = $exam->board;
+
+        //If a create a helper to add as a last array item the dynamically generated formula
+        //Must know the desired column to append as its last cell
+        //Must know the desired formula
+        //Must know if using a title/header to be used or ignored
+        $data = Helper::collectionToArray($grade->allStudentsWithData($exam)->toArray());
+        return Excel::create(
+            "CalificacionFinal".$board->shortName().$exam->applicated_at->toDateString(),
+            function ($excel) use ($data, $exam, $grade) {
+                        $excel->sheet(
+                            'Primera hoja',
+                            function ($sheet) use ($data, $exam, $grade) {
+                                $sheet->fromArray($data);
+                                $sheet->row(
+                                    1, function ($row) {
+                                            // call cell manipulation methods
+                                            $row->setBackground('#EAE3CB');
+                                    }
+                                );
+
+                                // Append row as very last
+                                //$sheet->appendRow(array());
+
+                                $highestColumn = $sheet->getHighestColumn();
+                                $newRow = $sheet->appendRow(array())->getHighestRow();
+
+
+                                //$sheet->appendRow(array($highestColumn, $highestRow ));
+
+                                $sheet->cell(
+                                    $highestColumn.($newRow+1), function ($cell) use ($highestColumn, $newRow) {
+                                        // manipulate the cell
+                                        $cell->setValue(
+                                            '=ROUND(AVERAGE('.$highestColumn."2:".$highestColumn.($newRow-1)."),2)"
+                                        );
+                                    }
+                                );
+                                // Set auto size for sheet
+                                $sheet->setAutoSize(true);
+                            }
+                        );
+                        $excel->sheet(
+                            'Segunda hoja',
+                            function ($sheet) use ($data, $exam, $grade) {
+                                $sheet->fromArray();
+                            }
+                        );
+                    }
+        )->export('xlsx');
     }
 }

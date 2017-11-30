@@ -82,7 +82,9 @@ Route::get('/exams/bottom_students/{exam}/{bottom}', 'ExamController@bottom_stud
 Route::resource('distractors', 'DistractorsController');
 
 Route::resource('slots', 'SlotsController');
+/* Grading */
 
+Route::get('spreadsheet/{exam}', 'ExamController@gradesSpreadshet')->name('gradesSpreadsheet');
 
 Route::resource('locations', 'LocationsController');
 Route::resource('users', 'UsersController');
@@ -98,3 +100,4 @@ Auth::routes();
 Route::post('/uploadUsers', 'UploadController@users_csv')->name('uploadCsvUsers');
 Route::post('/uploadUsersPics', 'UploadController@pictures')->name('userPictures');
 Route::post('/uploadUserAvatar', 'UploadController@userAvatar')->name('userAvatar');
+Route::post('uploadUsersExcel', 'UploadController@usersExcel')->name('uploadUsersExcel');

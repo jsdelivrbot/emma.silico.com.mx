@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{ elixir('css/app.css')  }}">
     <!-- Fonts -->
     <link rel="stylesheet" href="{{ elixir('css/fontawesome/css/font-awesome.min.css')  }}">
+    {{--  <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">  --}}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.15/b-1.4.0/b-print-1.4.0/fh-3.1.2/sc-1.4.2/datatables.min.css"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,8 +37,13 @@
                 @role('admin')
                   <!-- Branding Image -->
                   <a class="navbar-brand" href="{{ url('/') }}">
-                      {{ config('app.name', 'Laravel') }}
+                      {{ config('app.name', 'EMMA') }}
                   </a>
+                @endrole
+                @role('examinee')
+                    <a class="navbar-brand" href="{{ url('/')}}">
+                        {{ Auth::user()->name." ". Auth::user()->last_name }}
+                    </a>
                 @endrole
             </div>
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -49,13 +56,13 @@
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ url('/login') }}">Ingresar</a></li>
+                        {{--  <li><a href="{{ url('/register') }}">Register</a></li>  --}}
                     @else
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Helper::createAcronym(Auth::user()->name." ".Auth::user()->last_name) }}
+                                {{ (Auth::user()->name." ".Auth::user()->last_name) }}
                                 {{-- {{ Auth::user()->name }}--}} <span class="caret"></span>
                             </a>
 
@@ -67,6 +74,10 @@
                                     </a>
                                   </li>
                                 @endrole
+                                    <li>
+                                    {{ Auth::user()->name." ".Auth::user()->last_name}}
+                                    <img src="{{ Auth::user()->photo() }}" style="width: 150px;">
+                                    </li>
                                 <li>
                                     <a href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();
@@ -107,11 +118,12 @@
     {{-- Javascript --}}
     <script src="{{ asset('js/all.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
-<script src="http://cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.5/js/jquery.tablesorter.js"></script>
-
+    <script src="http://cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
+    {{--  <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>  --}}
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.15/b-1.4.0/b-print-1.4.0/fh-3.1.2/sc-1.4.2/datatables.min.js"></script>
     {{-- /Javascript --}}
     <script>
+    /* This prepares the view to recibe server mesages non-AJAX */
       $('#flash-overlay-modal').modal();
     </script>
 </body>

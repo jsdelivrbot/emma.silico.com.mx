@@ -7945,14 +7945,14 @@ div.container {
   width: 100%;
   margin: 0;
   padding: 0;
-  font: 11px Verdana,sans-serif;
+  font: 11px Verdana, sans-serif;
   color: #090808;
   border-radius: 0 0 7px 7px;
 }
 
 #zoomple_previewholder .caption-wrap .caption {
   padding: 5px 10px;
-  font: 11px Verdana,sans-serif;
+  font: 11px Verdana, sans-serif;
   border-radius: 0 0 7px 7px;
   background: #fff;
 }
@@ -8013,15 +8013,18 @@ div.container {
   .chart_display h2 {
     page-break-before: always;
   }
-  .chart_display h3, .chart_display h4 {
+  .chart_display h3,
+  .chart_display h4 {
     page-break-after: avoid;
   }
-  .chart_display pre, .chart_display blockquote {
+  .chart_display pre,
+  .chart_display blockquote {
     page-break-inside: avoid;
   }
 }
 
-.chart_display .navbar-nav > li > a, .chart_display .navbar-brand {
+.chart_display .navbar-nav > li > a,
+.chart_display .navbar-brand {
   padding-top: 4px !important;
   padding-bottom: 0 !important;
 }
@@ -8029,6 +8032,39 @@ div.container {
 .emma-navbar {
   height: 30px;
   max-height: 30px;
+}
+
+/* CSS used here will be applied after bootstrap.css */
+.left-column {
+  padding: 1em;
+  overflow: hidden;
+}
+
+.right-column {
+  height: 100vh;
+  padding: 0;
+}
+
+.right-column > .panel {
+  border-radius: 0;
+}
+
+.image-container {
+  height: 70vh;
+  width: 100%;
+  overflow: scroll;
+  padding: 0;
+}
+
+.vignette-container {
+  height: 30vh;
+  overflow: scroll;
+  padding: 0;
+}
+
+.questions-container {
+  height: 100vh;
+  overflow: scroll;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -68,6 +68,20 @@ class Exam extends Model
     }
 
     /**
+     * This is to be used to generate the answers dump
+     *
+     * @return void
+     */
+    public function answersRaw()
+    {
+            return DB::table('answers')
+                    ->join('exams', 'answers.exam_id', '=', 'exams.id')
+                    ->where('exam.id', '=', $this->id)
+                    ->get();
+    }
+    
+
+    /**
      * undocumented function summary
      *
      * Undocumented function long description
@@ -123,6 +137,32 @@ class Exam extends Model
         }
         return false;
     }
+
+    /**
+     *Scope a query to only return extemporaneous users
+     *
+     *@return \Illuminate\Database\Eloquent\Builder
+     */
+     public function scopeExtemporaneous()
+     {
+         
+     }
+
+    public function key()
+    {
+            return DB::table('questions')
+                    ->select(
+                            'questions.id',
+                            'questions.order',
+                            'distractors.option'
+                    )
+                    ->join('slots', 'questions.slot_id', '=', 'slots.id')
+                    ->join('distractors', 'questions.id', '=', 'distractors.question_id')
+                    ->where('slots.exam_id', '=', $this->id)
+                    ->where('distractors.correct', '=', 1)
+                    ->get();
+    }
+    
     //TODO get all active users
 
     //TODO get all present users

@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -250,6 +250,7 @@ return [
         'Stringy' => Stringy\Stringy::class,
         'Reports' => EMMA5\Libraries\ReportUserDoc::class,
         'Helper' => EMMA5\Helpers\Helper::class,
+        'Grade' => EMMA5\Grade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 

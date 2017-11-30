@@ -25,6 +25,20 @@
                         </span>
                         <span>{{ Carbon::now()->hour }}:{{ Carbon::now()->minute }}</span>
                     </div>
+                    <hr>
+                    <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Cargar archivo de Excel (inlcuye columna de nombre de imagen)
+                    </div>
+                    <div class="panel-body">
+                        {{ Form::open(['action' => 'UploadController@usersExcel', 'files' => true]) }}
+                        {{ Form::file('users_excel', ['class' => 'form-control']) }}
+                        <button class="btn btn-info">
+                            <i class="fa fa-ifile-excel-o">
+                            Cargar archivo excel
+                        </button>
+                    </div>
+                    </div>
 
                     <div class="panel-body">
                         {{  Form::open(['action' => 'UploadController@users_csv','files'=>true]) }}
@@ -63,35 +77,41 @@
                     <div class="panel-body">
 
                         <div class="panel panel-primary">
-                            <div class="panel-heading">Añadir fotografías de usuario</div>
+                            <div class="panel-heading">Añadir usuarios y fotografías</div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        {{ Form::open(['action' => 'UploadController@pictures', 'files' => true])}}
-                                        {{ Form::label('file','Lista de usuarios',array('id'=>'','class'=>''))  }}
-                                          {{ Form::file('zipFile','',array('id'=>'','class'=>''))  }}
+                                        {{ Form::open(['action' => 'UploadController@usersExcel', 'files' => true])}}
+                                        {{ Form::hidden('board_id', $board->id) }}
+                                        {{ Form::label('zipFile','Fotografías comprimidas',array('id'=>'','class'=>''))  }}
+                                        {{ Form::file('zipFile','',array('id'=>'','class'=>''))  }}
                                         <button class="btn btn-info" type="submit">
-                                            <i class="fa fa-users fa-2x" aria-hidden="true"></i>
-                                            <span>Cargar</span>
+                                                <i class="fa fa-users fa-2x" aria-hidden="true"></i>
+                                                <span>Cargar</span>
                                         </button>
                                         </a>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="clearfix">
-                                            @foreach ($exams as $exam)
-                                                <div class="col-sm-6">
-                                                    <a href="#" class="btn btn-primary">
-                                                        {{ $exam }}
-                                                    </a>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                                            {{ Form::label('users_excel','Lista de usuarios',array('id'=>'','class'=>''))  }}
+                                            {{ Form::file('users_excel', ['class' => 'form-control']) }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                            <div class="clearfix">
+                                                    <ul class="list-group">
+                                                            @foreach ($exams as $exam)
+                                                                    <li class="list-group-item">
+                                                                            Examen {{$exam->id}} <small>{{$exam->applicated_at}}</small>
+                                                                            {{ Form::checkbox('exam_id', $exam->id, false, [ 'class' => '' ]) }}
+                                                                    </li>
+                                                            @endforeach
+                                                    </ul>
+                                            </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                        <div class="col-sm-12">
 
-                                    </div>
+                                        </div>
                                 </div>
                             </div>
                             {{ Form::close() }}
@@ -101,7 +121,7 @@
                 </div>
             </div>
         </div>
-    @endrole
+@endrole
     </div>
 @endsection
 @section('footer')

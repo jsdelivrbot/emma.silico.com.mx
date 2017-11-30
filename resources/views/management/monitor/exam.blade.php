@@ -4,9 +4,16 @@
     <div class="panel-heading panel-primary">
       Avance de usuarios
     </div>
+    <div class="panel">
+            <a href="{{ route('gradesSpreadsheet', ['exam' => $exam->id]) }}" class="btn btn-sm btn-primary">
+                    Descargar archivo de calificaciones.
+                    <i class="fa fa-table" aria-hidden="true"></i>
+            </a>
+    </div>
     <div class="row panel-body">
-      <div class="col-sm-8">
-        <table class="table table-responsive table-bordered">
+      <div class="col-sm-6">
+        <table id="myTable" class="table table-responsive table-bordered">
+        <thead>
           <tr>
             <th>Estado</th>
             <th>Id</th>
@@ -14,9 +21,13 @@
             <th>Nombre</th>
             <th>Apellidos</th>
             <th>Sede</th>
-            <th>Avance</th>
-            <th>Calificación</th>
+            <th>Respuestas correctas</th>
+            <th>Respuestas entregadas <small>(Avance)</small> </th>
+            <th>Porcentaje de acierto</th>
+            <th>Porcentaje de avance</th>
           </tr>
+          </thead>
+          <tbody>
           @foreach ($exam->users->sortByDesc('answers') as $user)
             <tr>
               <td class="text-center">
@@ -29,10 +40,8 @@
                   @endif
                 </div>
                 <div class="pull-left">
-                        @php $filename = $stringy->create($user->name." ".$user->last_name)->toAscii()->toLowerCase()->replace(' ', '_') @endphp
-                        <img src="/images/avatars/users/{{$user->board_id."/".$filename}}.jpg" style="width: 50px; " >
                 <a href="/monitor/student/{{ $exam->id }}/{{$user->id}}">
-                  <img src="{{ Avatar::create($user->name." ".$user->last_name)->toBase64() }}" width="24px" class=""/>
+                  <img src="{{$user->photo()}}" height="125px" />
                 </a>
               </div>
               </td>
@@ -53,53 +62,37 @@
                 {{ $user->center->name }}
               @endif
               </td>
-              <td id="stats_{{ $user->id }}" class="text-center">
-                <h3>
-
-                  {{ $user->answers->count() }}/ 
-                  @if (isset($questions_count))
-                  	{{ $questions_count }}
-                  @endif 
-                </h3>
-                @php
+              @php
                   $grade = $grades->where('id', '=', $user->id)->pluck('points');
                   $points = $grade->get(0, 0);
                 @endphp
-                @php
-                $percentageAnswers = ($user->answers->count() / $questions_count)*100
-                @endphp
-
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                  aria-valuemin="0" aria-valuemax="100" style="width:{{$percentageAnswers}}%; background-color: #669A66;">
-                  <span class="" style="">
-                    {{ $user->answers->count() }}/{{ $questions_count }}
-                  </span>
-                </div>
-                <div class="progress-bar progress-bar-warning" role="progressbar" style="width:{{100-$percentageAnswers}}%; background-color: #C06D6B; ">
-                </div>
-                {{ $grade->get('points') }}
+              <td id="stats_{{ $user->id }}" class="text-center"><!-- Respuestas correctas  -->
+                  {{ $points }}
               </td>
+               @php
+                  $percentageAnswers = Helper::percentage($questions_count, $user->answers->count());
+                @endphp
+                
               <td class="text-center">
                 @php
-                $percentageCorrect = round(($points / $questions_count)*100,2)
+                $percentageCorrect = Helper::percentage($questions_count, $points);
                 @endphp
-                <h3>{{ $percentageCorrect/10 }}/10</h3>
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="70"
-                  aria-valuemin="0" aria-valuemax="100" style="width:{{$percentageCorrect}}%; background-color: #669A66;">
-                  <span class="" style="">
-                    {{ $points }}/{{ $questions_count }}
-                  </span>
-                </div>
-                <div class="progress-bar progress-bar-warning" role="progressbar" style="width:{{100-$percentageCorrect}}%; background-color: #C06D6B; ">
-                </div>
+                {{ $user->answers->count() }}
+              </td>
+              <td>
+                {{ $percentageCorrect }}
+              </td>
+              <td><!-- Porcentaje de avance --> 
+              
+                {{ $percentageAnswers }}
               </td>
           </tr>
         @endforeach
+        </tbody>
       </table>
     </div>
-      <div class="col-sm-4">
+
+      {{--  <div class="col-sm-4">
         <div class="container-fluid">
           <div class="row">
             <div class="col-sm-6">Línea corte</div>
@@ -137,7 +130,7 @@
             </div>-->
           </div>
         </div>
-      </div>
+      </div>  --}}
   </div>
 </div>
 @endsection

@@ -29,7 +29,7 @@
   }
   .my_page {
     page-break-inside: avoid;
-    font-size: 15px;
+    font-size: 18px;
 
   }
   h1, h2, h3, h4, h5 {
@@ -61,7 +61,7 @@
             <img src="{{ $logo }}" alt="" width="65px">
             {{ $board->name }}
           </h2>
-          <h4>Examen de Certificación {{ $exam->applicated_at->year }}</h4>
+          Examen de Certificación {{ $exam->applicated_at->year }}
           <span class="text-center"><small>{{ $exam->applicated_at->toDateString() }}</small></span>
         </div>
       </div>
@@ -75,31 +75,12 @@
         </div>
       </div>{{-- Header row end --}}
       <div class="row">
-        <div class="col-xs-2">{{-- Foto placeholder --}}
+        <div class="col-xs-4">{{-- Foto placeholder --}}
           <div class="panel">
-            @if ($user->avatar->first()['source'] != NULL)
-              @php
-              $source = "/images/".$user->avatar->first()['source'];
-              $type = pathinfo($source, PATHINFO_EXTENSION);
-              $data = file_get_contents($source);
-              $avatar = 'data:image/' . $type . ';base64,' . base64_encode($data);
-              @endphp
-              <img src="{{ $avatar }}" alt="" width="150px;">
-            @else
-                        @php 
-                                $filename = Stringy\Stringy::create($user->name." ".$user->last_name)->collapseWhitespace()->toAscii()->toLowerCase()->replace(' ', '_') ;
-              $source = "/images/avatars/users/".$user->board_id."/".$filename.".jpg";
-              $source = asset($source);
-              $type = pathinfo($source, PATHINFO_EXTENSION);
-              $data = file_get_contents($source);
-              $userPhoto = 'data:image/' . $type . ';base64,' . base64_encode($data);
-      @endphp
-      <img src= "{{$userPhoto}}" style="width: 50px; " >
-      {{--}}<img src="{{ Avatar::create($user->name." ".$user->last_name)->toBase64() }}" width="150px" class=""/>--}}
-            @endif
+                  <img src="{{$user->photo()}}" height="250px" />
           </div>
         </div>{{--Foto placeholder end --}}
-        <div class="col-xs-10">
+        <div class="col-xs-8 pull-right">
                 <div class="text-justify">
                         <h3>
                                 Sustentante:  <strong>{{ $user->full_name(1) }}</strong>
@@ -128,35 +109,35 @@
         </div>
       </div>
       <div class="row">
-              <div class="col-xs-12">
+              <div class="col-xs-12 text-left">
                       <h5>Instrucciones</h5>
                       <p>Espere a que nuestro personal le atienda y asigne una computadora</p>
-                      <p>No ingrese al exam hasta que nuestro personal se lo indique</p>
+                      <p>No ingrese al examen hasta que nuestro personal se lo indique</p>
                       <p>En caso de que su nombre esté mal escrito por favor haga la corrección en este documento y terminando su examen lo corregiremos.</p>
                       <p>Al terminar su examen debe entregar este documento firmado en la parte inferiror</p>
-                      <p>En el campo de -Usuario- debe capturar el texto marcado como Usuario impreso en este documento, tal y como está escrito. Este texto está compuesto de letras mayúsculas, 6 números y una letra minúscula</p>
-                      <p>En el campo de -Contraseña- debe capturar el texto marcado como Contraseña impreso en este documento tal y como está escrito. Este texto está compuesto de letras mayúsculas, 6 números y una letra minúscula</p>
+                      <p>En el campo de -Usuario- debe capturar el texto marcado como Usuario impreso en este documento, tal y como está escrito. Este texto está compuestpor letras mayúsculas y letras minúsculas</p>
+                      <p>En el campo de -Contraseña- debe capturar el texto marcado como Contraseña impreso en este documento tal y como está escrito. Este texto está compuesto de letras mayúsculas,  letras minúsculas</p>
                       <p>Al capturar sus datos en el sistema debe ser cuidadoso de que estén escritos tal y como los están en este documento ya que de no ser así no podrá ingresar</p>
                       <p>Su examen tendrá una duración de {{ $exam->duration }} minutos y consiste de {{ $exam->questions_count() }} preguntas.</p>
                       <h5>Consejos</h5>
                       <p>Cada pregunta tiene sólo una respuesta correcta. En caso de que usted piense que más repuestas podrían ser la correcta elija la que considere mejor.</p>
                       <p>Puede elegir dejar preguntas sin contestar y regresar a ellas más tarde</p>
                       <p>Puede cambiar sus respuestas las veces que quiera</p>
-                      <p>No existe un orden obligatorio para respoonder su examen pero le recomendamos seguir el orden én que se le presenta</p>
+                      <p>No existe un orden obligatorio para respoonder su examen pero le recomendamos seguir el orden en que se le presenta</p>
               </div>
-              <div class="col-xs-12">
+              <div class="col-xs-12 text-left ">
                       Cualquier violación a este reglamento amerita la cancelación del presente examen y sanción disciplinaria por parte del {{ $board->name }}.
                       <ol>
                               Limitantes
                               <li>Queda prohibido extraer cualquier información que competa a este examen</li>
-                              <li>Queda prohibido copiar y otros comportamientos que no se adecuén al perfil ético del {{ $board->short_name }} y de las buenas prácticas académicas.</li>
-                              <li>Usar el equipo de cómputo y sus sistemas de software para un objetivo distinto al de responder el examen</li>
+                              <li>Queda prohibido copiar y otros comportamientos que no se adecúen al perfil ético del {{ $board->name }} y de las buenas prácticas académicas.</li>
+                              <li>Queda prohibido usar el equipo de cómputo y sus sistemas de software para un objetivo distinto al de responder el examen</li>
                       </ol>
                       <p>Nuestro personal así como los miembros del {{ $board->name }} arbitrariamente pueden solicitar el cambio de asiento o equipo al sustentante.</p>
               </div>
       </div>
       <div class="row">
-              <div class="col-xs-11">
+              <div class="col-xs-12 text-left">
                       He entendido el reglamento y estoy de acuerdo con él.
                       <br>
                       Recibí mi examen.

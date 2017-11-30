@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Klaravel\Ntrust\Traits\NtrustUserTrait;
 use Hash;
 use DB;
+use Avatar;
+use File;
+use Helper;
 
 /**
  * @property mixed last_name
@@ -32,7 +35,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'username', 'email', 'password', 'center_id', 'board_id',
+        'name', 'last_name', 'username', 'email', 'password', 'center_id', 'board_id', 'completion_year',
     ];
 
     /**
@@ -148,4 +151,33 @@ class User extends Authenticatable
         }
         return $full_name;
     }
+
+    /**
+     * Returns a base64 encoded image with the user photo
+     * if it does not exists creates an avatar with their initials
+     *
+     * @return string
+     */
+    public function photo()
+    {
+        if (isset($this->avatar->first()->source)) {
+            $source = $this->avatar->first()->source;
+        } else {
+            $source = null;
+            return Avatar::create($this->name." ".$this->last_name)->toBase64();
+        }
+        if (isset($this->board->id)) {
+            $boardId = $this->board->id;
+        } else {
+            $boardId = null;
+        }
+        $filePath = 'images/avatars/users/'.$boardId.'/'.$source;
+        if (File::exists(public_path($filePath))) {
+            return Helper::imageBase64(public_path($filePath));
+            return asset($filePath);
+        } else {
+            return Avatar::create($this->name." ".$this->last_name)->toBase64();
+        }
+    }
+
 }

@@ -52,14 +52,16 @@ class AnswersController extends Controller
                                 'question_id' => $request->question_id,
                                 'user_id'=>$user->id,
                                 'exam_id'=>$request->exam_id
-                ]
+                ],
+		['answer'=>$request->answer]
                 );
-        $answer->answer = $request->answer;
-        if ($answer->save()) {
+		return response($answer, 200);
+        //$answer->answer = $request->answer;
+        /*if ($answer->save()) {
                 return response($answer, 200);
             } else {
                 return response('Error', 500);
-            }
+            }*/
         }
 
         return response()->json(['response' => 'This is get method']);
