@@ -101,3 +101,4 @@ public/images/*
 public/*.jpg
 public/images/exams
 #
+node_modules/
