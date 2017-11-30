@@ -102,3 +102,4 @@ public/*.jpg
 public/tmp/*
 public/images/exams
 #
+package-lock.json
