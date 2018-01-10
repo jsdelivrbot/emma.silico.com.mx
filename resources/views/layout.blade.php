@@ -114,7 +114,8 @@
 
 </div>
 
-    @yield('scripts')
+    {{--  @yield('scripts')  --}}
+    @section('scripts')
     {{-- Javascript --}}
     <script src="{{ asset('js/all.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
@@ -126,5 +127,7 @@
     /* This prepares the view to recibe server mesages non-AJAX */
       $('#flash-overlay-modal').modal();
     </script>
+    @endsection
+    @yield('scripts')
 </body>
 </html>
