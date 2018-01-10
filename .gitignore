@@ -79,6 +79,7 @@ node_modules/
 
 # Laravel cache #
 ######################
+<<<<<<< HEAD
 storage/framework/cache
 storage/framework/cache/
 storage/framework/cache/*
@@ -95,6 +96,20 @@ vendor/*
 storage/framework/sessions
 storage/framework/sessions/
 storage/framework/sessions/*1
+=======
+storage/framework/cache/*
+
+# Laravel views #
+storage/framework/views/*
+
+### Laravel ###
+vendor/node_modules/npm-debug.log
+vendor/node_modules/*
+vendor/*
+
+# Laravel sessions #
+storage/framework/sessions/*
+>>>>>>> e03f5688ef855b1d760423af77ff5657c11ac740
 
 # Generated exams by EMMA #
 ##########################
@@ -106,3 +121,7 @@ public/*.jpg
 public/tmp/*
 public/images/exams
 #
+<<<<<<< HEAD
+=======
+package-lock.json
+>>>>>>> e03f5688ef855b1d760423af77ff5657c11ac740

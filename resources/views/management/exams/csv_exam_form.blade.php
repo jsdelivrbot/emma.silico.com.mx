@@ -48,7 +48,11 @@
                           <tr>
                             <td>Fecha y hora de aplicación</td>
                             <td>
-                              <input class="form-control" type="datetime-local" name="applicated_at" value="{{old('applicated_at')}}">
+                                <div class='input-group date' id='datetimepicker3' >
+                    <input type='text' class="form-control" name="applicated_at" value="{{old('applicated_at')}}" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
                               <small>Formato 24hrs.</small>
                             </td>
                           </tr>
@@ -95,4 +99,25 @@
 @endsection
 @section('footer')
 
+@endsection
+@section('scripts')
+@parent
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js" type="text/javascript" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/es.js" type="text/javascript" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker3').datetimepicker({
+                  inline: true,
+                  locale: 'es',
+                  stepping: 10,
+                  format: 'YYYY-MM-DDThh:mm',
+                  //format: 'd/mm/yyyy h:mm'
+                //sideBySide: true,
+                  //showMeridian: true,
+                  showClose: true,
+                  //todayBtn: true
+                });
+            });
+        </script>
 @endsection
