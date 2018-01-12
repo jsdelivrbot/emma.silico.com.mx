@@ -71,3 +71,6 @@
       </div>
     </div>
 @endsection
+@section('adminScripts')
+  @parent
+@stop

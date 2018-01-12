@@ -9,7 +9,8 @@ Administrar Exámenes
         @role('admin')
           <div class="col-md-8 col-md-offset-2">
               <div class="panel panel-default">
-                  <div class="panel-heading">Dashboard</div>
+                @include('admin_header_partial')
+                  <div class="panel-heading"><h1>Dashboard</h1></div>
 
                   <div class="panel-body">
                     <div class="row">

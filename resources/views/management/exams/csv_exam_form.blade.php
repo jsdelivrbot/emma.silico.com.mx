@@ -2,7 +2,7 @@
 @section('content')
   <div class="container">
       <div class="row">
-          <div class="col-md-10 col-md-offset-1">
+          <div class="col-md-12 ">
               <div class="panel panel-default">
                   <div class="panel-heading">Creación de examen</div>
                   @role('admin')
@@ -11,7 +11,7 @@
                   <div class="panel-body">
                     <div class="row">
                         {{ Form::open(['url' => 'exam/upload', 'files'=>true, ]) }}
-                      <div class="col-sm-5 form-group">
+                      <div class="col-sm-12 form-group">
                         <table class="table">
                           <tr>
                             <td>Número de casos</td>
@@ -53,7 +53,6 @@
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
-                              <small>Formato 24hrs.</small>
                             </td>
                           </tr>
                           <tr>
