@@ -17,7 +17,6 @@
       </ul>
   </div>
   <div id="image-container-{{ $slot->id }}" class="panel" style:"margin-top:66px;"> 
-
     @php
       $display = ""
     @endphp
@@ -32,8 +31,8 @@
           <div class="">
               <p>{{ $image->caption }}</p>
           </div>
-        <a href="{{ asset('images/exams/'.$slot->exam_id.'/'.$image->source) }}" class="zoomple">
-                  <img  src="{{ asset('images/exams/'.$slot->exam_id.'/'.$image->source) }}  " alt="" style="width: 100%;">
+          <a href="{{ asset('images/exams/'.$slot->exam_id.'/'.$image->source) }}" <!--class="zoomple"-->>
+                  <img  src="{{ asset('images/exams/'.$slot->exam_id.'/'.$image->source) }}  " alt="" style="height: 100%; max-width: 100%; max-height: 100%;">
         </a>
       </div>
       @php

@@ -26,6 +26,7 @@
     "chart.js": "^2.4.0",
     "font-awesome": "*",
     "jquery": "^3.1.0",
+    "jquery-zoom": "^1.7.20",
     "webpack": "^1.13.2"
   }
 }
