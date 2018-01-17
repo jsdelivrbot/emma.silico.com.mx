@@ -24,7 +24,7 @@
     @foreach($slot->videos as $video)
          <video width="320" height="240" controls>
              <source src="{{ asset('videos/'.$video->source) }}" type="video/{{pathinfo($video->source, PATHINFO_EXTENSION)}}">;
-            Your browser does not support the video tag.
+            Este navegador no es compatible con la reproducción de videos
         </video> 
     @endforeach
     @foreach($slot->images as $image)
