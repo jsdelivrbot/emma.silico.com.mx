@@ -21,6 +21,12 @@
     @php
       $display = ""
     @endphp
+    @foreach($slot->videos as $video)
+         <video width="320" height="240" controls>
+             <source src="{{ asset('videos/'.$video->source) }}" type="video/{{pathinfo($video->source, PATHINFO_EXTENSION)}}">;
+            Your browser does not support the video tag.
+        </video> 
+    @endforeach
     @foreach($slot->images as $image)
       <div id="image-slide-{{ $image->id }}" class="polaroid" style="display:{{ $display }};">
           <div class="">
