@@ -14,6 +14,8 @@
   {{--  <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">  --}}
   @role('admin')
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.15/b-1.4.0/b-print-1.4.0/fh-3.1.2/sc-1.4.2/datatables.min.css"/>
+<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+  
   @endrole
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -134,6 +136,8 @@
   <script src="http://cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
   {{--  <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>  --}}
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.15/b-1.4.0/b-print-1.4.0/fh-3.1.2/sc-1.4.2/datatables.min.js"></script>
+<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+  
 @endsection
 @endrole
 
