@@ -140,7 +140,7 @@ class ExamController extends Controller
         $userGrade = $grade->gradeStudent($exam, $user);
         $questionsCount = $exam->questions->count();
         $examUser = $user->exams->find($request->exam_id)->pivot;
-
+        $passed =$grade->passed($exam, $user);
         if (!isset($examUser->ended_at)) {
             $examUser->ended_at = Carbon::now();
         }
@@ -148,7 +148,7 @@ class ExamController extends Controller
         $examUser->active = 0;
         $examUser->save();
         // return "examen finalizado a las: ".$examUser->ended_at;
-        return view('exams.finish', compact('exam', 'examUser', 'userGrade', 'answersCount', 'questionsCount'));
+        return view('exams.finish', compact('exam', 'examUser', 'userGrade', 'answersCount', 'questionsCount', 'passed'));
     }
 
     /*These are for management*/
