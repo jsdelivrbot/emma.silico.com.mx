@@ -80,8 +80,6 @@
       {{  100-$percentageTime }}%
     </div>
   </div>
-</div>
-<div class="row">
   <div class="col-sm-6 panel text-justify">
     <h3>Hora de inicio:
       <small class="pull-right">{{ Carbon::parse($status->started_at)->toTimeString() }}<br><small>({{ Carbon::parse($status->ended_at)->toDateString() }})</small></small>
@@ -161,3 +159,4 @@
       @include('management.crud.modal_partial')
 
     </div>
+    @stop

@@ -33,14 +33,10 @@
                               </h1>
                       @endif
                       @php
-                              $grade = new EMMA5\Grade;
 $user = Auth::user();
               @endphp
-              @if ($grade->passed($exam,$user) && $exam->passing_grade != 0)
-                      <h2 class="text-success">Examen acreditado</h2>
-              @elseif ($grade->passed($exam,$user) && $exam->passing_grade != 0)
-                      <h2 class="text-warning">Examen no acreditado</h2>
-              @endif
+              @if($passed && $exam->passing_grade != null) <h1 class="text-warning">Examen acreditado</h1> @endif
+              @if(!$passed && $exam->passing_grade != null) <h2 class="text-danger">Examen no acreditado</h2> @endif
               Diríjase a nuestro personal para más instrucciones
                       </div>
                       <div class="progress">
