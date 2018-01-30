@@ -31,9 +31,7 @@
           <div class="">
               <p>{{ $image->caption }}</p>
           </div>
-          <a href="{{ asset('images/exams/'.$slot->exam_id.'/'.$image->source) }}" <!--class="zoomple"-->>
                   <img  src="{{ asset('images/exams/'.$slot->exam_id.'/'.$image->source) }}  " alt="" style="height: 100%; max-width: 100%; max-height: 100%;">
-        </a>
       </div>
       @php
         $display = "none"

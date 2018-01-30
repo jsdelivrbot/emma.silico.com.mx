@@ -6,14 +6,15 @@
  */
 --}}
 
-    @php
-        $source = preg_replace('/\\.[^.\\s]{3,4}$/', '', $video->source);
-    @endphp
-<video width="100%"  controls autoplay loop>
-    {{--<source src="/videos/{{ $video->source }}" type="video/mp4">--}}
+        {{--  $source = preg_replace('/\\.[^.\\s]{3,4}$/', '', $video->source);  --}}
+    <video width="100%"  controls autoplay loop muted>
+        <source src="{{ asset('videos/'.$video->source) }}" type="video/{{pathinfo($video->source, PATHINFO_EXTENSION)}}">;
+       Este navegador no es compatible con la reproducción de videos
+   </video> 
+{{--  <video width="100%"  controls autoplay loop>
     <source src="/videos/{{ $source }}.mp4" type="video/mp4">
     <source src="/videos/{{$source}}.webm" type="video/webm">
     <source src="/videos/{{$source}}.ogg" type="video/ogg">
 
     El video no puede ser reproducido en este equipo por favor solicite apoyo a nuestro personal
-</video>
+</video>  --}}
