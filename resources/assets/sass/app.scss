@@ -413,9 +413,9 @@ Test for new style
 * {
     box-sizing: border-box;
 }
-/*This just stops me getting horizontal scrolling if anything overflows the width*/
 body {
-    overflow-x: hidden;
+    overflow-x: hidden; /*This just stops me getting horizontal scrolling if anything overflows the width*/
+    font-size: 2rem;
 }
 /*Just removing default browser padding/margin*/
 html,
