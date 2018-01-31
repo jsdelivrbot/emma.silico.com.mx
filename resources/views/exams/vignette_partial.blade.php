@@ -1,4 +1,5 @@
-<div class="col-md-12 vignette-conrainer" >
+<div class="vignette-container" >
     <span class="badge">{{ $vignette->slot->order }} </span>
-    {!! $vignette->text !!}
+    <span>{!! $vignette->text !!}</span>
+    <hr>
 </div>
