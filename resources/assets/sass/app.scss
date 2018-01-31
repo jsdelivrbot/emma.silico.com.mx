@@ -396,7 +396,7 @@ div.container {
 }
 
 .vignette-container {
-  height: 30vh;
+  // height: 30vh;
   overflow: scroll;
   padding: 0;
 }
@@ -409,12 +409,12 @@ div.container {
 /*##############################
 Test for new style
 */
-/*I love me some border-box*/
 * {
     box-sizing: border-box;
 }
+/*This just stops me getting horizontal scrolling if anything overflows the width*/
 body {
-    overflow-x: hidden; /*This just stops me getting horizontal scrolling if anything overflows the width*/
+    overflow-x: hidden;
     font-size: 2rem;
 }
 /*Just removing default browser padding/margin*/
@@ -423,6 +423,15 @@ body {
     padding: 0;
     margin: 0;
     //color: #ebebeb;
+}
+hr{
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
 }
 /*Flexbox gives us the flexiness we need. The top just stays put as there is no scrolling on the body due to the page never exceeding viewport height*/
 .Top {
