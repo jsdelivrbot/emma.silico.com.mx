@@ -40,6 +40,10 @@
                                                           <table class="table">
                                                                   @foreach ($user->exams as $exam)
                                                                           @if ($exam)
+                                                                                <tr>
+                                                                                        <td>Consejo</td>
+                                                                                        <td>{{$exam->board->name}}</td>
+                                                                                </tr>
                                                                                   <tr>
                                                                                           <td>Fecha de aplicación</td>
                                                                                           <td>{{ Carbon::createFromFormat('Y-m-d H:i:s', $exam->applicated_at)->format('Y-m-d') }}</td>
