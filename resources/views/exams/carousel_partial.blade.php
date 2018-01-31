@@ -1,4 +1,4 @@
-<div class="panel" id="slider-thumbs" style="position:absolute;">
+<div class="panel" id="slider-thumbs" style="position:relative;">
       <!-- thumb navigation items -->
       <ul class="list-inline list-group" style="overflow-scrolling: ">
         @php
