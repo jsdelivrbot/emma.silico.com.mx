@@ -558,6 +558,11 @@ class UploadController extends Controller
 
     public function examImages(Request $request)
     {
+	$files = $request->file('images');
+
+	if($request->hasFile('images'))
+	{
+	
         ini_set('memory_limit', '256M');
         $path = public_path('images/exams/'.$request->exam_id);
         if (!File::exists($path)) {
@@ -598,6 +603,7 @@ class UploadController extends Controller
         }
         return back();
     }
+}
 
     /**
      ''''* Filters a Request with zipped pictures and

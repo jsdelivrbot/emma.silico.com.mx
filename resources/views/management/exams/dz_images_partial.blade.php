@@ -7,3 +7,5 @@
   </div>
   <div id="dropzone-previews" class="dropzone-previews"></div>
 {!! Form::close() !!}
+@yield('adminScripts')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.js"></script>
