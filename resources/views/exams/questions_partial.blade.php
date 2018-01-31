@@ -25,13 +25,13 @@
                                 <div class="radio">
                                     {{ Form::radio('answer' , $distractor->option, (isset($answer) ? $distractor->option == $answer? true : false : false) ) }}
                                 </div>
-                                <div class="distractor-badge label pull-left">
-                                    {{ $distractor->option }}
-                                </div>
+                                <span class="distractor-badge label">
+                                    {{$distractor->option}}
+                                </span>
 
-                                <div class="pull-right" id="distractor_{{ $distractor->id }}" >
+                                <span class="" id="distractor_{{ $distractor->id }}" >
                                     {!! $distractor->distractor !!}
-                                </div>
+                                </span>
                             </label>
                         </div>
                     </li>
