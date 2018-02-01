@@ -573,6 +573,7 @@ class UploadController extends Controller
         //        ]);
         $files = $request->file('images');
         foreach ($files as $file) {
+		Debugbar::addMessage($file, 'mylabel');
             $fileName = $file->getClientOriginalName();
             $input = $file->getClientOriginalName();
             $img = Image::make($file);
@@ -601,7 +602,8 @@ class UploadController extends Controller
                 ]
             );
         }
-        return back();
+        //return back();
+	return Redirect::back()->withErrors(['msg', 'The Message']);
     }
 }
 

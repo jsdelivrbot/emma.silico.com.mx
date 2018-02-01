@@ -9,4 +9,5 @@
     @include('management.crud.modal_partial')
 
 @endsection
+@yield('adminScripts')
 
