@@ -28,6 +28,8 @@
 *.xls
 *.xlsx
 *.pdf
+*.txt
+*.csv
 
 # Logs and databases #
 ######################
@@ -73,9 +75,6 @@ Temporary Items
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
-/node_modules
-node_modules/
 node_modules/*
 
 # Laravel cache #
@@ -100,15 +99,15 @@ vendor/*
 
 # Generated exams by EMMA #
 ##########################
-storage/app/public/
-storage/tmp/
-public/tmp/
+storage/app/public/*
+storage/tmp/*
+public/tmp/*
 public/images/*
 public/*.jpg
 public/tmp/*
-public/images/exams/
+public/images/exams/*
 package-lock.json
 public/css/app.css
-public/css/app.css.map
+/css/app.css.map
 public/js/all.js
 public/js/all.js.map
