@@ -74,25 +74,30 @@ Temporary Items
 *.sw*
 
 # Dependency directory
+######################
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules/*
 
 # Laravel cache #
-######################
+#################
 storage/framework/cache/*
 
 ### Laravel ###
+###############
 vendor/node_modules/npm-debug.log
 vendor/node_modules/
 vendor/*
 # Laravel sessions #
+####################
 storage/framework/sessions/*
 storage/framework/cache/*
 
 # Laravel views #
+#################
 storage/framework/views/*
 
 ### Laravel ###
+###############
 vendor/node_modules/npm-debug.log
 vendor/node_modules/*
 vendor/*
