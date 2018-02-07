@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Redirect;
 use File;
 use League\Flysystem\ZipArchive\ZipArchiveAdapter as Adapter;
 use League\Csv\Reader;
@@ -603,7 +604,7 @@ class UploadController extends Controller
             );
         }
         //return back();
-	return Redirect::back()->withErrors(['msg', 'The Message']);
+	return Redirect::back();
     }
 }
 
