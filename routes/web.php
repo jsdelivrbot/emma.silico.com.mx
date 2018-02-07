@@ -50,9 +50,12 @@ Route::resource('slots', 'SlotsController');
 
 Route::get('/user', 'ExamController@user_dashboard');
 Route::post('/exams/start', 'ExamController@start');
-Route::get('exams/generalIndex', 'ExamController@generalIndex')->name('generalIndex')->middleware('checkExam');
-Route::get('exams/slot/{slot}', 'ExamController@answerSlot')->name('exams.slot')->middleware('checkExam');
-Route::post('/answers/store', 'AnswersController@store')->middleware('checkExam');
+//Route::get('exams/generalIndex', 'ExamController@generalIndex')->name('generalIndex')->middleware('checkExam');//Commented to temporarily disable the middleware
+Route::get('exams/generalIndex', 'ExamController@generalIndex')->name('generalIndex');
+//Route::get('exams/slot/{slot}', 'ExamController@answerSlot')->name('exams.slot')->middleware('checkExam');
+Route::get('exams/slot/{slot}', 'ExamController@answerSlot')->name('exams.slot');
+//Route::post('/answers/store', 'AnswersController@store')->middleware('checkExam');
+Route::post('/answers/store', 'AnswersController@store');
 Route::post('/exams/finish', 'ExamController@finish')->name('exams.finish');
 
 //Exam creation Route
