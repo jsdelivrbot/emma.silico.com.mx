@@ -6,5 +6,5 @@
     Arrastre sus imágenes aquí
   </div>
   <div id="dropzone-previews" class="dropzone-previews"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.js"></script>
+  {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.js"></script>  --}}
 {!! Form::close() !!}
