@@ -67,6 +67,26 @@ class Grade extends Model
             ->get();
     }
 
+    /* End of functions for single user */
+    /**
+     * Progress all the students
+     *
+     * Calculates all the students progress for a given exam returning a JSON with the user id, names and points aquired.
+     *
+     * @param Exam
+     * @return json Object
+     */
+    public function progressAllStudents(Exam $exam)
+    {
+        return DB::table(DB::raw('users, answers'))
+            ->select(DB::raw('users.id, count(answers.id) as points'))
+            ->whereRaw('users.id = answers.user_id')
+            ->where('answers.exam_id', $exam->id)
+            ->orderBy('points', 'desc')
+            ->groupBy('users.id')
+            ->get();
+    }
+
     public function allStudentsBySubject(Exam $exam)
     {
         return DB::table('questions')

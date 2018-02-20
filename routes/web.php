@@ -76,6 +76,7 @@ Route::get('/quotes/{quote}/delete', 'QuotesController@destroy');
 Route::resource('exams', 'ExamController');
 Route::post('/exams/users', 'ExamController@users_exam');
 Route::get('/exams/grade_chart/{exam}', 'ExamController@grade_all_chart');
+Route::get('/exams/progress_chart/{exam}', 'ExamController@progress_present_chart');
 Route::get('/exams/grade_user/{exam}/{user}', 'ExamController@grade_student');
 Route::get('/exams/grade_all/{exam}', 'ExamController@grade_all');
 Route::get('/exams/top_students/{exam}/{top}', 'ExamController@top_students');

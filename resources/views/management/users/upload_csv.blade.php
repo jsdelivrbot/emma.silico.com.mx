@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-9 col-md-offset-2">
+            <div class="col-sm-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-body">
 
@@ -84,7 +84,8 @@
                                         {{ Form::open(['action' => 'UploadController@usersExcel', 'files' => true])}}
                                         {{ Form::hidden('board_id', $board->id) }}
                                         {{ Form::label('zipFile','Fotografías comprimidas',array('id'=>'','class'=>''))  }}
-                                        {{ Form::file('zipFile','',array('id'=>'','class'=>''))  }}
+                                        {{--  {{ Form::file('zipFile',,array('id'=>'zipFile','class'=>'btn btn-default'))  }}  --}}
+                                        {{ Form::file('zipFile')}}
                                         <button class="btn btn-info" type="submit">
                                                 <i class="fa fa-users fa-2x" aria-hidden="true"></i>
                                                 <span>Cargar</span>
@@ -107,11 +108,6 @@
                                                     </ul>
                                             </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                        <div class="col-sm-12">
-
-                                        </div>
                                 </div>
                             </div>
                             {{ Form::close() }}

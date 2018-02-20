@@ -4,7 +4,7 @@ namespace EMMA5;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
+use SoftDeletes;
 class Exam extends Model
 {
     //
