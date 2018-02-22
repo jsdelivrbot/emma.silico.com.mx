@@ -33,8 +33,8 @@
               }
           ]
          };
-         var max =300;
-         var steps = max/100;
+         var max =320;
+         var steps = max/15;
          new Chart(ctx).Line(chart, {
            responsive: true,
            scaleOverride: true,

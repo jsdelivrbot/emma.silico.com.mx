@@ -4,7 +4,7 @@
         @php
           $selected = "selected"
         @endphp
-          @foreach($slot->images as $image)
+          @foreach($slot->images->sortBy('source') as $image)
               <li id="image-selector-{{ $image->id }}" class="{{$selected}}">
                   <a>
                       <img src="{{ asset('images/exams/'.$slot->exam_id.'/'.$image->source) }}" class="img-thumbnail" width="65px" alt="">
@@ -26,7 +26,7 @@
             Este navegador no es compatible con la reproducción de videos
         </video> 
     @endforeach
-    @foreach($slot->images as $image)
+    @foreach($slot->images->sortBy('source') as $image)
       <div id="image-slide-{{ $image->id }}" class="polaroid" style="display:{{ $display }};">
           <div class="">
               <p>{{ $image->caption }}</p>
