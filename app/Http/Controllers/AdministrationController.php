@@ -76,7 +76,7 @@ class AdministrationController extends Controller
 
             $pdf = PDF::loadView('management.users.passwords', compact('exam', 'users', 'board'));
             return $pdf->download('users'.$exam->id.'.pdf');
-           // return view('management.users.passwords', compact('exam', 'users', 'board'));
+            //return view('management.users.passwords', compact('exam', 'users', 'board'));
         } else {
             return redirect()->action('ExamController@user_dashboard');
         }

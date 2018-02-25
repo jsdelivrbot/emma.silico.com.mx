@@ -262,6 +262,29 @@ class ExamController extends Controller
         return view('management.exams.grades_chart_partial', compact('ids', 'points', 'pointsAverage', 'passingGrade'));
     }
 
+
+    /**
+     * Creates a JSON response to be a rendered chart for the given exam
+     *
+     * Returns JSON data for chart composed of the answers count for all the present studients
+     *  in the given exam
+     *
+     * @param type exam EMMA5\Exam
+     * @return return JSON Response
+     */
+    public function progress_present_chart(Exam $exam)
+    {
+        $progressAll = new Grade;
+        $usersProgress = $progressAll->progressAllStudents($exam);
+        // dd($usersProgress->pluck('points'));
+        $progress = $usersProgress->pluck('points');
+        $progressAverage = $usersProgress->pluck('points')->avg();
+        $ids = $usersProgress->pluck('id');
+        return view('management.exams.progress_chart_partial', compact('ids', 'progress', 'progressAverage', 'passingGrade'));
+    }
+
+    
+
     /**
      * Return student point
      *

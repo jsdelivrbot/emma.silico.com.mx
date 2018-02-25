@@ -28,6 +28,8 @@
 *.xls
 *.xlsx
 *.pdf
+*.txt
+*.csv
 
 # Logs and databases #
 ######################
@@ -72,43 +74,46 @@ Temporary Items
 *.sw*
 
 # Dependency directory
+######################
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
-/node_modules
-node_modules/
 node_modules/*
 
 # Laravel cache #
-######################
+#################
 storage/framework/cache/*
 
 ### Laravel ###
+###############
 vendor/node_modules/npm-debug.log
 vendor/node_modules/
 vendor/*
 # Laravel sessions #
+####################
 storage/framework/sessions/*
 storage/framework/cache/*
 
 # Laravel views #
+#################
 storage/framework/views/*
 
 ### Laravel ###
+###############
 vendor/node_modules/npm-debug.log
 vendor/node_modules/*
 vendor/*
 
 # Generated exams by EMMA #
 ##########################
-storage/app/public/
-storage/tmp/
-public/tmp/
+storage/app/public/*
+storage/tmp/*
+public/tmp/*
 public/images/*
 public/*.jpg
 public/tmp/*
-public/images/exams/
+public/images/exams/*
 package-lock.json
 public/css/app.css
-public/css/app.css.map
+/css/app.css.map
 public/js/all.js
 public/js/all.js.map
+bootstrap/cache/services.php

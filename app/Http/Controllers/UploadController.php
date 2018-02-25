@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Redirect;
 use File;
 use League\Flysystem\ZipArchive\ZipArchiveAdapter as Adapter;
 use League\Csv\Reader;
@@ -559,6 +560,11 @@ class UploadController extends Controller
 
     public function examImages(Request $request)
     {
+	$files = $request->file('images');
+
+	if($request->hasFile('images'))
+	{
+	
         ini_set('memory_limit', '256M');
         $path = public_path('images/exams/'.$request->exam_id);
         if (!File::exists($path)) {
@@ -569,6 +575,7 @@ class UploadController extends Controller
         //        ]);
         $files = $request->file('images');
         foreach ($files as $file) {
+		Debugbar::addMessage($file, 'mylabel');
             $fileName = $file->getClientOriginalName();
             $input = $file->getClientOriginalName();
             $img = Image::make($file);
@@ -597,8 +604,10 @@ class UploadController extends Controller
                 ]
             );
         }
-        return back();
+        //return back();
+	return Redirect::back();
     }
+}
 
     /**
      ''''* Filters a Request with zipped pictures and

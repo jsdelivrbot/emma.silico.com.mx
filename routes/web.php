@@ -50,9 +50,12 @@ Route::resource('slots', 'SlotsController');
 
 Route::get('/user', 'ExamController@user_dashboard');
 Route::post('/exams/start', 'ExamController@start');
-Route::get('exams/generalIndex', 'ExamController@generalIndex')->name('generalIndex')->middleware('checkExam');
-Route::get('exams/slot/{slot}', 'ExamController@answerSlot')->name('exams.slot')->middleware('checkExam');
-Route::post('/answers/store', 'AnswersController@store')->middleware('checkExam');
+//Route::get('exams/generalIndex', 'ExamController@generalIndex')->name('generalIndex')->middleware('checkExam');//Commented to temporarily disable the middleware
+Route::get('exams/generalIndex', 'ExamController@generalIndex')->name('generalIndex');
+//Route::get('exams/slot/{slot}', 'ExamController@answerSlot')->name('exams.slot')->middleware('checkExam');
+Route::get('exams/slot/{slot}', 'ExamController@answerSlot')->name('exams.slot');
+//Route::post('/answers/store', 'AnswersController@store')->middleware('checkExam');
+Route::post('/answers/store', 'AnswersController@store');
 Route::post('/exams/finish', 'ExamController@finish')->name('exams.finish');
 
 //Exam creation Route
@@ -73,6 +76,7 @@ Route::get('/quotes/{quote}/delete', 'QuotesController@destroy');
 Route::resource('exams', 'ExamController');
 Route::post('/exams/users', 'ExamController@users_exam');
 Route::get('/exams/grade_chart/{exam}', 'ExamController@grade_all_chart');
+Route::get('/exams/progress_chart/{exam}', 'ExamController@progress_present_chart');
 Route::get('/exams/grade_user/{exam}/{user}', 'ExamController@grade_student');
 Route::get('/exams/grade_all/{exam}', 'ExamController@grade_all');
 Route::get('/exams/top_students/{exam}/{top}', 'ExamController@top_students');

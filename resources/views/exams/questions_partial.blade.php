@@ -11,7 +11,12 @@
         <li id="question_{{$question->id}}"class="list-group-item question-li" >
           {!! $question->text !!}
             @if($question->images->first() != NULL)
-                <img  src="{{ asset('images/exams/'.$slot->exam_id.'/'.$question->images->first()->source) }}  " alt="" style="width: 100%;">              @endif
+		<div class="panel">
+		@foreach($question->images as $image)
+                	<img  src="{{ asset('images/exams/'.$slot->exam_id.'/'.$image->source) }}  " alt="" style="width: 100%;">              
+		@endforeach 
+		</div>
+	    @endif
           @php
             isset($question->answers->last()->answer) ? $answer = $question->answers->last()->answer : $answer = NULL
           @endphp
