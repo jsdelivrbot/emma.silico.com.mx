@@ -4,6 +4,8 @@ namespace EMMA5\Http\Controllers;
 
 use EMMA5\Vignette;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Redirect;
 
 class VignettesController extends Controller
 {
@@ -81,7 +83,9 @@ class VignettesController extends Controller
         $vignette->update($request->all());
         flash('Viñeta actualizada', 'success')->important();
 
-        return back();
+        // return back();
+        //
+        return Redirect::to(URL::previous() . "#vignette_".$vignette->id);
     }
 
     /**
