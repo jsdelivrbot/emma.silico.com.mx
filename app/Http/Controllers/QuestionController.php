@@ -9,6 +9,8 @@ use EMMA5\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Redirect;
 
 class QuestionController extends Controller
 {
@@ -82,6 +84,7 @@ class QuestionController extends Controller
     {
         //
         return view('management.crud.questions.edit_form', compact('question'));
+
     }
 
     /**
@@ -97,7 +100,8 @@ class QuestionController extends Controller
         $question->update($request->all());
         flash('Pregunta actualizada', 'success')->important();
 
-        return back();
+        // return back();
+        return Redirect::to(URL::previous() . "#question_".$question->id);
     }
 
     /**
@@ -142,7 +146,8 @@ class QuestionController extends Controller
         //$question->update($request->all());
         flash('Distractor actualizado', 'success')->important();
 
-        return back();
+        // return back();
+        return Redirect::to(URL::previous() . "#question_".$question->id);
     }
 
     /**

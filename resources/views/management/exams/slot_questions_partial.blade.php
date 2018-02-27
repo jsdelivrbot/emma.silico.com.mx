@@ -1,9 +1,9 @@
 <div class="">
-    <span class="badge">{{ $question->id }}</span>
+    <span id="question_{{$question->id}}" class="badge">{{ $question->id }}</span>
     <span class="badge">{!! $question->order !!}</span><span>{!! $question->text !!}</span>
     <div class="">
             @foreach($question->images as $image)
-                    <img src="{{ asset('images/exams/'.$question->slot->exam_id.'/'.$image->source) }}" class="img-thumbnail" width="65px" alt=""> 
+                    <img src="{{ asset('images/exams/'.$question->slot->exam_id.'/'.$image->source) }}" class="img-thumbnail" width="65px" alt="">
             @endforeach
             @foreach($question->videos as $video)
                 <source src="{{ asset('videos/'.$video->source) }}" type="video/{{pathinfo($video->source, PATHINFO_EXTENSION)}}">;

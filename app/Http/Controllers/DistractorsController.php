@@ -4,6 +4,8 @@ namespace EMMA5\Http\Controllers;
 
 use EMMA5\Distractor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Redirect;
 
 use EMMA5\Http\Requests;
 
@@ -78,7 +80,8 @@ class DistractorsController extends Controller
         $distractor->update($request->all());
         flash('Distractor actualizado', 'success')->important()->fade();
 
-        return back();
+        // return back();
+        return Redirect::to(URL::previous() . "#distractor".$question->id);
     }
 
 

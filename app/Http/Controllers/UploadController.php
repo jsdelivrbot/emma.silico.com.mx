@@ -70,14 +70,15 @@ class UploadController extends Controller
         //
         $results = $reader->fetch();
         $outputText = "";
+        dd($results);
         foreach ($results as $row) {
             $row[0] = preg_replace('/^ */', '', $row[0]);
             /*Encuentra los espacios al pricipio de la línea y los remueve*/
             $row[0] = preg_replace('/^ */', '', $row[0]);
             /*Encuentra los espacios al final de la línea y los remueve;*/
             $row[0] = preg_replace('/ *$/', '', $row[0]);
-            #$row[0] = preg_replace('/\W*$/,''');
-            #$row[0] = preg_replace('/^\W*/,' '');
+            // $row[0] = preg_replace('/\W*$/,','');
+            // $row[0] = preg_replace('/^\W*/,' '');
             #Encuentra los espacios y tabuladores redundantes;
             $row[0] = preg_replace('/ {2,}/', ' ', $row[0]);
             $row[0] = preg_replace('/\t{2,}/', ' ', $row[0]);
