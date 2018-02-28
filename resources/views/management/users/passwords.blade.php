@@ -69,7 +69,7 @@
         <div class="col-xs-1">
           <div class="text-right">
             <div class="panel">
-              {{ $user->id }}
+              {{ $user->id."-".$user->pivot->turn }}
             </div>
           </div>
         </div>
@@ -93,6 +93,9 @@
                         @endif
                         @if($user->completion_year != NULL)
                                 <h4>Año de egreso: {{ $user->completion_year }}</h4>
+                        @endif
+                        @if($user->pivot->turn != NULL)
+                                <h4>Turno {{ $user->pivot->turn }}</h4>
                         @endif
                         <p>
                         <h2 class="text-justify">

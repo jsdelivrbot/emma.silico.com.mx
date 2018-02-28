@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public function exams()
     {
-        return $this->belongsToMany('EMMA5\Exam')->withPivot('active', 'started_at', 'ended_at', 'location_id');
+        return $this->belongsToMany('EMMA5\Exam')->withPivot('active', 'started_at', 'ended_at', 'location_id', 'turn');
     }
 
     public function locations()

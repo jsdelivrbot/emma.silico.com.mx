@@ -27,7 +27,7 @@ class Exam extends Model
 
     public function users()
     {
-        return $this->belongsToMany('EMMA5\User')->withPivot('active', 'started_at', 'ended_at', 'seat', 'location_id');
+        return $this->belongsToMany('EMMA5\User')->withPivot('active', 'started_at', 'ended_at', 'seat', 'location_id', 'turn');
     }
 
     public function locations()
@@ -79,7 +79,7 @@ class Exam extends Model
                     ->where('exam.id', '=', $this->id)
                     ->get();
     }
-    
+
 
     /**
      * undocumented function summary
@@ -128,7 +128,7 @@ class Exam extends Model
             ->groupBy('exams.id', 'subjects.id')
             ->get();
     }
-   
+
 
     public function isExtemporaneous(User $user)
     {
@@ -145,7 +145,7 @@ class Exam extends Model
      */
      public function scopeExtemporaneous()
      {
-         
+
      }
 
     public function key()
@@ -162,7 +162,7 @@ class Exam extends Model
                     ->where('distractors.correct', '=', 1)
                     ->get();
     }
-    
+
     //TODO get all active users
 
     //TODO get all present users

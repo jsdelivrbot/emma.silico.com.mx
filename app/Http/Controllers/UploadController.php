@@ -29,6 +29,7 @@ use Comodojo\Zip\Zip as Zip;
 use Comodojo\Exception\ZipException as ZipException;
 use Debugbar;
 use Stringy as S;
+use Log;
 
 class UploadController extends Controller
 {
@@ -478,6 +479,7 @@ class UploadController extends Controller
                         $userArray['password'] = $userName;
                         $userArray['board_id'] = $request->board_id;
                         $userArray['identifier'] = $item['identifier'];
+                        $turn = filter_var($item['turn'], FILTER_SANITIZE_NUMBER_INT);
                         //$user->password = $userName;
                         $center =  Center::where('name', $item['center'])->first();
                         if ($center) {
@@ -485,7 +487,8 @@ class UploadController extends Controller
                         } else {
                                 //$user->center_id = null;
                                 $userArray['center_id'] = null;
-                                flash($item['center']." no se encuentra en nuestra base de datos", 'danger')->important();
+                                // flash($item['center']." no se encuentra en nuestra base de datos", 'danger')->important();
+                                Log::info($item['center']." no se encuentra en nuestra base de datos");
                         }
                         //$user->exam_id = $request->exam_id;
                         //$user = User::firstOrCreate(['identifier' => $userArray['identifier'], 'board_id' => $request->board_id, 'name' => $userArray['name'], 'last_name' => $userArray['last_name'] ]);
@@ -495,20 +498,23 @@ class UploadController extends Controller
                         $user->username = $userName;
                         $user->password = $userName;
                          */
-                        $user->identifier = $userArray['identifier'];
-                        $user->save($userArray);
-                        $user->exams()->save($exam);
+                        // $user->identifier = $userArray['identifier'];
+                        // $user-> = $userArray['identifier'];
+                        // $user->save($userArray);
+                        // $user->exams()->save($exam); //Will use a proper attach
+                        $exam->users()->attach($user, ['turn' => $turn]);
                         if (isset($imagesDir) && $imagesDir != "") {
                                 $expectedFilename = ''.S::create($item['identifier'])->collapseWhitespace()->regexReplace('\W','');
-                                $image = preg_grep("/\/($expectedFilename)\.\w*$/", $imagesDir);
+                                // $image = preg_grep("/\/($expectedFilename)\.\w*$/", $imagesDir);
+                                $image =''.S::create(pathinfo($imagesDir[0], PATHINFO_FILENAME))->collapseWhitespace()->regexReplace('\W','');
                                 if ($image != null) {
-                                        $image = array_shift($image);
-                                        $fileName = File::name($image).".".File::extension($image);
+                                        // $image = array_shift($image);
+                                        $fileName = File::name($image).".".File::extension($imagesDir[0]);
                                         $avatar = new Img;
                                         $avatar->imageable_id = $user->id;
                                         $avatar->source = $fileName;
                                         $avatar->imageable_type = "EMMA5\user";
-                                        File::copy($image, $avatarsPath.$fileName);
+                                        File::copy($imagesDir[0], $avatarsPath.$fileName);
                                         $avatar->save();
 
                                         $user->avatar()->save($avatar);
@@ -517,8 +523,8 @@ class UploadController extends Controller
                 }
                 return $user;
         }));
-        ini_set('max_execution_time', '30');
-        return $users;
+        ini_set('max_execution_time', '180');
+        // return $users;
         //validate the header names (this will be converted to attribute
         //names by excelLaravel)
         //
@@ -526,7 +532,7 @@ class UploadController extends Controller
         //¿How manage the photos?
         //Create the Image object and attach it but the after how do I
         //garantee that the user uploads the photo files
-        return null;
+        return back();
     }
 
 
@@ -564,7 +570,7 @@ class UploadController extends Controller
 
 	if($request->hasFile('images'))
 	{
-	
+
         ini_set('memory_limit', '256M');
         $path = public_path('images/exams/'.$request->exam_id);
         if (!File::exists($path)) {
