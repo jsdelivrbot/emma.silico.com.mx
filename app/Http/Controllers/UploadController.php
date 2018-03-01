@@ -440,6 +440,10 @@ class UploadController extends Controller
             } else {
                     $avatarsPath = public_path("images/avatars/users/$request->board_id/");
             }
+            foreach ($imagesDir as  $imageFile){
+                $fileName = ''.S::create(pathinfo($imageFile, PATHINFO_FILENAME))->collapseWhitespace()->regexReplace('\W','');
+                File::copy($imageFile, $avatarsPath.$fileName);
+            }
         } else {
                 $imagesDir = "";
                 $avatarsPath = "";
@@ -503,24 +507,34 @@ class UploadController extends Controller
                         // $user->save($userArray);
                         // $user->exams()->save($exam); //Will use a proper attach
                         $exam->users()->attach($user, ['turn' => $turn]);
-                        if (isset($imagesDir) && $imagesDir != "") {
-                                $expectedFilename = ''.S::create($item['identifier'])->collapseWhitespace()->regexReplace('\W','');
-                                // $image = preg_grep("/\/($expectedFilename)\.\w*$/", $imagesDir);
-                                $image =''.S::create(pathinfo($imagesDir[0], PATHINFO_FILENAME))->collapseWhitespace()->regexReplace('\W','');
-                                if ($image != null) {
-                                        // $image = array_shift($image);
-                                        $fileName = File::name($image).".".File::extension($imagesDir[0]);
-                                        $avatar = new Img;
-                                        $avatar->imageable_id = $user->id;
-                                        $avatar->source = $fileName;
-                                        $avatar->imageable_type = "EMMA5\user";
-                                        File::copy($imagesDir[0], $avatarsPath.$fileName);
-                                        $avatar->save();
+                        $avatar = new Img;
+                                $avatar->imageable_id = $user->id;
+                                $avatar->source = ''.S::create($item['identifier'])->collapseWhitespace()->regexReplace('\W','');;
+                                $avatar->imageable_type = "EMMA5\user";
+                                $avatar->save();
 
-                                        $user->avatar()->save($avatar);
-                                }
+                //         if (isset($imagesDir) && $imagesDir != "") {
+                //                 $expectedFilename = ''.S::create($item['identifier'])->collapseWhitespace()->regexReplace('\W','');
+                //                 // $image = preg_grep("/\/($expectedFilename)\.\w*$/", $imagesDir);
+                //                 // dd($imagesDir);
+                //                 $image =''.S::create(pathinfo($imagesDir[0], PATHINFO_FILENAME))->collapseWhitespace()->regexReplace('\W','');
+                //                 if ($image != null) {
+                //                         dd($image);
+                //                         $fileName = File::name($image).".".File::extension($imagesDir[0]);
+                //                         $avatar = new Img;
+                //                         $avatar->imageable_id = $user->id;
+                //                         $avatar->source = $fileName;
+                //                         $avatar->imageable_type = "EMMA5\user";
+                //                         // dd($imagesDir[0]);
+                //                         // dd($avatarsPath.$fileName);
+                //                         File::copy($imagesDir[0], $avatarsPath.$fileName);
+                //                         array_shift($imagesDir);
+                //                         $avatar->save();
 
-                }
+                //                         // $user->avatar()->save($avatar);
+                //                 }
+
+                // }
                 return $user;
         }));
         ini_set('max_execution_time', '180');
