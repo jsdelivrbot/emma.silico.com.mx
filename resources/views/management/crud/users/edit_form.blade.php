@@ -27,6 +27,13 @@
                     <strong>{{ $errors->first('last_name') }}</strong>
                 </span>
         @endif
+        {!! Form::label('completion_year', 'Año de egreso') !!}
+        {!! Form::text('completion_year',$user->completion_year, ['class' => 'form-control', 'required' => true]) !!}
+        @if ($errors->has('completion_year'))
+            <span class="help-block">
+                    <strong>{{ $errors->first('completion_year') }}</strong>
+                </span>
+        @endif
         @if ($errors->has('avatar'))
                 <span class="help-block">
                         <strong>{{ $errors->first('avatar') }}</strong>
