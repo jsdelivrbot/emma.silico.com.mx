@@ -86,6 +86,7 @@ class UsersController extends Controller
         $user->last_name = $request->last_name;
         $user->center_id = $request->center_id;
         $user->board_id = $request->board_id;
+        $user->identifier = $request->identifier;
         $user->update($request->all());
         if ($request->hasFile('avatar')) {
             //Helper::gt

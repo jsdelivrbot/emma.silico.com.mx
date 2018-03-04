@@ -13,6 +13,13 @@
     {{--  {!! Form::model($location, ['action' => ['UsersController@update', $location], 'class' => 'form-group'] ) !!} --}}
 
     <div class="form-group">
+        {!! Form::label('identifier', 'Folio') !!}
+        {!! Form::text('identifier', $user->identifier, ['class' => 'form-control', 'required' => true, 'autofocus' => true]) !!}
+        @if ($errors->has('identifier'))
+            <span class="help-block">
+                    <strong>{{ $errors->first('identifier') }}</strong>
+                </span>
+        @endif
         {!! Form::label('name', 'Nombre') !!}
         {!! Form::text('name', $user->name, ['class' => 'form-control', 'required' => true, 'autofocus' => true]) !!}
         @if ($errors->has('name'))
