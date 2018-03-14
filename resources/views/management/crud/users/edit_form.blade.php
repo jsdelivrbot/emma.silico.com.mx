@@ -54,6 +54,13 @@
                         <strong>{{ $errors->first('center') }}</strong>
                 </span>
         @endif
+        {!! Form::label('completion_year', 'Año de terminación') !!}
+        {!! Form::text('completion_year',$user->completion_year, ['class' => 'form-control', 'required' => true]) !!}
+        @if ($errors->has('completion_year'))
+                <span class="help-block">
+                        <strong>{{ $errors->first('completion_year') }}</strong>
+                </span>
+        @endif
         <button class="btn btn-success btn-block" type="submit">Guardar</button>
 
     </div>
