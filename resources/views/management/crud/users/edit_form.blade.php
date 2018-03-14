@@ -13,6 +13,13 @@
     {{--  {!! Form::model($location, ['action' => ['UsersController@update', $location], 'class' => 'form-group'] ) !!} --}}
 
     <div class="form-group">
+        {!! Form::label('identifier', 'Folio') !!}
+        {!! Form::text('identifier', $user->identifier, ['class' => 'form-control', 'required' => true, 'autofocus' => true]) !!}
+        @if ($errors->has('identifier'))
+            <span class="help-block">
+                    <strong>{{ $errors->first('identifier') }}</strong>
+                </span>
+        @endif
         {!! Form::label('name', 'Nombre') !!}
         {!! Form::text('name', $user->name, ['class' => 'form-control', 'required' => true, 'autofocus' => true]) !!}
         @if ($errors->has('name'))
@@ -25,6 +32,13 @@
         @if ($errors->has('last_name'))
             <span class="help-block">
                     <strong>{{ $errors->first('last_name') }}</strong>
+                </span>
+        @endif
+        {!! Form::label('completion_year', 'Año de egreso') !!}
+        {!! Form::text('completion_year',$user->completion_year, ['class' => 'form-control', 'required' => true]) !!}
+        @if ($errors->has('completion_year'))
+            <span class="help-block">
+                    <strong>{{ $errors->first('completion_year') }}</strong>
                 </span>
         @endif
         @if ($errors->has('avatar'))

@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-  <div class="container panel">
+  <div class="container">
     <div class="panel-heading panel-primary">
       Avance de usuarios
     </div>
@@ -10,12 +10,11 @@
                     <i class="fa fa-table" aria-hidden="true"></i>
             </a>
     </div>
-    <div class="row panel-body">
-      <div class="col-sm-6">
-        <table id="myTable" class="table table-responsive table-bordered">
+        <table id="myTable" class="table table-bordered">
         <thead>
           <tr>
             <th>Estado</th>
+            <th>Turno</turno>
             <th>Id</th>
             <th>Folio</th>
             <th>Nombre</th>
@@ -45,6 +44,9 @@
                 </a>
               </div>
               </td>
+              <td>
+                {{$user->pivot->turn}}
+                </td>
               <td id="user_{{ $user->id  }}">
                       {{ $user->id }}
               </td>
