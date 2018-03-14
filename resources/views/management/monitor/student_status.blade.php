@@ -3,6 +3,7 @@
   <div class="container">
     <div class="panel-heading panel-primary">
       Avance de usuario
+            <a id="" href="{{ route('monitor', $exam->id) }}" class="btn btn-block btn-sm btn-info">Regresar al listado general</a>
     </div>
     <div class="row">
       <div class="col-sm-6">
