@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-  <div class="container">
+  <div class="container-fluid">
     <div class="panel-heading panel-primary">
       Avance de usuarios
     </div>
@@ -10,7 +10,7 @@
                     <i class="fa fa-table" aria-hidden="true"></i>
             </a>
     </div>
-        <table id="myTable" class="table table-bordered">
+        <table id="myTable" class="table table-bordered table-striped">
         <thead>
           <tr>
             <th>Estado</th>
@@ -94,8 +94,8 @@
       </table>
     </div>
 
-      {{--  <div class="col-sm-4">
-        <div class="container-fluid">
+       <div class="col-sm-4">
+        <div class="container-fluid panel">
           <div class="row">
             <div class="col-sm-6">Línea corte</div>
             <div class="col-sm-6">{{ $exam->passing_grade}}</div>
@@ -132,7 +132,7 @@
             </div>-->
           </div>
         </div>
-      </div>  --}}
+      </div>  
   </div>
 </div>
 @endsection

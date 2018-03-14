@@ -14,7 +14,7 @@
 
     <div class="form-group">
         {!! Form::label('identifier', 'Folio') !!}
-        {!! Form::text('identifier', $user->identifier, ['class' => 'form-control', 'required' => true, 'autofocus' => true]) !!}
+        {!! Form::text('identifier', $user->identifier, ['class' => 'form-control', 'required' => false, 'autofocus' => true]) !!}
         @if ($errors->has('identifier'))
             <span class="help-block">
                     <strong>{{ $errors->first('identifier') }}</strong>
@@ -54,7 +54,7 @@
         </div>
         {!! Form::file('avatar') !!}
         <hr>
-        {!! Form::select('board_id', \EMMA5\Board::all()->pluck('name', 'id'), $user->board->id, ['class' => 'form-control', 'required' => true]) !!}
+        {!! Form::select('board_id', \EMMA5\Board::all()->pluck('name', 'id'), $user->board->id ? $user->board->id : '', ['class' => 'form-control', 'required' => true]) !!}
         @if ($errors->has('board'))
                 <span class="help-block">
                         <strong>{{ $errors->first('board') }}</strong>
@@ -62,17 +62,10 @@
         @endif
         <hr>
         {!! Form::label('center', 'Sede formativa') !!}
-        {!! Form::select('center_id', \EMMA5\Center::orderBy('name')->get()->pluck('name', 'id'), $user->center->id, ['class' => 'form-control', 'required' => true]) !!}
+        {!! Form::select('center_id', \EMMA5\Center::orderBy('name')->get()->pluck('name', 'id'), $user->center_id ? $user->center_id : '', ['class' => 'form-control', 'required' => true]) !!}
         @if ($errors->has('center'))
                 <span class="help-block">
                         <strong>{{ $errors->first('center') }}</strong>
-                </span>
-        @endif
-        {!! Form::label('completion_year', 'Año de terminación') !!}
-        {!! Form::text('completion_year',$user->completion_year, ['class' => 'form-control', 'required' => true]) !!}
-        @if ($errors->has('completion_year'))
-                <span class="help-block">
-                        <strong>{{ $errors->first('completion_year') }}</strong>
                 </span>
         @endif
         <button class="btn btn-success btn-block" type="submit">Guardar</button>
