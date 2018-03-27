@@ -94,7 +94,7 @@
       </table>
     </div>
 
-       <div class="col-sm-4">
+{{--       <div class="col-sm-4">
         <div class="container-fluid panel">
           <div class="row">
             <div class="col-sm-6">Línea corte</div>
@@ -132,7 +132,7 @@
             </div>-->
           </div>
         </div>
-      </div>  
+      </div>--}}  
   </div>
 </div>
 @endsection
