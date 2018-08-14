@@ -1,4 +1,4 @@
-<div class="panel" id="slider-thumbs" style="position:relative;">
+<div class="" id="slider-thumbs" style="position:relative;">
       <!-- thumb navigation items -->
       <ul class="list-inline list-group" style="overflow-scrolling: ">
         @php
@@ -31,7 +31,7 @@
           <div class="">
               <p>{{ $image->caption }}</p>
           </div>
-                  <img  src="{{ asset('images/exams/'.$slot->exam_id.'/'.$image->source) }}  " alt="" style="height: 100%; max-width: 100%; max-height: 100%;">
+                  <img  src="{{ asset('images/exams/'.$slot->exam_id.'/'.$image->source) }}  " alt="" style="width: 55%; max-width: 100%; max-height: 100%;">
       </div>
       @php
         $display = "none"

@@ -69,10 +69,11 @@ $( document ).ready(function() {
 $(document).ready(function(){
             $('#myTable').DataTable(
                 {
+                    lengthMenu: [[-1, 10, 25, 50], [ "Todos", 10, 25, 50]],
                     language: {
                         url: '//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json'
                     },
-                    fixedHeader: true   
+                    fixedHeader: true
                 }
             );
 

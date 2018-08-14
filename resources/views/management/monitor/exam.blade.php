@@ -10,7 +10,7 @@
                     <i class="fa fa-table" aria-hidden="true"></i>
             </a>
     </div>
-        <table id="myTable" class="table table-bordered table-striped">
+        <table id="myTable" class="table table-bordered table-striped" style="width: 100%;">
         <thead>
           <tr>
             <th>Estado</th>
