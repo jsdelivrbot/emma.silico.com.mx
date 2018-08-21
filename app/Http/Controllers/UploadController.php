@@ -498,6 +498,8 @@ class UploadController extends Controller
                         //$user = User::firstOrCreate(['identifier' => $userArray['identifier'], 'board_id' => $request->board_id, 'name' => $userArray['name'], 'last_name' => $userArray['last_name'] ]);
                         //dd($userArray['identifier']);
                         $user = User::firstOrCreate($userArray);
+                        $user->identifier = $item['identifier'];
+                        $user->save();
                         /*$userName = S::create(Helper::createAcronym($user->full_name()))->padBoth(4, 'X');
                         $user->username = $userName;
                         $user->password = $userName;
