@@ -124,6 +124,7 @@ class Grade extends Model
                 'users.last_name as Apellidos',
                 'centers.name as Sede',
                 'users.completion_year',
+                'exam_user.turn as Turno',
                 'exam_user.started_at as Inicio',
                 'exam_user.ended_at as Fin'
                 )
